@@ -53,7 +53,7 @@ class ListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "thermostatTableViewCell", for: indexPath) as? ThermostatTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ThermostatTableViewCell", for: indexPath) as? ThermostatTableViewCell else {
             fatalError("thermostatTableViewCell is not found")
         }
         
