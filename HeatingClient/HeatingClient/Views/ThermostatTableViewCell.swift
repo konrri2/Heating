@@ -16,6 +16,7 @@ class ThermostatTableViewCell: UITableViewCell {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var setTemperatureLabel: UILabel!
     @IBOutlet weak var modeLabel: UILabel!
+    @IBOutlet weak var isOnLabel: UILabel!
     
     var disposeBag = DisposeBag()
     
@@ -27,6 +28,15 @@ class ThermostatTableViewCell: UITableViewCell {
                     .disposed(by: disposeBag)
                 vm.temperature
                     .bind(to: temperatureLabel.rx.text)
+                    .disposed(by: disposeBag)
+
+                vm.temperatureColor
+                    .subscribe(onNext: { [weak self]  color in
+                        self?.temperatureLabel.textColor = color
+                    }).disposed(by: disposeBag)
+                
+                vm.isOn
+                    .bind(to: isOnLabel.rx.text)
                     .disposed(by: disposeBag)
             }
         }

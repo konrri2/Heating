@@ -1,0 +1,6 @@
+Tests:
+unit test:
+    downloading and parsing
+
+UITest:
+    for a given temperatures, are the colors correct

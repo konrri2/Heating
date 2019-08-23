@@ -12,9 +12,9 @@ import Foundation
 struct Thermostat {
     var roomName: String?  // /api/last returns no description //TODO implement /api/all
     var timestamp: Date? //TODO date
-    var oudsideTemp: Float?
-    var temperature: Float?  //nil if thermostat is offline
-    var setTemperature: Float?
+    var oudsideTemp: Double?
+    var temperature: Double?  //nil if thermostat is offline
+    var setTemperature: Double?
     var isOn: Bool?
     var mode: String? //TODO enum
 }

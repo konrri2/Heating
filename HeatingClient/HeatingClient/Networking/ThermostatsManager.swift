@@ -59,10 +59,10 @@ class ThermostatsManager {
                 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
                 let date = dateFormatter.date(from: strArr[0])
                 
-                let oudsideTemp = Float(strArr[1].trimmingCharacters(in: .whitespaces))
+                let oudsideTemp = Double(strArr[1].trimmingCharacters(in: .whitespaces))
                 for (index, element) in self.roomsNames.enumerated() {
-                    let temp = Float(strArr[index+4].trimmingCharacters(in: .whitespaces))
-                    let setTemp = Float(strArr[index+13].trimmingCharacters(in: .whitespaces))
+                    let temp = Double(strArr[index+4].trimmingCharacters(in: .whitespaces))
+                    let setTemp = Double(strArr[index+13].trimmingCharacters(in: .whitespaces))
                     let on = Bool(strArr[index+22].trimmingCharacters(in: .whitespaces).lowercased())
                     
                     let thermostat = Thermostat(
