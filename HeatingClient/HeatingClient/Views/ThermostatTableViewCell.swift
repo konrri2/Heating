@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 class ThermostatTableViewCell: UITableViewCell {
     
@@ -15,4 +16,15 @@ class ThermostatTableViewCell: UITableViewCell {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var setTemperatureLabel: UILabel!
     @IBOutlet weak var modeLabel: UILabel!
+    
+    var disposeBag = DisposeBag()
+    
+    var viewModel: ThermostatViewModel? {
+        didSet {
+            if let vm = viewModel {
+                vm.roomName.bind(to: nameLabel.rx.text).disposed(by: disposeBag)
+                vm.temperature.bind(to: temperatureLabel.rx.text)
+            }
+        }
+    }
 }

@@ -46,9 +46,6 @@ class ListViewController: UITableViewController {
                     self.tableView.reloadData()
                 }
             }).disposed(by: disposeBag)
-        
-        
-        //
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -58,17 +55,9 @@ class ListViewController: UITableViewController {
         }
         
         let thermostatVM = self.thermostatListVM.thermostatAt(indexPath.row)
-        
-        thermostatVM.title.asDriver(onErrorJustReturn: "")
-            .drive(cell.nameLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-//        thermostatVM.description.asDriver(onErrorJustReturn: 0.0)
-//            .drive(cell.descriptionLabel.rx.t)
-//            .disposed(by: disposeBag)
-        
+        cell.viewModel = thermostatVM
+
         return cell
-        
     }
     
 }

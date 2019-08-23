@@ -31,12 +31,12 @@ struct ThermostatViewModel {
         self.thermostat = thermostat
     }
     
-    var title: Observable<String> {
+    var roomName: Observable<String> {
         return Observable<String>.just(thermostat.roomName ?? "no name")
     }
     
-    var description: Observable<Float> {
-        return Observable<Float>.just(thermostat.temperature ?? 0.0)
+    var temperature: Observable<String> {
+        return Observable<String>.just(String(thermostat.temperature ?? 0.0))
     }
 }
 
