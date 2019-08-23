@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 class ThermostatsManager {
-    ///rooms names are copy-pasted from python server  //TODO should add API call to get this dynamically
+    ///rooms names are copy-pasted from python server  //TODO should add API call to get names dynamically
     var roomsNames: [String] = ["main bedroom", "bathroom", "gust", "agata's", "leo's", "living room", "kitchen", "office"]
     var lastResul: [Thermostat]?
     

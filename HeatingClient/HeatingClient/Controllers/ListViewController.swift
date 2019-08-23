@@ -19,21 +19,12 @@ class ListViewController: UITableViewController {
         
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
-        
         let conf = ConfigManager.parseConfig()
         populateThermostats(conf.HeatingSystemUrl)
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.thermostatListVM == nil ? 0: self.thermostatListVM.thermostatsVM.count
-    }
-    
     private func populateThermostats(_ urlStr: String) {
-
+        
         guard let url = URL(string: urlStr) else {
             fatalError("\(urlStr) is not a correct url for heating system")
         }
@@ -48,13 +39,22 @@ class ListViewController: UITableViewController {
             }).disposed(by: disposeBag)
     }
     
+    //MARK: - TableView overrides
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.thermostatListVM == nil ? 0: self.thermostatListVM.thermostatsVM.count
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ThermostatTableViewCell", for: indexPath) as? ThermostatTableViewCell else {
-            fatalError("thermostatTableViewCell is not found")
+            fatalError("ThermostatTableViewCell is not found")
         }
         
-        let thermostatVM = self.thermostatListVM.thermostatAt(indexPath.row)
+        let thermostatVM = self.thermostatListVM[indexPath.row]
         cell.viewModel = thermostatVM
 
         return cell

@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--List View Controller-->
+        <!--Thermostats List-->
         <scene sceneID="3JK-Ph-lZ0">
             <objects>
                 <tableViewController storyboardIdentifier="ListViewController" id="ALD-lT-Udo" customClass="ListViewController" customModule="HeatingClient" customModuleProvider="target" sceneMemberID="viewController">
@@ -57,7 +57,7 @@
                             <outlet property="delegate" destination="ALD-lT-Udo" id="zLd-4B-zE0"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="6sT-d1-ARg"/>
+                    <navigationItem key="navigationItem" title="Thermostats List" id="6sT-d1-ARg"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GgK-ay-dg0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

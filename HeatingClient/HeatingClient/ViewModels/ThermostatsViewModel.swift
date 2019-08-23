@@ -21,6 +21,12 @@ struct ThermostatListViewModel {
     func thermostatAt(_ index: Int) -> ThermostatViewModel {
         return self.thermostatsVM[index]
     }
+    
+    subscript(index: Int) -> ThermostatViewModel {
+        get {
+            return self.thermostatsVM[index]
+        }
+    }
 }
 
 struct ThermostatViewModel {

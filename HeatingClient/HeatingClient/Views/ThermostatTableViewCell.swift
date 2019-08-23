@@ -22,8 +22,12 @@ class ThermostatTableViewCell: UITableViewCell {
     var viewModel: ThermostatViewModel? {
         didSet {
             if let vm = viewModel {
-                vm.roomName.bind(to: nameLabel.rx.text).disposed(by: disposeBag)
-                vm.temperature.bind(to: temperatureLabel.rx.text)
+                vm.roomName
+                    .bind(to: nameLabel.rx.text)
+                    .disposed(by: disposeBag)
+                vm.temperature
+                    .bind(to: temperatureLabel.rx.text)
+                    .disposed(by: disposeBag)
             }
         }
     }
