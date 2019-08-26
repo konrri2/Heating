@@ -46,7 +46,7 @@ struct ThermostatViewModel {
     }
     
     var temperatureColor: Observable<UIColor> {
-        return Observable<UIColor>.just(colorForTemperature())
+        return Observable<UIColor>.just(textColor(for: thermostat.temperature))
     }
     
     var isOn: Observable<String> {
@@ -55,8 +55,8 @@ struct ThermostatViewModel {
                 var str = "off"
                 if thermostat.isOn == true {
                     str = "on"
-                    if let temp = thermostat.setTemperature,
-                        let setTemp = thermostat.temperature {
+                    if let setTemp = thermostat.setTemperature,
+                        let temp = thermostat.temperature {
                         if setTemp >= temp {
                             str = "🔥  on"
                         }
@@ -66,9 +66,17 @@ struct ThermostatViewModel {
             }())
     }
     
+    var setTemperature: Observable<String> {
+        return Observable<String>.just("Set to \(thermostat.setTemperature ?? 0.0)")
+    }
+    
+    var setTemperatureColor: Observable<UIColor> {
+        return Observable<UIColor>.just(textColor(for: thermostat.setTemperature))
+    }
+    
     ///arbitrarry choosen colors
-    func colorForTemperature() -> UIColor {
-        guard let temp = thermostat.temperature else {
+    func textColor(for temperature: Double?) -> UIColor {
+        guard let temp = temperature else {
             return UIColor.purple
         }
         if temp >= 23.0 {
@@ -78,10 +86,13 @@ struct ThermostatViewModel {
             return UIColor.orange
         }
         else if temp <= 18.0 {
+            return UIColor.cyan
+        }
+        else if temp <= 16.0 {
             return UIColor.blue
         }
         else {
-            return UIColor.green
+            return UIColor.green  //just right
         }
     }
     

@@ -38,6 +38,15 @@ class ThermostatTableViewCell: UITableViewCell {
                 vm.isOn
                     .bind(to: isOnLabel.rx.text)
                     .disposed(by: disposeBag)
+                
+                vm.setTemperature
+                    .bind(to: setTemperatureLabel.rx.text)
+                    .disposed(by: disposeBag)
+                
+                vm.setTemperatureColor
+                    .subscribe(onNext: { [weak self]  color in
+                        self?.setTemperatureLabel.textColor = color
+                    }).disposed(by: disposeBag)
             }
         }
     }
