@@ -13,28 +13,33 @@ struct Config: Decodable {
 }
 
 class ConfigManager {
-    static func loadConfigTest() {
-        
+    static func loadConfigTest() -> NSDictionary? {
         var nsDictionary: NSDictionary?
         if let path = Bundle.main.path(forResource: "Config", ofType: "plist") {
             nsDictionary = NSDictionary(contentsOfFile: path)
         }
+        return nsDictionary
     }
     
-    static func parseConfig() -> Config? {
-        var url = Bundle.main.url(forResource: "Config2", withExtension: "plist")
-        if url == nil {
-            url = Bundle.main.url(forResource: "Config_debug", withExtension: "plist")
+    static func parseConfig() -> Config {
+        if let mainConfig = ConfigManager.parseConfig(filename: "Config") {
+            return mainConfig
         }
-        guard let fileUrl = url else {
-            fatalError("No Config.plist file (nor Config_debug.plist)")
+        else if let testConfig = ConfigManager.parseConfig(filename: "Config_debug") {
+            logWarn("Could not load main Config.plist file, used Config_debug instead")
+            return testConfig
         }
-        guard let data = try? Data(contentsOf: fileUrl) else {
-            fatalError("No data in config file")
+        else {
+            fatalError("You mast add Config.plist (Config_debug.plist) with 'HeatingSystemUrl' value")
         }
-        let decoder = PropertyListDecoder()
-        guard let config = try? decoder.decode(Config.self, from: data) else {
-            fatalError("No url for heating system - add Config.plist file")
+    }
+    
+    
+    static func parseConfig(filename: String) -> Config? {
+        guard let url = Bundle.main.url(forResource: filename, withExtension: "plist"),
+                let data = try? Data(contentsOf: url),
+                let config = try? PropertyListDecoder().decode(Config.self, from: data) else {
+                return nil
         }
         return config
     }
