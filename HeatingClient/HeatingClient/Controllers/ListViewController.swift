@@ -30,13 +30,22 @@ class ListViewController: UITableViewController {
         }
         let man = ThermostatsManager()
         man.loadLastCsv(url: url)
-            .subscribe(onNext: { therArr in
-                self.thermostatListVM = ThermostatListViewModel(therArr)
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
+            .subscribe(
+                onNext: { therArr in
+                    self.thermostatListVM = ThermostatListViewModel(therArr)
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                },
+                onError: {error in
+                    let alert = UIAlertController(title: "Network error", message: error.localizedDescription, preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "OK :-(", style: UIAlertAction.Style.default, handler: nil))
+                    DispatchQueue.main.async {
+                        self.present(alert, animated: true, completion: nil)
+                    }
                 }
-            }).disposed(by: disposeBag)
+            ).disposed(by: disposeBag)
     }
     
     //MARK: - TableView overrides

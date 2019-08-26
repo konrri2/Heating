@@ -2,6 +2,7 @@
 
 import Foundation
 
+///in this form Config.plist must be
 struct Config: Decodable {
     private enum CodingKeys: String, CodingKey {
         case HeatingSystemUrl, info
