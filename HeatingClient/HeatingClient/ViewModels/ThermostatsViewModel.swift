@@ -85,11 +85,11 @@ struct ThermostatViewModel {
         else if temp >= 21.0 {
             return UIColor.orange
         }
-        else if temp <= 18.0 {
-            return UIColor.cyan
-        }
         else if temp <= 16.0 {
             return UIColor.blue
+        }
+        else if temp <= 18.0 {
+            return UIColor.cyan
         }
         else {
             return UIColor.green  //just right

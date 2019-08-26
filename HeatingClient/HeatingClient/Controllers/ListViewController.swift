@@ -20,7 +20,9 @@ class ListViewController: UITableViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         let conf = ConfigManager.parseConfig()
-        populateThermostats(conf.HeatingSystemUrl)
+        if let heatingServerUrl = conf?.HeatingSystemUrl {
+            populateThermostats(heatingServerUrl)
+        }
     }
     
     private func populateThermostats(_ urlStr: String) {

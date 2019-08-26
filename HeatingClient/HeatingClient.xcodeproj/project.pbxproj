@@ -19,6 +19,7 @@
 		7616492F230D486000BFE176 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7616492D230D486000BFE176 /* LaunchScreen.storyboard */; };
 		7616493A230D54EE00BFE176 /* ThermostatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76164939230D54EE00BFE176 /* ThermostatsViewModel.swift */; };
 		7616493C230D54FA00BFE176 /* Thermostat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7616493B230D54FA00BFE176 /* Thermostat.swift */; };
+		762EBF442313FFD800B2FB30 /* Config_debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 762EBF432313FFD700B2FB30 /* Config_debug.plist */; };
 		9DB53D70338729D0640D4E64 /* Pods_HeatingClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F41C7183F47905B2795D9A3 /* Pods_HeatingClient.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		76164930230D486000BFE176 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76164939230D54EE00BFE176 /* ThermostatsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThermostatsViewModel.swift; sourceTree = "<group>"; };
 		7616493B230D54FA00BFE176 /* Thermostat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thermostat.swift; sourceTree = "<group>"; };
+		762EBF432313FFD700B2FB30 /* Config_debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config_debug.plist; sourceTree = "<group>"; };
 		FCA6CAB906B1E505011ACCC4 /* Pods-HeatingClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeatingClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-HeatingClient/Pods-HeatingClient.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,6 +76,7 @@
 		7612CB3A230E9AC7002CF6C4 /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				762EBF432313FFD700B2FB30 /* Config_debug.plist */,
 				7612CB3B230E9E1D002CF6C4 /* Config.plist */,
 				7612CB3C230E9E1D002CF6C4 /* ConfigManager.swift */,
 			);
@@ -217,6 +220,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				762EBF442313FFD800B2FB30 /* Config_debug.plist in Resources */,
 				7610AF6223101EE600E91F84 /* TODO.txt in Resources */,
 				7612CB3D230E9E1D002CF6C4 /* Config.plist in Resources */,
 				7616492F230D486000BFE176 /* LaunchScreen.storyboard in Resources */,
