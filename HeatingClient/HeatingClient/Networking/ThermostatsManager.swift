@@ -80,4 +80,13 @@ class ThermostatsManager {
                 return retList
         }
     }
+    
+    func loadAllCsv() {
+        //TODO
+    }
+    
+    func loadHistoryCsv(for date: Date) {
+        //TODO
+        //TODO on server site
+    }
 }
