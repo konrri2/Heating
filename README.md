@@ -15,5 +15,6 @@ The python program is monitoring temperatures every 5minute and change thermosta
 
 Add `Config.plist` with url for the server
 
+
 List of thermostat<br/>
-![Screenshot thermostats List](/HeatingList/Screenshots/list.png)
+![Screenshot thermostats List](/HeatingClient/Screenshots/list.png)
