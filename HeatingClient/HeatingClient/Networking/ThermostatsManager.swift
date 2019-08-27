@@ -81,8 +81,23 @@ class ThermostatsManager {
         }
     }
     
-    func loadAllCsv() {
-        //TODO
+    func loadAllCsv() -> Observable<[String]> {
+        //TODO config.plist with api link and api methods name
+        let url = URL(string: "http://192.168.1.3:8090/api/all")!
+        return Observable.just(url)
+            .flatMap { url -> Observable<Data> in
+                let request = URLRequest(url: url)
+                return URLSession.shared.rx.data(request: request)
+            }
+            .map { data -> [String] in
+                let dataStr = String(data: data, encoding: String.Encoding.utf8)
+                logVerbose(dataStr)
+                guard let dataRow = dataStr else { return [] }
+                let strArr = dataRow.components(separatedBy: "\n")
+                logVerbose("first row of response")
+                logVerbose(strArr[0])
+                return strArr
+        }
     }
     
     func loadHistoryCsv(for date: Date) {
