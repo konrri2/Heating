@@ -1,4 +1,4 @@
-# Heating system for my home. 
+# Heating optimisation system for my home. 
 ## Server: RaspberryPi+Python 
 
 
