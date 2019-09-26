@@ -8,13 +8,16 @@
 
 import XCTest
 import RxSwift
+import RxBlocking
 
 @testable import HeatingClient
 
 class HeatingClientTests: XCTestCase {
     
+    var disposeBag: DisposeBag!
+    
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+       disposeBag = DisposeBag()
     }
 
     override func tearDown() {
@@ -26,27 +29,25 @@ class HeatingClientTests: XCTestCase {
         XCTAssertTrue(conf.HeatingSystemUrl.starts(with: "http"), "No http -> wrong url in config file")
     }
     
-    func testJsonData() {
+    func testJsonData() throws {
         let conf = ConfigManager.parseConfig()
         guard let url = URL(string: conf.HeatingSystemUrl) else {
             fatalError("\(conf.HeatingSystemUrl) is not a correct url for heating system")
         }
         let man = ThermostatsManager()
-        let csvObserver = man.loadLastCsv(url: url)
-            .subscribe(
-                onNext: { thermostatsArr in
-                    //does not enter here :-/
-                    
-                    XCTAssertEqual(thermostatsArr.count, 7, "number of thermostats must by 8")
-            })
-        XCTAssertNotNil(csvObserver, "man.loadLastCsv returns nil")
+        log("testing loadLastCsv...")
+        let thermostatsArr = try man.loadLastCsv(url: url)
+            .toBlocking()
+            .first()
+        XCTAssertNotEqual(thermostatsArr?.count, 3, "number of thermostats cennot be 3")
+        XCTAssertEqual(thermostatsArr?.count, 8, "number of thermostats must by 8")
     }
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+//    func testPerformanceExample() {
+//        // This is an example of a performance test case.
+//        self.measure {
+//            // Put the code you want to measure the time of here.
+//        }
+//    }
 
 }
