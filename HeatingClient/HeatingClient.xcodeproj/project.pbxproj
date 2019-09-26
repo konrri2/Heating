@@ -19,6 +19,7 @@
 		7616492F230D486000BFE176 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7616492D230D486000BFE176 /* LaunchScreen.storyboard */; };
 		7616493A230D54EE00BFE176 /* ThermostatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76164939230D54EE00BFE176 /* ThermostatsViewModel.swift */; };
 		7616493C230D54FA00BFE176 /* Thermostat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7616493B230D54FA00BFE176 /* Thermostat.swift */; };
+		76227818233CD3AF00B89376 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76227817233CD3AF00B89376 /* DetailViewController.swift */; };
 		762EBF442313FFD800B2FB30 /* Config_debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 762EBF432313FFD700B2FB30 /* Config_debug.plist */; };
 		762EBF472314062000B2FB30 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762EBF462314062000B2FB30 /* Logger.swift */; };
 		76C3D60123227BB9005DB931 /* HeatingClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C3D60023227BB9005DB931 /* HeatingClientTests.swift */; };
@@ -54,6 +55,7 @@
 		76164930230D486000BFE176 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76164939230D54EE00BFE176 /* ThermostatsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThermostatsViewModel.swift; sourceTree = "<group>"; };
 		7616493B230D54FA00BFE176 /* Thermostat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thermostat.swift; sourceTree = "<group>"; };
+		76227817233CD3AF00B89376 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		762EBF432313FFD700B2FB30 /* Config_debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config_debug.plist; sourceTree = "<group>"; };
 		762EBF462314062000B2FB30 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		76C3D5FE23227BB9005DB931 /* HeatingClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HeatingClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				76164926230D485E00BFE176 /* ListViewController.swift */,
+				76227817233CD3AF00B89376 /* DetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-HeatingClient-HeatingClientTests/Pods-HeatingClient-HeatingClientTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxBlocking/RxBlocking.framework",
@@ -355,6 +359,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBlocking.framework",
@@ -374,6 +379,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-HeatingClient/Pods-HeatingClient-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
@@ -381,6 +387,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
@@ -418,6 +425,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76227818233CD3AF00B89376 /* DetailViewController.swift in Sources */,
 				7612CB41230E9F3E002CF6C4 /* ThermostatsManager.swift in Sources */,
 				76164927230D485E00BFE176 /* ListViewController.swift in Sources */,
 				7612CB43230EA043002CF6C4 /* ThermostatTableViewCell.swift in Sources */,

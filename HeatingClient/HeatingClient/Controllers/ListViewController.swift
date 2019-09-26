@@ -19,6 +19,7 @@ class ListViewController: UITableViewController {
         
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
+        
         let conf = ConfigManager.parseConfig()
         populateThermostats(conf.HeatingSystemUrl)
     }
@@ -74,4 +75,18 @@ class ListViewController: UITableViewController {
         return cell
     }
     
+    
+    
+    // MARK: - Segues
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         if segue.identifier == "showDetail" {
+             if let indexPath = tableView.indexPathForSelectedRow {
+                 let object = thermostatListVM[indexPath.row]
+                 let controller = (segue.destination as! DetailViewController)
+                 controller.theThermostatVM = object
+                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+                 controller.navigationItem.leftItemsSupplementBackButton = true
+             }
+         }
+     }
 }

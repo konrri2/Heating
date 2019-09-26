@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UJc-Ww-Gs4">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UJc-Ww-Gs4">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.70"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JSu-r6-c4h" id="TQw-nf-lZG">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="79.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20.5" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRU-vp-R0B">
@@ -34,7 +34,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="living room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8CF-tp-sTU">
-                                            <rect key="frame" x="116" y="11" width="104.5" height="23"/>
+                                            <rect key="frame" x="116" y="11" width="105" height="23"/>
                                             <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="19"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -70,12 +70,13 @@
                                     <outlet property="nameLabel" destination="8CF-tp-sTU" id="F4S-R2-jfi"/>
                                     <outlet property="setTemperatureLabel" destination="sAh-Gn-0ks" id="k0b-hD-e3I"/>
                                     <outlet property="temperatureLabel" destination="SRU-vp-R0B" id="UJS-hy-gyl"/>
+                                    <segue destination="avO-e8-BB7" kind="show" identifier="showDetail" id="wDN-lt-JLc"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="ALD-lT-Udo" id="MuT-ud-TLh"/>
-                            <outlet property="delegate" destination="ALD-lT-Udo" id="zLd-4B-zE0"/>
+                            <outlet property="delegate" destination="ALD-lT-Udo" id="L39-9t-btU"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Thermostats List" id="6sT-d1-ARg"/>
@@ -83,6 +84,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GgK-ay-dg0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="959.4202898550725" y="73.660714285714278"/>
+        </scene>
+        <!--Detail-->
+        <scene sceneID="TfY-35-YmJ">
+            <objects>
+                <viewController title="Detail" id="avO-e8-BB7" customClass="DetailViewController" customModule="HeatingClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Kng-2c-5cC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="YCP-N6-cYi"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Kwx-64-spd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oxx-Ml-rub" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2275" y="67"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="v92-mZ-hoj">

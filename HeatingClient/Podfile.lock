@@ -1,4 +1,7 @@
 PODS:
+  - Charts (3.3.0):
+    - Charts/Core (= 3.3.0)
+  - Charts/Core (3.3.0)
   - RxBlocking (4.5.0):
     - RxSwift (>= 4.4.2, ~> 4.4)
   - RxCocoa (4.5.0):
@@ -8,6 +11,7 @@ PODS:
     - RxSwift (>= 4.4.2, ~> 4.4)
 
 DEPENDENCIES:
+  - Charts
   - RxBlocking
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
@@ -15,17 +19,19 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Charts
     - RxBlocking
     - RxCocoa
     - RxSwift
     - RxTest
 
 SPEC CHECKSUMS:
+  Charts: e0dd4cd8f257bccf98407b58183ddca8e8d5b578
   RxBlocking: 79413e4d916f44bb3e113c5b2cc059e36fe58910
   RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   RxTest: 3ccb66bfbace0bf7df1c43a7c75d046f8ce60372
 
-PODFILE CHECKSUM: e9a10fcaa3d61bdaa4f52246d97580db00369fb6
+PODFILE CHECKSUM: 08e1e2a62d8f1b23076282772ee5f99ed74ae035
 
 COCOAPODS: 1.5.3
