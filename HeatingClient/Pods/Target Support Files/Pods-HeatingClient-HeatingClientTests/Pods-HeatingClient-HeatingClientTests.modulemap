@@ -1,0 +1,6 @@
+framework module Pods_HeatingClient_HeatingClientTests {
+  umbrella header "Pods-HeatingClient-HeatingClientTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

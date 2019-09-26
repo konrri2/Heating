@@ -23,7 +23,7 @@ class ListViewController: UITableViewController {
         populateThermostats(conf.HeatingSystemUrl)
     }
     
-    private func populateThermostats(_ urlStr: String) {
+    internal func populateThermostats(_ urlStr: String) {
         
         guard let url = URL(string: urlStr) else {
             fatalError("\(urlStr) is not a correct url for heating system")

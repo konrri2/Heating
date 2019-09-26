@@ -10,4 +10,8 @@ target 'HeatingClient' do
   pod 'RxSwift','~> 4.0' 
   pod 'RxCocoa','~> 4.0'
 
+  target 'HeatingClientTests' do
+      pod 'RxTest'
+      pod 'RxBlocking'
+  end
 end

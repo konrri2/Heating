@@ -45,7 +45,7 @@ class ThermostatsManager {
     func loadLastCsv(url: URL) -> Observable<[Thermostat]> {
         return Observable.just(url)
             .flatMap { url -> Observable<Data> in
-                let request = URLRequest(url: url)
+                let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)  //it is important not to cache
                 return URLSession.shared.rx.data(request: request)
             }.map { data -> [String] in
                 let dataStr = String(data: data, encoding: String.Encoding.utf8)
@@ -62,7 +62,8 @@ class ThermostatsManager {
                 let oudsideTemp = Double(strArr[1].trimmingCharacters(in: .whitespaces))
                 for (index, element) in self.roomsNames.enumerated() {
                     let temp = Double(strArr[index+4].trimmingCharacters(in: .whitespaces))
-                    let setTemp = Double(strArr[index+13].trimmingCharacters(in: .whitespaces))
+                    let setTemp = self.parseTemperature(strArr[index+13])
+    
                     let on = Bool(strArr[index+22].trimmingCharacters(in: .whitespaces).lowercased())
                     
                     let thermostat = Thermostat(
@@ -79,6 +80,18 @@ class ThermostatsManager {
                 self.lastResul = retList
                 return retList
         }
+    }
+    
+    private func parseTemperature(_ str: String) -> Double? {
+        var retTemp = Double(str.trimmingCharacters(in: .whitespaces))
+        if retTemp == nil {
+            let arrStr = str.components(separatedBy: "->")  //-> indicates the temperature is changing. It looks good in .csv but complicate parsing process
+            if arrStr.count > 1 {
+                retTemp = Double(arrStr[1].trimmingCharacters(in: .whitespaces))
+            }
+        }
+        
+        return retTemp
     }
     
     func loadAllCsv() -> Observable<[String]> {

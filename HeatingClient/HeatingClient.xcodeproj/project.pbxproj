@@ -21,11 +21,24 @@
 		7616493C230D54FA00BFE176 /* Thermostat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7616493B230D54FA00BFE176 /* Thermostat.swift */; };
 		762EBF442313FFD800B2FB30 /* Config_debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 762EBF432313FFD700B2FB30 /* Config_debug.plist */; };
 		762EBF472314062000B2FB30 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762EBF462314062000B2FB30 /* Logger.swift */; };
+		76C3D60123227BB9005DB931 /* HeatingClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C3D60023227BB9005DB931 /* HeatingClientTests.swift */; };
 		9DB53D70338729D0640D4E64 /* Pods_HeatingClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F41C7183F47905B2795D9A3 /* Pods_HeatingClient.framework */; };
+		F07F3C8DEBA8B9E87ADC1E93 /* Pods_HeatingClient_HeatingClientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE21A825AD4ECD93E37B4B6 /* Pods_HeatingClient_HeatingClientTests.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		76C3D60323227BB9005DB931 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 76164919230D485E00BFE176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 76164920230D485E00BFE176;
+			remoteInfo = HeatingClient;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0F41C7183F47905B2795D9A3 /* Pods_HeatingClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HeatingClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2388AB1CE9104EF0E1E724B3 /* Pods-HeatingClient-HeatingClientTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeatingClient-HeatingClientTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HeatingClient-HeatingClientTests/Pods-HeatingClient-HeatingClientTests.release.xcconfig"; sourceTree = "<group>"; };
 		4A98C292716A6DBED8A3F769 /* Pods-HeatingClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeatingClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HeatingClient/Pods-HeatingClient.debug.xcconfig"; sourceTree = "<group>"; };
 		7610AF6123101EE600E91F84 /* TODO.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
 		7612CB3B230E9E1D002CF6C4 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
@@ -43,6 +56,11 @@
 		7616493B230D54FA00BFE176 /* Thermostat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thermostat.swift; sourceTree = "<group>"; };
 		762EBF432313FFD700B2FB30 /* Config_debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config_debug.plist; sourceTree = "<group>"; };
 		762EBF462314062000B2FB30 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		76C3D5FE23227BB9005DB931 /* HeatingClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HeatingClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		76C3D60023227BB9005DB931 /* HeatingClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatingClientTests.swift; sourceTree = "<group>"; };
+		76C3D60223227BB9005DB931 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8BE21A825AD4ECD93E37B4B6 /* Pods_HeatingClient_HeatingClientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HeatingClient_HeatingClientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6D1C949977ADC6A3B645AD8 /* Pods-HeatingClient-HeatingClientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeatingClient-HeatingClientTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HeatingClient-HeatingClientTests/Pods-HeatingClient-HeatingClientTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FCA6CAB906B1E505011ACCC4 /* Pods-HeatingClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeatingClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-HeatingClient/Pods-HeatingClient.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -55,6 +73,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		76C3D5FB23227BB9005DB931 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F07F3C8DEBA8B9E87ADC1E93 /* Pods_HeatingClient_HeatingClientTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -62,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				0F41C7183F47905B2795D9A3 /* Pods_HeatingClient.framework */,
+				8BE21A825AD4ECD93E37B4B6 /* Pods_HeatingClient_HeatingClientTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -71,6 +98,8 @@
 			children = (
 				4A98C292716A6DBED8A3F769 /* Pods-HeatingClient.debug.xcconfig */,
 				FCA6CAB906B1E505011ACCC4 /* Pods-HeatingClient.release.xcconfig */,
+				C6D1C949977ADC6A3B645AD8 /* Pods-HeatingClient-HeatingClientTests.debug.xcconfig */,
+				2388AB1CE9104EF0E1E724B3 /* Pods-HeatingClient-HeatingClientTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -97,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				76164923230D485E00BFE176 /* HeatingClient */,
+				76C3D5FF23227BB9005DB931 /* HeatingClientTests */,
 				76164922230D485E00BFE176 /* Products */,
 				62CF654B733D9C84465C7A81 /* Pods */,
 				0E38355399887CCFA758BF3A /* Frameworks */,
@@ -107,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				76164921230D485E00BFE176 /* HeatingClient.app */,
+				76C3D5FE23227BB9005DB931 /* HeatingClientTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -171,6 +202,15 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		76C3D5FF23227BB9005DB931 /* HeatingClientTests */ = {
+			isa = PBXGroup;
+			children = (
+				76C3D60023227BB9005DB931 /* HeatingClientTests.swift */,
+				76C3D60223227BB9005DB931 /* Info.plist */,
+			);
+			path = HeatingClientTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -193,6 +233,26 @@
 			productReference = 76164921230D485E00BFE176 /* HeatingClient.app */;
 			productType = "com.apple.product-type.application";
 		};
+		76C3D5FD23227BB9005DB931 /* HeatingClientTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76C3D60723227BB9005DB931 /* Build configuration list for PBXNativeTarget "HeatingClientTests" */;
+			buildPhases = (
+				350AE08C6FCD752A954F9AB6 /* [CP] Check Pods Manifest.lock */,
+				76C3D5FA23227BB9005DB931 /* Sources */,
+				76C3D5FB23227BB9005DB931 /* Frameworks */,
+				76C3D5FC23227BB9005DB931 /* Resources */,
+				5D35883352F44E9FC88AE4B7 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				76C3D60423227BB9005DB931 /* PBXTargetDependency */,
+			);
+			name = HeatingClientTests;
+			productName = HeatingClientTests;
+			productReference = 76C3D5FE23227BB9005DB931 /* HeatingClientTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -205,6 +265,10 @@
 				TargetAttributes = {
 					76164920230D485E00BFE176 = {
 						CreatedOnToolsVersion = 10.3;
+					};
+					76C3D5FD23227BB9005DB931 = {
+						CreatedOnToolsVersion = 10.3;
+						TestTargetID = 76164920230D485E00BFE176;
 					};
 				};
 			};
@@ -222,6 +286,7 @@
 			projectRoot = "";
 			targets = (
 				76164920230D485E00BFE176 /* HeatingClient */,
+				76C3D5FD23227BB9005DB931 /* HeatingClientTests */,
 			);
 		};
 /* End PBXProject section */
@@ -240,9 +305,66 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		76C3D5FC23227BB9005DB931 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		350AE08C6FCD752A954F9AB6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HeatingClient-HeatingClientTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5D35883352F44E9FC88AE4B7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-HeatingClient-HeatingClientTests/Pods-HeatingClient-HeatingClientTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxBlocking/RxBlocking.framework",
+				"${BUILT_PRODUCTS_DIR}/RxTest/RxTest.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBlocking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxTest.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HeatingClient-HeatingClientTests/Pods-HeatingClient-HeatingClientTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9FBC9169D83C907DABC607DC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -307,7 +429,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		76C3D5FA23227BB9005DB931 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76C3D60123227BB9005DB931 /* HeatingClientTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		76C3D60423227BB9005DB931 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 76164920230D485E00BFE176 /* HeatingClient */;
+			targetProxy = 76C3D60323227BB9005DB931 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		76164928230D485E00BFE176 /* Main.storyboard */ = {
@@ -485,6 +623,48 @@
 			};
 			name = Release;
 		};
+		76C3D60523227BB9005DB931 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C6D1C949977ADC6A3B645AD8 /* Pods-HeatingClient-HeatingClientTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W9AYBK7AF4;
+				INFOPLIST_FILE = HeatingClientTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = pl.edu.leszczynski.HeatingClientTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HeatingClient.app/HeatingClient";
+			};
+			name = Debug;
+		};
+		76C3D60623227BB9005DB931 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2388AB1CE9104EF0E1E724B3 /* Pods-HeatingClient-HeatingClientTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W9AYBK7AF4;
+				INFOPLIST_FILE = HeatingClientTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = pl.edu.leszczynski.HeatingClientTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HeatingClient.app/HeatingClient";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -502,6 +682,15 @@
 			buildConfigurations = (
 				76164934230D486000BFE176 /* Debug */,
 				76164935230D486000BFE176 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		76C3D60723227BB9005DB931 /* Build configuration list for PBXNativeTarget "HeatingClientTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76C3D60523227BB9005DB931 /* Debug */,
+				76C3D60623227BB9005DB931 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
