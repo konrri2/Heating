@@ -94,13 +94,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b4U-CJ-YG7" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="144" width="375" height="523"/>
                                 <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="YCP-N6-cYi" firstAttribute="trailing" secondItem="b4U-CJ-YG7" secondAttribute="trailing" id="GSR-Dm-Y2L"/>
-                            <constraint firstItem="b4U-CJ-YG7" firstAttribute="top" secondItem="YCP-N6-cYi" secondAttribute="top" id="WpC-4T-P3H"/>
+                            <constraint firstItem="b4U-CJ-YG7" firstAttribute="top" secondItem="YCP-N6-cYi" secondAttribute="top" constant="100" id="WpC-4T-P3H"/>
                             <constraint firstItem="YCP-N6-cYi" firstAttribute="bottom" secondItem="b4U-CJ-YG7" secondAttribute="bottom" id="cJS-dm-nR2"/>
                             <constraint firstItem="b4U-CJ-YG7" firstAttribute="leading" secondItem="YCP-N6-cYi" secondAttribute="leading" id="w2l-hH-bOH"/>
                         </constraints>

@@ -19,6 +19,8 @@ class DetailViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     var historyChartViewModel: HistoryChartViewModel? = nil
+    var theThermostatVM: ThermostatViewModel?
+    var timeLabels: [String]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,16 +30,7 @@ class DetailViewController: UIViewController {
     }
     
 
-    var theThermostatVM: ThermostatViewModel?
-    //{
-//        didSet {
-//            // Update the view.
-//            if lineChartView != nil {
-//                populateChart()
-//            }
-//            log("setting thermostat \(String(describing: theThermostatVM?.roomName))")
-//        }
-//    }
+
 
     //TODO: calling loadAll each time is not optimal
     internal func populateChart() {
@@ -49,7 +42,8 @@ class DetailViewController: UIViewController {
                     
                     DispatchQueue.main.async {
                         if let roomName = self.theThermostatVM?.thermostat.roomName {
-                            self.lineChartView.data = self.historyChartViewModel?.chartData(for: roomName)
+                            (self.timeLabels, self.lineChartView.data) = self.historyChartViewModel!.chartData(for: roomName)
+                            self.formatChart()
                             //reload or somthing TODO: check
                         }
                     }
@@ -65,6 +59,18 @@ class DetailViewController: UIViewController {
         .disposed(by: disposeBag)
     }
     
+    func formatChart() {
+        // configure X axis
+        let xAxis = lineChartView.xAxis
+        xAxis.labelPosition = .bottom
+        xAxis.drawGridLinesEnabled = false
+        if let labels = timeLabels {
+            xAxis.valueFormatter = IndexAxisValueFormatter(values: labels)
+            xAxis.labelCount = labels.count
+        }
+        xAxis.labelRotationAngle = -90.0
+        xAxis.granularity = 1.0
+    }
     
     //MARK: - debug
     
@@ -96,7 +102,7 @@ class DetailViewController: UIViewController {
 
         lineChartView.data = chartData
 
-//        lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: months)
+        lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: months)
 //        lineChartView.xAxis.labelPosition = .bottom
 //        lineChartView.xAxis.drawGridLinesEnabled = false
 //        lineChartView.xAxis.avoidFirstLastClippingEnabled = true

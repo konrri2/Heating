@@ -117,7 +117,7 @@ class ThermostatsManager {
         
         return Observable.just(url)
             .flatMap { url -> Observable<Data> in
-                let request = URLRequest(url: url)
+                let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)  //it is important not to cache
                 return URLSession.shared.rx.data(request: request)
             }
             .map { data -> [String] in
