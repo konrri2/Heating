@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>HeatingSystemUrl</key>
-	<string>http://leszczynski.edu.pl/last.json</string>
+	<string>http://leszczynski.edu.pl</string>
 	<key>info</key>
 	<string>Main</string>
 </dict>

@@ -17,20 +17,18 @@ class ListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+        }
         
         
-        let conf = ConfigManager.parseConfig()
-        populateThermostats(conf.HeatingSystemUrl)
+
+        populateThermostats()
     }
     
-    internal func populateThermostats(_ urlStr: String) {
-        
-        guard let url = URL(string: urlStr) else {
-            fatalError("\(urlStr) is not a correct url for heating system")
-        }
+    internal func populateThermostats() {
         let man = ThermostatsManager()
-        man.loadLastCsv(url: url)
+        man.loadLastCsv()
             .subscribe(
                 onNext: { therArr in
                     self.thermostatListVM = ThermostatListViewModel(therArr)

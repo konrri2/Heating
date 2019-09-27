@@ -10,6 +10,14 @@ struct Config: Decodable {
     
     let HeatingSystemUrl: String
     let info: String
+    
+    var lastMeasurementUrl: String {
+        return HeatingSystemUrl+"/api/last"
+    }
+    
+    var allMeasurementsUrl: String {
+        return HeatingSystemUrl+"/api/all"
+    }
 }
 
 class ConfigManager {

@@ -15,7 +15,14 @@ class ThermostatsManager {
     var roomsNames: [String] = ["main bedroom", "bathroom", "gust", "agata's", "leo's", "living room", "kitchen", "office"]
     var lastResul: [Thermostat]?
     
-    static func loadCsvLine(url: URL) -> Observable<[String]> {
+    let config: Config
+    
+    init() {
+        config = ConfigManager.parseConfig()
+    }
+    
+    
+    static func debug_loadCsvLine(url: URL) -> Observable<[String]> {
         return Observable.just(url)
             .flatMap { url -> Observable<Data> in
                 let request = URLRequest(url: url)
@@ -42,7 +49,11 @@ class ThermostatsManager {
      main bedroom,bathroom,gust,agata's,leo's',living room,kitchen,office
 
         */
-    func loadLastCsv(url: URL) -> Observable<[Thermostat]> {
+    func loadLastCsv() -> Observable<[Thermostat]> {
+        guard let url = URL(string: config.lastMeasurementUrl) else {
+            fatalError("\(config.lastMeasurementUrl) is not a correct url for heating system")
+        }
+        
         return Observable.just(url)
             .flatMap { url -> Observable<Data> in
                 let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)  //it is important not to cache

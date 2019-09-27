@@ -30,19 +30,25 @@ class HeatingClientTests: XCTestCase {
     }
     
     func testJsonData() throws {
-        let conf = ConfigManager.parseConfig()
-        guard let url = URL(string: conf.HeatingSystemUrl) else {
-            fatalError("\(conf.HeatingSystemUrl) is not a correct url for heating system")
-        }
         let man = ThermostatsManager()
         log("testing loadLastCsv...")
-        let thermostatsArr = try man.loadLastCsv(url: url)
+        let thermostatsArr = try man.loadLastCsv()
             .toBlocking()
             .first()
         XCTAssertNotEqual(thermostatsArr?.count, 3, "number of thermostats cennot be 3")
         XCTAssertEqual(thermostatsArr?.count, 8, "number of thermostats must by 8")
     }
 
+    func testAllHistoryJsonData() throws {
+        let man = ThermostatsManager()
+        log("testing loadLastCsv...")
+        let thermostatsArr = try man.loadAllCsv()
+            .toBlocking()
+            .first()
+        //XCTAssertNotEqual(thermostatsArr?.count, 3, "number of thermostats cennot be 3")
+        //XCTAssertEqual(thermostatsArr?.count, 8, "number of thermostats must by 8")
+    }
+    
 //    func testPerformanceExample() {
 //        // This is an example of a performance test case.
 //        self.measure {
