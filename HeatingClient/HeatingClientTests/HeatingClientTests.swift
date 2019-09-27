@@ -41,12 +41,13 @@ class HeatingClientTests: XCTestCase {
 
     func testAllHistoryJsonData() throws {
         let man = ThermostatsManager()
-        log("testing loadLastCsv...")
-        let thermostatsArr = try man.loadAllCsv()
+        log("testing loadAllCsv...")
+        let measurmentsDict = try man.loadAllCsv()
             .toBlocking()
             .first()
-        //XCTAssertNotEqual(thermostatsArr?.count, 3, "number of thermostats cennot be 3")
-        //XCTAssertEqual(thermostatsArr?.count, 8, "number of thermostats must by 8")
+        let thermostatsArr = measurmentsDict?.values.first
+        XCTAssertNotEqual(thermostatsArr?.count, 3, "number of thermostats cennot be 3")
+        XCTAssertEqual(thermostatsArr?.count, 8, "number of thermostats must by 8")
     }
     
 //    func testPerformanceExample() {

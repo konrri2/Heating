@@ -35,6 +35,35 @@ class ThermostatsManager {
             }
     }
     
+    fileprivate func buildMeasurment(_ strArr: [String]) -> [Thermostat] {
+        var retList = [Thermostat]()
+        //date format 2019-08-12 10:45
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        let date = dateFormatter.date(from: strArr[0])
+        
+        let oudsideTemp = Double(strArr[1].trimmingCharacters(in: .whitespaces))
+        for (index, element) in self.roomsNames.enumerated() {
+            let temp = Double(strArr[index+4].trimmingCharacters(in: .whitespaces))
+            let setTemp = self.parseTemperature(strArr[index+13])
+            
+            let on = Bool(strArr[index+22].trimmingCharacters(in: .whitespaces).lowercased())
+            
+            let thermostat = Thermostat(
+                roomName: element,
+                timestamp: date,
+                oudsideTemp: oudsideTemp,
+                temperature: temp,
+                setTemperature: setTemp,
+                isOn: on,
+                mode: strArr[index+31]
+            )
+            retList.append(thermostat)
+        }
+        self.lastResul = retList
+        return retList
+    }
+    
     /**
             /api/last return a single csv row with last measurments
      the CSV row has a specyfic format:
@@ -64,32 +93,7 @@ class ThermostatsManager {
                 let strArr = dataRow.components(separatedBy: ",")
                 return strArr
             }.map { strArr -> [Thermostat] in
-                var retList = [Thermostat]()
-                //date format 2019-08-12 10:45
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-                let date = dateFormatter.date(from: strArr[0])
-                
-                let oudsideTemp = Double(strArr[1].trimmingCharacters(in: .whitespaces))
-                for (index, element) in self.roomsNames.enumerated() {
-                    let temp = Double(strArr[index+4].trimmingCharacters(in: .whitespaces))
-                    let setTemp = self.parseTemperature(strArr[index+13])
-    
-                    let on = Bool(strArr[index+22].trimmingCharacters(in: .whitespaces).lowercased())
-                    
-                    let thermostat = Thermostat(
-                        roomName: element,
-                        timestamp: date,
-                        oudsideTemp: oudsideTemp,
-                        temperature: temp,
-                        setTemperature: setTemp,
-                        isOn: on,
-                        mode: strArr[index+31]
-                    )
-                    retList.append(thermostat)
-                }
-                self.lastResul = retList
-                return retList
+                return self.buildMeasurment(strArr)
         }
     }
     
@@ -105,9 +109,13 @@ class ThermostatsManager {
         return retTemp
     }
     
-    func loadAllCsv() -> Observable<[String]> {
-        //TODO config.plist with api link and api methods name
-        let url = URL(string: "http://192.168.1.3:8090/api/all")!
+    typealias MeasurementHistory = [Date: [Thermostat]]
+    
+    func loadAllCsv() -> Observable<MeasurementHistory> {
+        guard let url = URL(string: config.allMeasurementsUrl) else {
+            fatalError("\(config.lastMeasurementUrl) is not a correct url for heating system")
+        }
+        
         return Observable.just(url)
             .flatMap { url -> Observable<Data> in
                 let request = URLRequest(url: url)
@@ -118,10 +126,25 @@ class ThermostatsManager {
                 logVerbose(dataStr)
                 guard let dataRow = dataStr else { return [] }
                 let strArr = dataRow.components(separatedBy: "\n")
-                logVerbose("first row of response")
-                logVerbose(strArr[0])
                 return strArr
-        }
+            }
+            .map { csvRows -> MeasurementHistory in
+                var retHistory = MeasurementHistory()
+                for row in csvRows.dropFirst() {        //drop first because there is a header
+                    let rowCells = row.components(separatedBy: ",")
+                    if rowCells.count > 8 {
+                        let measurment = self.buildMeasurment(rowCells)
+                        
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+                        if let date = dateFormatter.date(from: rowCells[0]) {
+                            retHistory[date] = measurment
+                        }
+                    }
+                }
+                return retHistory
+            }
+
     }
     
     func loadHistoryCsv(for date: Date) {
