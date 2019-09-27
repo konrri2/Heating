@@ -35,6 +35,7 @@ class ThermostatsManager {
             }
     }
     
+    //TODO: change [Thermostat] into a model
     fileprivate func buildMeasurment(_ strArr: [String]) -> [Thermostat] {
         var retList = [Thermostat]()
         //date format 2019-08-12 10:45
@@ -109,8 +110,6 @@ class ThermostatsManager {
         return retTemp
     }
     
-    typealias MeasurementHistory = [Date: [Thermostat]]
-    
     func loadAllCsv() -> Observable<MeasurementHistory> {
         guard let url = URL(string: config.allMeasurementsUrl) else {
             fatalError("\(config.lastMeasurementUrl) is not a correct url for heating system")
@@ -123,7 +122,6 @@ class ThermostatsManager {
             }
             .map { data -> [String] in
                 let dataStr = String(data: data, encoding: String.Encoding.utf8)
-                logVerbose(dataStr)
                 guard let dataRow = dataStr else { return [] }
                 let strArr = dataRow.components(separatedBy: "\n")
                 return strArr

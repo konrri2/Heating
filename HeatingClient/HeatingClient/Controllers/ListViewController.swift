@@ -45,11 +45,6 @@ class ListViewController: UITableViewController {
                     }
                 }
             ).disposed(by: disposeBag)
-        
-        //TODO only if succesfully downloaded last - try download all
-        man.loadAllCsv()
-            .subscribe()  //if there is no subscription nathing will happend
-        .disposed(by: disposeBag)
     }
     
     //MARK: - TableView overrides
