@@ -17,11 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        //Override colors globally
-        //rgb(41, 128, 185)
-        UINavigationBar.appearance().barTintColor = UIColor(displayP3Red: 41/255, green: 128/255, blue: 185/255, alpha: 1.0)
-        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]  //separetly change for large title
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//        //Override colors globally
+//        //rgb(41, 128, 185)
+//        UINavigationBar.appearance().barTintColor = UIColor(displayP3Red: 41/255, green: 128/255, blue: 185/255, alpha: 1.0)
+//        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]  //separetly change for large title
+//        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 
         
         return true
