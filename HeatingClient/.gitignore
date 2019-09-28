@@ -1,3 +1,7 @@
+#custom
+HeatingClient/Config/Config.plist
+HeatingClient/Pods/Target Support Files/
+
 
 # Created by https://www.gitignore.io/api/swift,xcode
 # Edit at https://www.gitignore.io/?templates=swift,xcode
@@ -76,6 +80,7 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 
 # Code Injection
+
 # After new code Injection tools there's a generated folder /iOSInjectionProject
 # https://github.com/johnno1962/injectionforxcode
 
@@ -102,3 +107,5 @@ iOSInjectionProject/
 **/xcshareddata/WorkspaceSettings.xcsettings
 
 # End of https://www.gitignore.io/api/swift,xcode
+
+
