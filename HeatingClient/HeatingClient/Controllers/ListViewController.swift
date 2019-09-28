@@ -14,6 +14,7 @@ class ListViewController: UITableViewController {
     let disposeBag = DisposeBag()
     private var thermostatListVM: ThermostatListViewModel!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,7 +22,8 @@ class ListViewController: UITableViewController {
             self.navigationController?.navigationBar.prefersLargeTitles = true
         }
         
-        
+        let nib = UINib.init(nibName: "ThermostatTableViewCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: ThermostatTableViewCell.id)
 
         populateThermostats()
     }
@@ -59,7 +61,7 @@ class ListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ThermostatTableViewCell", for: indexPath) as? ThermostatTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ThermostatTableViewCell.id, for: indexPath) as? ThermostatTableViewCell else {
             fatalError("ThermostatTableViewCell is not found")
         }
         
@@ -69,7 +71,9 @@ class ListViewController: UITableViewController {
         return cell
     }
     
-    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "showDetail", sender: indexPath);
+    }
     
     // MARK: - Segues
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

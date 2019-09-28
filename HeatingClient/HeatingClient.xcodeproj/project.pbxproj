@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,7 +12,6 @@
 		7612CB3D230E9E1D002CF6C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7612CB3B230E9E1D002CF6C4 /* Config.plist */; };
 		7612CB3E230E9E1D002CF6C4 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7612CB3C230E9E1D002CF6C4 /* ConfigManager.swift */; };
 		7612CB41230E9F3E002CF6C4 /* ThermostatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7612CB40230E9F3E002CF6C4 /* ThermostatsManager.swift */; };
-		7612CB43230EA043002CF6C4 /* ThermostatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7612CB42230EA043002CF6C4 /* ThermostatTableViewCell.swift */; };
 		76164925230D485E00BFE176 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76164924230D485E00BFE176 /* AppDelegate.swift */; };
 		76164927230D485E00BFE176 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76164926230D485E00BFE176 /* ListViewController.swift */; };
 		7616492A230D485E00BFE176 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76164928230D485E00BFE176 /* Main.storyboard */; };
@@ -24,6 +23,8 @@
 		762EBF442313FFD800B2FB30 /* Config_debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 762EBF432313FFD700B2FB30 /* Config_debug.plist */; };
 		762EBF472314062000B2FB30 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762EBF462314062000B2FB30 /* Logger.swift */; };
 		76C3D60123227BB9005DB931 /* HeatingClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C3D60023227BB9005DB931 /* HeatingClientTests.swift */; };
+		76EE9B5A233F9C400062409E /* ThermostatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EE9B58233F9C400062409E /* ThermostatTableViewCell.swift */; };
+		76EE9B5B233F9C400062409E /* ThermostatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76EE9B59233F9C400062409E /* ThermostatTableViewCell.xib */; };
 		9DB53D70338729D0640D4E64 /* Pods_HeatingClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F41C7183F47905B2795D9A3 /* Pods_HeatingClient.framework */; };
 		F07F3C8DEBA8B9E87ADC1E93 /* Pods_HeatingClient_HeatingClientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE21A825AD4ECD93E37B4B6 /* Pods_HeatingClient_HeatingClientTests.framework */; };
 /* End PBXBuildFile section */
@@ -47,7 +48,6 @@
 		7612CB3B230E9E1D002CF6C4 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		7612CB3C230E9E1D002CF6C4 /* ConfigManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		7612CB40230E9F3E002CF6C4 /* ThermostatsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThermostatsManager.swift; sourceTree = "<group>"; };
-		7612CB42230EA043002CF6C4 /* ThermostatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThermostatTableViewCell.swift; sourceTree = "<group>"; };
 		76164921230D485E00BFE176 /* HeatingClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeatingClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76164924230D485E00BFE176 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76164926230D485E00BFE176 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +63,8 @@
 		76C3D5FE23227BB9005DB931 /* HeatingClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HeatingClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76C3D60023227BB9005DB931 /* HeatingClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatingClientTests.swift; sourceTree = "<group>"; };
 		76C3D60223227BB9005DB931 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76EE9B58233F9C400062409E /* ThermostatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThermostatTableViewCell.swift; sourceTree = "<group>"; };
+		76EE9B59233F9C400062409E /* ThermostatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThermostatTableViewCell.xib; sourceTree = "<group>"; };
 		8BE21A825AD4ECD93E37B4B6 /* Pods_HeatingClient_HeatingClientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HeatingClient_HeatingClientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6D1C949977ADC6A3B645AD8 /* Pods-HeatingClient-HeatingClientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeatingClient-HeatingClientTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HeatingClient-HeatingClientTests/Pods-HeatingClient-HeatingClientTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FCA6CAB906B1E505011ACCC4 /* Pods-HeatingClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeatingClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-HeatingClient/Pods-HeatingClient.release.xcconfig"; sourceTree = "<group>"; };
@@ -177,7 +179,8 @@
 			children = (
 				76164928230D485E00BFE176 /* Main.storyboard */,
 				7616492D230D486000BFE176 /* LaunchScreen.storyboard */,
-				7612CB42230EA043002CF6C4 /* ThermostatTableViewCell.swift */,
+				76EE9B58233F9C400062409E /* ThermostatTableViewCell.swift */,
+				76EE9B59233F9C400062409E /* ThermostatTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				7612CB3D230E9E1D002CF6C4 /* Config.plist in Resources */,
 				7616492F230D486000BFE176 /* LaunchScreen.storyboard in Resources */,
 				7616492C230D486000BFE176 /* Assets.xcassets in Resources */,
+				76EE9B5B233F9C400062409E /* ThermostatTableViewCell.xib in Resources */,
 				7616492A230D485E00BFE176 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,12 +413,12 @@
 				76227818233CD3AF00B89376 /* DetailViewController.swift in Sources */,
 				7612CB41230E9F3E002CF6C4 /* ThermostatsManager.swift in Sources */,
 				76164927230D485E00BFE176 /* ListViewController.swift in Sources */,
-				7612CB43230EA043002CF6C4 /* ThermostatTableViewCell.swift in Sources */,
 				7602B93D233E0F3E004B354E /* HistoryChartViewModel.swift in Sources */,
 				76164925230D485E00BFE176 /* AppDelegate.swift in Sources */,
 				7616493C230D54FA00BFE176 /* Thermostat.swift in Sources */,
 				7612CB3E230E9E1D002CF6C4 /* ConfigManager.swift in Sources */,
 				7616493A230D54EE00BFE176 /* ThermostatsViewModel.swift in Sources */,
+				76EE9B5A233F9C400062409E /* ThermostatTableViewCell.swift in Sources */,
 				762EBF472314062000B2FB30 /* Logger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

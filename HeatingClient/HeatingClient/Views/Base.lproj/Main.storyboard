@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UJc-Ww-Gs4">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UJc-Ww-Gs4">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JSu-r6-c4h" id="TQw-nf-lZG">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20.5" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRU-vp-R0B">
@@ -55,8 +57,10 @@
                                     <constraints>
                                         <constraint firstItem="SRU-vp-R0B" firstAttribute="leading" secondItem="TQw-nf-lZG" secondAttribute="leadingMargin" id="0na-dZ-P43"/>
                                         <constraint firstItem="8CF-tp-sTU" firstAttribute="leading" secondItem="SRU-vp-R0B" secondAttribute="trailing" constant="16" id="5UT-PI-IiA"/>
+                                        <constraint firstItem="SRU-vp-R0B" firstAttribute="top" secondItem="TQw-nf-lZG" secondAttribute="topMargin" id="BLh-fC-zZG"/>
                                         <constraint firstItem="hXU-Bs-fiX" firstAttribute="top" secondItem="sAh-Gn-0ks" secondAttribute="top" id="CQE-ra-N7n"/>
                                         <constraint firstItem="8CF-tp-sTU" firstAttribute="top" secondItem="TQw-nf-lZG" secondAttribute="topMargin" id="O2c-bt-7Nk"/>
+                                        <constraint firstItem="SRU-vp-R0B" firstAttribute="bottom" secondItem="TQw-nf-lZG" secondAttribute="bottomMargin" id="fIs-fK-I06"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="SRU-vp-R0B" secondAttribute="bottom" id="kre-pC-ZqY"/>
                                         <constraint firstItem="SRU-vp-R0B" firstAttribute="top" secondItem="TQw-nf-lZG" secondAttribute="topMargin" id="lbo-Bx-dhl"/>
                                         <constraint firstItem="hXU-Bs-fiX" firstAttribute="bottom" secondItem="TQw-nf-lZG" secondAttribute="bottomMargin" id="nlo-HP-OcB"/>
@@ -66,10 +70,6 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="isOnLabel" destination="hXU-Bs-fiX" id="Z2Q-Dr-f5Y"/>
-                                    <outlet property="nameLabel" destination="8CF-tp-sTU" id="F4S-R2-jfi"/>
-                                    <outlet property="setTemperatureLabel" destination="sAh-Gn-0ks" id="k0b-hD-e3I"/>
-                                    <outlet property="temperatureLabel" destination="SRU-vp-R0B" id="UJS-hy-gyl"/>
                                     <segue destination="avO-e8-BB7" kind="show" identifier="showDetail" id="wDN-lt-JLc"/>
                                 </connections>
                             </tableViewCell>
@@ -94,8 +94,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b4U-CJ-YG7" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="0.0" y="144" width="375" height="523"/>
-                                <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="164" width="375" height="503"/>
+                                <color key="backgroundColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -122,7 +122,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UJc-Ww-Gs4" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NUz-JQ-qOL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

@@ -18,6 +18,8 @@ class ThermostatTableViewCell: UITableViewCell {
     @IBOutlet weak var modeLabel: UILabel!
     @IBOutlet weak var isOnLabel: UILabel!
     
+    static var id = "ThermostatTableViewCell"
+    
     var disposeBag = DisposeBag()
     
     var viewModel: ThermostatViewModel? {
