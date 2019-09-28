@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import RxSwift
 
+@IBDesignable
 class ThermostatTableViewCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
@@ -19,6 +20,7 @@ class ThermostatTableViewCell: UITableViewCell {
     @IBOutlet weak var isOnLabel: UILabel!
     
     static var id = "ThermostatTableViewCell"
+    static var nibName = "ThermostatTableViewCell"
     
     var disposeBag = DisposeBag()
     

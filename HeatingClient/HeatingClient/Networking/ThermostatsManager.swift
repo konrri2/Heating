@@ -90,7 +90,8 @@ class ThermostatsManager {
         let obsLocal = buildLastCsvObservable(for: localUrl)
         let obsRemote = buildLastCsvObservable(for: remoteUrl)
         
-        return Observable.concat([obsLocal,obsRemote])
+        return Observable
+                .merge(obsRemote,obsLocal)
     }
     
     @available(*, deprecated, message: "This only dowlnoad from one source. Now we check both local and remote server")

@@ -1,3 +1,7 @@
+tak nie mozna:
+Observable.concat([obsRemote,obsLocal])
+bo kolejnosc ma znaczenia
+
 connect locally to rasp pi and show that it is connectect locally
 
 Tests:

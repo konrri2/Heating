@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20.5" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpw-z2-vmc">
-                        <rect key="frame" x="20" y="0.0" width="76" height="80.5"/>
+                        <rect key="frame" x="20" y="0.0" width="76" height="80"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="80" id="x3W-Mt-RJ6"/>
                         </constraints>
@@ -29,22 +29,19 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="living room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8y-T1-Ukc">
-                        <rect key="frame" x="112" y="10.5" width="105" height="23"/>
+                        <rect key="frame" x="112" y="10" width="105" height="23"/>
                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="19"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="on" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pMv-mM-sIJ">
-                        <rect key="frame" x="311" y="42.5" width="20" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="45O-Gh-gDN"/>
-                        </constraints>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="on" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pMv-mM-sIJ">
+                        <rect key="frame" x="311" y="43" width="20" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="set to: 20.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LcZ-QA-quB">
-                        <rect key="frame" x="112" y="42.5" width="87" height="21"/>
+                        <rect key="frame" x="112" y="42" width="87" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="hPf-Mj-aX0"/>
                         </constraints>
@@ -54,7 +51,6 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="pMv-mM-sIJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-13" id="4c3-Q4-OxT"/>
                     <constraint firstAttribute="bottom" secondItem="fpw-z2-vmc" secondAttribute="bottom" id="8Dl-Ub-5FD"/>
                     <constraint firstItem="p8y-T1-Ukc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="AnX-2h-T0I"/>
                     <constraint firstItem="fpw-z2-vmc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="SGr-SN-jSe"/>
