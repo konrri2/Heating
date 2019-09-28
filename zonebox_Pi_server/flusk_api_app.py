@@ -20,7 +20,7 @@ app = Flask(__name__)
 @app.route('/api/all', methods=['GET'])
 def get_file():
     print("/api/all")
-    return send_from_directory('res', 'all.csv')
+    return send_from_directory('./res', 'all.csv')
     # app.send_file('/measurements_format.csv', attachment_filename='measurements_format.csv')
     # return send_from_directory(directory=uploads, filename='measurements_format.csv')
 

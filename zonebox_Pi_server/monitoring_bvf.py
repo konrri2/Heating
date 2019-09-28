@@ -20,7 +20,7 @@ def read_rooms_settings_file():
     try:
         global rooms_arr
         rooms_arr = []  # clear
-        with open('settings.csv', 'r') as f:
+        with open('./settings.csv', 'r') as f:
             reader = csv.reader(f)
             for row in reader:
                 rooms_arr.append(Room(row[0], row[1], row[2], row[3], float(row[4]), float(row[5]), float(row[6]), float(row[7])))
@@ -158,7 +158,7 @@ def main_loop():
     except:
         print("!!!!    \n!\n! main loop error \n\n")
     writes_in_hour_count = writes_in_hour_count + 1
-    threading.Timer(300, main_loop).start()  # every 15minutes
+    threading.Timer(300, main_loop).start()  # every 5 minutes
 
 
 main_loop()
