@@ -21,6 +21,7 @@ class DetailViewController: UIViewController {
     var historyChartViewModel: HistoryChartViewModel? = nil
     var theThermostatVM: ThermostatViewModel?
     var timeLabels: [String]?
+    var lineChartDate: LineChartData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +43,8 @@ class DetailViewController: UIViewController {
                     
                     DispatchQueue.main.async {
                         if let roomName = self.theThermostatVM?.thermostat.roomName {
-                            (self.timeLabels, self.lineChartView.data) = self.historyChartViewModel!.chartData(for: roomName)
+                            (self.timeLabels, self.lineChartDate) = self.historyChartViewModel!.chartData(for: roomName)
+                            self.lineChartView.data = self.lineChartDate
                             self.formatChart()
                             //reload or somthing TODO: check
                         }

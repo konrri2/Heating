@@ -1,3 +1,5 @@
+connect locally to rasp pi and show that it is connectect locally
+
 Tests:
 unit test:
     downloading and parsing

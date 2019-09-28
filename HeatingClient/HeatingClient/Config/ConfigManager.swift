@@ -5,11 +5,16 @@ import Foundation
 ///in this form Config.plist must be
 struct Config: Decodable {
     private enum CodingKeys: String, CodingKey {
-        case HeatingSystemUrl, info
+        case remoteAddress, localAddress, info
     }
-    
-    let HeatingSystemUrl: String
+
+    let localAddress: String
+    let remoteAddress: String
     let info: String
+
+    var HeatingSystemUrl: String {
+        return localAddress //TODO chose which one works
+    }
     
     var lastMeasurementUrl: String {
         return HeatingSystemUrl+"/api/last"
@@ -21,19 +26,12 @@ struct Config: Decodable {
 }
 
 class ConfigManager {
-    static func loadConfigTest() -> NSDictionary? {
-        var nsDictionary: NSDictionary?
-        if let path = Bundle.main.path(forResource: "Config", ofType: "plist") {
-            nsDictionary = NSDictionary(contentsOfFile: path)
-        }
-        return nsDictionary
-    }
-    
+
     static func parseConfig() -> Config {
-        if let mainConfig = ConfigManager.parseConfig(filename: "Config") {
+        if let mainConfig = parseConfig(filename: "Config") {
             return mainConfig
         }
-        else if let testConfig = ConfigManager.parseConfig(filename: "Config_debug") {
+        else if let testConfig = parseConfig(filename: "Config_debug") {
             logWarn("Could not load main Config.plist file, used Config_debug instead")
             return testConfig
         }

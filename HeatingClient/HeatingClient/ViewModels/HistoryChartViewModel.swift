@@ -19,7 +19,7 @@ struct HistoryChartViewModel {
         logVerbose("number of Measurement in History = \(history.keys.count)")
     }
     
-    func chartData(for roomName: String) -> ([String], LineChartData) {
+    func chartData(for roomName: String) -> ([String]?, LineChartData?) {
         var dataEntries: [ChartDataEntry] = []
         var labels = [String]()
         
