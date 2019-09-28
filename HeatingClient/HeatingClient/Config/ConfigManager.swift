@@ -11,17 +11,21 @@ struct Config: Decodable {
     let localAddress: String
     let remoteAddress: String
     let info: String
-
-    var HeatingSystemUrl: String {
-        return localAddress //TODO chose which one works
+    
+    func lastMeasurementUrl(local: Bool) -> String {
+        if local {
+            return localAddress + "/api/last"
+        } else {
+            return remoteAddress + "/api/last"
+        }
     }
     
-    var lastMeasurementUrl: String {
-        return HeatingSystemUrl+"/api/last"
-    }
-    
-    var allMeasurementsUrl: String {
-        return HeatingSystemUrl+"/api/all"
+    func allMeasurementsUrl(local: Bool) -> String {
+        if local {
+            return localAddress + "/api/all"
+        } else {
+            return remoteAddress + "/api/all"
+        }
     }
 }
 

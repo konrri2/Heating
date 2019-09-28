@@ -80,10 +80,40 @@ class ThermostatsManager {
 
         */
     func loadLastCsv() -> Observable<[Thermostat]> {
-        guard let url = URL(string: config.lastMeasurementUrl) else {
+        guard let localUrl = URL(string: config.lastMeasurementUrl(local: true)) else {
+            fatalError("config.lastMeasurementUrl(local: true): \(config.lastMeasurementUrl(local: true)) is not a correct url for heating system")
+        }
+        guard let remoteUrl = URL(string: config.lastMeasurementUrl(local: false)) else {
+            fatalError("config.lastMeasurementUrl(local: true): \(config.lastMeasurementUrl(local: true)) is not a correct url for heating system")
+        }
+        
+        let obsLocal = buildLastCsvObservable(for: localUrl)
+        let obsRemote = buildLastCsvObservable(for: remoteUrl)
+        
+        return Observable.concat([obsLocal,obsRemote])
+    }
+    
+    @available(*, deprecated, message: "This only dowlnoad from one source. Now we check both local and remote server")
+    func loadLastCsvFrom_SingleServer() -> Observable<[Thermostat]> {
+        guard let url = URL(string: config.lastMeasurementUrl(local: true)) else {
             fatalError("\(config.lastMeasurementUrl) is not a correct url for heating system")
         }
         
+        return Observable.just(url)
+            .flatMap { url -> Observable<Data> in
+                let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)  //it is important not to cache
+                return URLSession.shared.rx.data(request: request)
+            }.map { data -> [String] in
+                let dataStr = String(data: data, encoding: String.Encoding.utf8)
+                guard let dataRow = dataStr else { return [] }
+                let strArr = dataRow.components(separatedBy: ",")
+                return strArr
+            }.map { strArr -> [Thermostat] in
+                return self.buildMeasurment(strArr)
+            }
+    }
+    
+    func buildLastCsvObservable(for url: URL) -> Observable<[Thermostat]> {
         return Observable.just(url)
             .flatMap { url -> Observable<Data> in
                 let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)  //it is important not to cache
@@ -111,7 +141,7 @@ class ThermostatsManager {
     }
     
     func loadAllCsv() -> Observable<MeasurementHistory> {
-        guard let url = URL(string: config.allMeasurementsUrl) else {
+        guard let url = URL(string: config.allMeasurementsUrl(local: true)) else {
             fatalError("\(config.lastMeasurementUrl) is not a correct url for heating system")
         }
         

@@ -26,10 +26,11 @@ class HeatingClientTests: XCTestCase {
 
     func testConfigManager() {
         let conf = ConfigManager.parseConfig()
-        XCTAssertTrue(conf.HeatingSystemUrl.starts(with: "http"), "No http -> wrong url in config file")
+        XCTAssertTrue(conf.localAddress.starts(with: "http"), "No http -> wrong url in config file")
+        XCTAssertTrue(conf.remoteAddress.starts(with: "http"), "No http -> wrong url in config file")
     }
     
-    func testJsonData() throws {
+    func testJsonData_loadLastCsv() throws {
         let man = ThermostatsManager()
         log("testing loadLastCsv...")
         let thermostatsArr = try man.loadLastCsv()
