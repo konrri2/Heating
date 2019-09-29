@@ -67,9 +67,9 @@ class DetailViewController: UIViewController {
                         
                         DispatchQueue.main.async {
                             if let roomName = self.theThermostatVM?.thermostat.roomName {
-                                (self.timeLabels, self.lineChartDate) = self.historyChartViewModel!.chartData(for: roomName)
+                                (self.timeLabels, self.lineChartDate) = self.historyChartViewModel!.chartData(for: roomName, chartView: self.lineChartView)
                                 self.lineChartView.data = self.lineChartDate
-                                self.formatChart()
+                                self.formatChartXAxis()
                                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
                                 //reload or somthing TODO: check
                             }
@@ -80,8 +80,7 @@ class DetailViewController: UIViewController {
         .disposed(by: disposeBag)
     }
     
-    func formatChart() {
-        // configure X axis
+    func formatChartXAxis() {
         let xAxis = lineChartView.xAxis
         xAxis.labelPosition = .bottom
         xAxis.drawGridLinesEnabled = false
@@ -89,7 +88,9 @@ class DetailViewController: UIViewController {
             xAxis.valueFormatter = IndexAxisValueFormatter(values: labels)
             xAxis.labelCount = labels.count
         }
-        xAxis.labelRotationAngle = -90.0
+        xAxis.labelRotationAngle = -45.0
         xAxis.granularity = 1.0
+      
+        lineChartView.animate(yAxisDuration: 2)
     }
 }
