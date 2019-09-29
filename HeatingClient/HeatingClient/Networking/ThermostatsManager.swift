@@ -79,7 +79,7 @@ class ThermostatsManager {
      main bedroom,bathroom,gust,agata's,leo's',living room,kitchen,office
 
         */
-    func loadLastCsv() -> Observable<[Thermostat]> {
+    func loadLastCsv() -> Observable<Thermostats> {
         guard let localUrl = URL(string: config.lastMeasurementUrl(local: true)) else {
             fatalError("config.lastMeasurementUrl(local: true): \(config.lastMeasurementUrl(local: true)) is not a correct url for heating system")
         }
@@ -91,7 +91,7 @@ class ThermostatsManager {
         let obsRemote = buildLastCsvObservable(for: remoteUrl)
         
         return Observable
-                .merge(obsRemote,obsLocal)
+                .merge(obsLocal,obsRemote)
     }
     
     @available(*, deprecated, message: "This only dowlnoad from one source. Now we check both local and remote server")
@@ -114,7 +114,7 @@ class ThermostatsManager {
             }
     }
     
-    func buildLastCsvObservable(for url: URL) -> Observable<[Thermostat]> {
+    func buildLastCsvObservable(for url: URL) -> Observable<Thermostats> {
         return Observable.just(url)
             .flatMap { url -> Observable<Data> in
                 let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)  //it is important not to cache
@@ -124,9 +124,9 @@ class ThermostatsManager {
                 guard let dataRow = dataStr else { return [] }
                 let strArr = dataRow.components(separatedBy: ",")
                 return strArr
-            }.map { strArr -> [Thermostat] in
-                return self.buildMeasurment(strArr)
-        }
+            }.map { strArr -> Thermostats in
+                return Thermostats(self.buildMeasurment(strArr))
+        }.catchErrorJustReturn(Thermostats(error: "err"))
     }
     
     private func parseTemperature(_ str: String) -> Double? {

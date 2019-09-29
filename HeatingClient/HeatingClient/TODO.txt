@@ -1,8 +1,6 @@
-tak nie mozna:
-Observable.concat([obsRemote,obsLocal])
-bo kolejnosc ma znaczenia
+"guest" literówka
 
-connect locally to rasp pi and show that it is connectect locally
+merge (for all) locally to rasp pi and show that it is connectect locally
 
 Tests:
 unit test:

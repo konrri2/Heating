@@ -18,3 +18,21 @@ struct Thermostat {
     var isOn: Bool?
     var mode: String? //TODO enum
 }
+
+struct Thermostats {
+    var errorInfo: String?
+    var array: [Thermostat]?
+    
+    init(_ arr: [Thermostat]) {
+        array = arr
+    }
+    init(error: String) {
+        errorInfo = error
+    }
+    
+    subscript(index: Int) -> Thermostat? {
+        get {
+            return array?[index]
+        }
+    }
+}

@@ -33,6 +33,20 @@ class DetailViewController: UIViewController {
         if lineChartView != nil {
             populateChart()
         }
+        
+        if let testView = Bundle.main.loadNibNamed(ThermostatTableViewCell.nibName, owner: self, options: nil)?.first as? UITableViewCell {
+            testView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(testView)
+//            NSLayoutConstraint.activate([
+//                testView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+//                testView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+//                testView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+//                testView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+//                ])
+            //self.testView = testView
+        } else {
+            logError("cannot load nib")
+        }
     }
     
 

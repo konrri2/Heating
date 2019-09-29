@@ -32,13 +32,19 @@ class ListViewController: UITableViewController {
         let man = ThermostatsManager()
         man.loadLastCsv()
             .subscribe(
-                onNext: { therArr in
-                    self.thermostatListVM = ThermostatListViewModel(therArr)
-                    
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
+                onNext: { thermostats in
+                    if let error = thermostats.errorInfo {
+                        logWarn(error)
+                    }
+                    else if let therArr = thermostats.array {
+                        self.thermostatListVM = ThermostatListViewModel(therArr)
+                        
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
                     }
                 }
+
 //                ,
 //                onError: {error in
 //TODO one always fail
@@ -48,7 +54,8 @@ class ListViewController: UITableViewController {
 //                        self.present(alert, animated: true, completion: nil)
 //                    }
 //                }
-            ).disposed(by: disposeBag)
+            )
+            .disposed(by: disposeBag)
     }
     
     //MARK: - TableView overrides
