@@ -54,6 +54,7 @@ class DetailViewController: UIViewController {
 
     //TODO: calling loadAll each time is not optimal
     internal func populateChart() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         let man = ThermostatsManager()
         man.loadAllCsv()
             .subscribe(
@@ -69,6 +70,7 @@ class DetailViewController: UIViewController {
                                 (self.timeLabels, self.lineChartDate) = self.historyChartViewModel!.chartData(for: roomName)
                                 self.lineChartView.data = self.lineChartDate
                                 self.formatChart()
+                                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                                 //reload or somthing TODO: check
                             }
                         }

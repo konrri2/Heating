@@ -101,7 +101,7 @@ class ThermostatsManager {
     private func buildLastCsvObservable(for url: URL) -> Observable<HauseThermostats> {
         return Observable.just(url)
             .flatMap { url -> Observable<Data> in
-                let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)  //it is important not to cache
+                let request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 300)  //cache for 5 minutes
                 return URLSession.shared.rx.data(request: request)
             }.map { data -> [String] in
                 let dataStr = String(data: data, encoding: String.Encoding.utf8)

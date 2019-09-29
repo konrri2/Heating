@@ -1,6 +1,11 @@
-oudside temperature view
+oudside temperature chart
 
 setting view
+
+cell view as a DatailViewHeader -> autolayout
+
+chart download indicator
+
 
 chart view - make pretty
 
