@@ -10,8 +10,8 @@ import Foundation
 
 
 struct Thermostat {
-    var roomName: String?  // /api/last returns no description //TODO implement /api/all
-    var timestamp: Date? //TODO date
+    var roomName: String?  // /api/last returns no description
+    var timestamp: Date?
     var oudsideTemp: Double?
     var temperature: Double?  //nil if thermostat is offline
     var setTemperature: Double?

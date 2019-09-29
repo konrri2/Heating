@@ -27,6 +27,14 @@ struct Config: Decodable {
             return remoteAddress + "/api/all"
         }
     }
+    
+    func getSettingsUrl(local: Bool) -> String {
+        if local {
+            return localAddress + "/api/getSettings"
+        } else {
+            return remoteAddress + "/api/getSettings"
+        }
+    }
 }
 
 class ConfigManager {

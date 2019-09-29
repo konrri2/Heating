@@ -30,14 +30,38 @@ class HeatingClientTests: XCTestCase {
         XCTAssertTrue(conf.remoteAddress.starts(with: "http"), "No http -> wrong url in config file")
     }
     
+    func testGetSettings() throws {
+        let man = SettingsManager()
+        let apiReturns = try man.loadSettings()
+            .toBlocking()
+            .toArray()
+        XCTAssertNotEqual(apiReturns.count, 3, "number of models of thermostats cennot be 3")
+        XCTAssertEqual(apiReturns.count, 2, "number of models of thermostats must by 2 (one from local one form remote)")
+        let t0 = apiReturns[0]
+        let t1 = apiReturns[1]
+        
+        XCTAssertTrue(((t0.errorInfo == nil) != (t1.errorInfo == nil)), "only one (local xor remote) may terurn error")
+        let successResultDict = t0.dict.isEmpty ? t0.dict : t1.dict
+        XCTAssertNotEqual(successResultDict.keys.count, 3, "number of settings cennot be 3")
+        XCTAssertEqual(successResultDict.keys.count, 8, "number of thermostats must by 8")
+    }
+    
     func testJsonData_loadLastCsv() throws {
         let man = ThermostatsManager()
         log("testing loadLastCsv...")
-        let thermostatsArr = try man.loadLastCsv()
+        let apiReturns = try man.loadLastCsv()
             .toBlocking()
-            .first()
-        XCTAssertNotEqual(thermostatsArr?.count, 3, "number of thermostats cennot be 3")
-        XCTAssertEqual(thermostatsArr?.count, 8, "number of thermostats must by 8")
+            .toArray()
+        XCTAssertNotEqual(apiReturns.count, 3, "number of models of thermostats cennot be 3")
+        XCTAssertEqual(apiReturns.count, 2, "number of models of thermostats must by 2 (one from local one form remote)")
+        let t0 = apiReturns[0]
+        let t1 = apiReturns[1]
+        
+        XCTAssertTrue(((t0.errorInfo == nil) != (t1.errorInfo == nil)), "only one (local xor remote) may terurn error")
+        let successResultArray = t0.array != nil ? t0.array : t1.array
+        XCTAssertNotNil(successResultArray, "one must return corretct array")
+        XCTAssertNotEqual(successResultArray?.count, 3, "number of thermostats cennot be 3")
+        XCTAssertEqual(successResultArray?.count, 8, "number of thermostats must by 8")
     }
 
     func testAllHistoryJsonData() throws {
