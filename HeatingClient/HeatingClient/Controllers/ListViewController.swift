@@ -14,7 +14,6 @@ class ListViewController: UITableViewController {
     let disposeBag = DisposeBag()
     private var thermostatListVM: ThermostatListViewModel!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,9 +25,17 @@ class ListViewController: UITableViewController {
         self.tableView.register(nib, forCellReuseIdentifier: ThermostatTableViewCell.id)
 
         populateThermostats()
+        
+        self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+    }
+    
+    @objc func refresh(sender:AnyObject) {
+        logVerbose("=--------------    @objc private func refreshData(_ sender: Any)")
+        populateThermostats()
     }
     
     internal func populateThermostats() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         let man = ThermostatsManager()
         man.loadLastCsv()
             .subscribe(
@@ -41,6 +48,8 @@ class ListViewController: UITableViewController {
                         
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
+                            self.refreshControl?.endRefreshing()
+                            UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         }
                     }
                 }

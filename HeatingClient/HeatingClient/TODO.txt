@@ -1,4 +1,10 @@
-geatchin rooms names from settings
+
+
+seting
+
+chart view - make pretty
+
+rooms names from settings
 
 Tests:
 unit test:
