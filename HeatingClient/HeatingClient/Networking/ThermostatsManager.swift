@@ -1,5 +1,5 @@
 //
-//  ThermostatsManager.swift
+//  HauseThermostatsManager.swift
 //  NewsAppMVVM
 //
 //  Created by Konrad Leszczyński on 16/08/2019.
@@ -23,7 +23,7 @@ class ThermostatsManager {
     
     
     //MARK: - public methods
-    func loadLastCsv() -> Observable<Thermostats> {
+    func loadLastCsv() -> Observable<HauseThermostats> {
         guard let localUrl = URL(string: config.lastMeasurementUrl(local: true)) else {
             fatalError("config.lastMeasurementUrl(local: true): \(config.lastMeasurementUrl(local: true)) is not a correct url for heating system")
         }
@@ -55,7 +55,7 @@ class ThermostatsManager {
     
     
     //MARK: private methods
-    fileprivate func buildMeasurment(_ strArr: [String]) -> Thermostats {
+    fileprivate func buildMeasurment(_ strArr: [String]) -> HauseThermostats {
         var retList = [Thermostat]()
         //date format 2019-08-12 10:45
         let dateFormatter = DateFormatter()
@@ -81,7 +81,7 @@ class ThermostatsManager {
             retList.append(thermostat)
         }
         self.lastResul = retList
-        return Thermostats(retList)
+        return HauseThermostats(retList)
     }
     
     /**
@@ -98,7 +98,7 @@ class ThermostatsManager {
      main bedroom,bathroom,gust,agata's,leo's',living room,kitchen,office
 
         */
-    private func buildLastCsvObservable(for url: URL) -> Observable<Thermostats> {
+    private func buildLastCsvObservable(for url: URL) -> Observable<HauseThermostats> {
         return Observable.just(url)
             .flatMap { url -> Observable<Data> in
                 let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)  //it is important not to cache
@@ -108,9 +108,9 @@ class ThermostatsManager {
                 guard let dataRow = dataStr else { return [] }
                 let strArr = dataRow.components(separatedBy: ",")
                 return strArr
-            }.map { strArr -> Thermostats in
+            }.map { strArr -> HauseThermostats in
                 return self.buildMeasurment(strArr)
-        }.catchErrorJustReturn(Thermostats(error: "==== error for url \(url.absoluteString) ===="))
+        }.catchErrorJustReturn(HauseThermostats(error: "==== error for url \(url.absoluteString) ===="))
     }
     
     private func parseTemperature(_ str: String) -> Double? {
@@ -138,7 +138,7 @@ class ThermostatsManager {
                 return strArr
             }
             .map { csvRows -> MeasurementHistory in
-                var measurmentsArr = [Thermostats]()
+                var measurmentsArr = [HauseThermostats]()
                 for row in csvRows.dropFirst() {        //drop first because there is a header
                     let rowCells = row.components(separatedBy: ",")
                     if rowCells.count > 8 {

@@ -19,7 +19,7 @@ struct Thermostat {
     var mode: String? //TODO enum
 }
 
-struct Thermostats {
+struct HauseThermostats {
     var errorInfo: String?
     var array: [Thermostat]?
     
@@ -40,13 +40,13 @@ struct Thermostats {
 struct MeasurementHistory {
     var errorInfo: String?
     //var dict = [Date: [Thermostat]]()
-    var measurmentsArr: [Thermostats]?
+    var measurmentsArr: [HauseThermostats]?
     
 //    init(_ dict: [Date: [Thermostat]]) {
 //        self.dict = dict
 //    }
     
-    init(_ arr: [Thermostats]) {
+    init(_ arr: [HauseThermostats]) {
         measurmentsArr = arr
     }
     

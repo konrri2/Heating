@@ -1,5 +1,5 @@
 //
-//  ThermostatsViewModel.swift
+//  HauseThermostatsViewModel.swift
 //  NewsAppMVVM
 //
 //  Created by Konrad Leszczyński on 20/08/2019.
