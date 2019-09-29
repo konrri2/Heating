@@ -67,12 +67,15 @@ class HeatingClientTests: XCTestCase {
     func testAllHistoryJsonData() throws {
         let man = ThermostatsManager()
         log("testing loadAllCsv...")
-        let measurmentsDict = try man.loadAllCsv()
+        let apiReturns = try man.loadAllCsv()
             .toBlocking()
-            .first()
-        let thermostatsArr = measurmentsDict?.values.first
-        XCTAssertNotEqual(thermostatsArr?.count, 3, "number of thermostats cennot be 3")
-        XCTAssertEqual(thermostatsArr?.count, 8, "number of thermostats must by 8")
+            .toArray()
+        XCTAssertNotEqual(apiReturns.count, 3, "number of models of thermostats cennot be 3")
+        XCTAssertEqual(apiReturns.count, 2, "number of models of thermostats must by 2 (one from local one form remote)")
+        let t0 = apiReturns[0]
+        let t1 = apiReturns[1]
+        
+        XCTAssertTrue(((t0.errorInfo == nil) != (t1.errorInfo == nil)), "only one (local xor remote) may terurn error")
     }
     
 //    func testPerformanceExample() {

@@ -21,7 +21,41 @@ class ThermostatsManager {
         config = ConfigManager.parseConfig()
     }
     
-    fileprivate func buildMeasurment(_ strArr: [String]) -> [Thermostat] {
+    
+    //MARK: - public methods
+    func loadLastCsv() -> Observable<Thermostats> {
+        guard let localUrl = URL(string: config.lastMeasurementUrl(local: true)) else {
+            fatalError("config.lastMeasurementUrl(local: true): \(config.lastMeasurementUrl(local: true)) is not a correct url for heating system")
+        }
+        guard let remoteUrl = URL(string: config.lastMeasurementUrl(local: false)) else {
+            fatalError("config.lastMeasurementUrl(local: true): \(config.lastMeasurementUrl(local: true)) is not a correct url for heating system")
+        }
+        
+        let obsLocal = buildLastCsvObservable(for: localUrl)
+        let obsRemote = buildLastCsvObservable(for: remoteUrl)
+        
+        return Observable
+            .merge(obsLocal,obsRemote)
+    }
+    
+    func loadAllCsv() -> Observable<MeasurementHistory> {
+        guard let localUrl = URL(string: config.allMeasurementsUrl(local: true)) else {
+            fatalError("config.allMeasurementsUrl(local: is not a correct url for heating system")
+        }
+        guard let remoteUrl = URL(string: config.allMeasurementsUrl(local: false)) else {
+            fatalError("config.allMeasurementsUrl(remote is not a correct url for heating system")
+        }
+        
+        let obsLocal = buildAllCsvObservable(for: localUrl)
+        let obsRemote = buildAllCsvObservable(for: remoteUrl)
+        
+        return Observable
+            .merge(obsLocal,obsRemote)
+    }
+    
+    
+    //MARK: private methods
+    fileprivate func buildMeasurment(_ strArr: [String]) -> Thermostats {
         var retList = [Thermostat]()
         //date format 2019-08-12 10:45
         let dateFormatter = DateFormatter()
@@ -47,7 +81,7 @@ class ThermostatsManager {
             retList.append(thermostat)
         }
         self.lastResul = retList
-        return retList
+        return Thermostats(retList)
     }
     
     /**
@@ -75,7 +109,7 @@ class ThermostatsManager {
                 let strArr = dataRow.components(separatedBy: ",")
                 return strArr
             }.map { strArr -> Thermostats in
-                return Thermostats(self.buildMeasurment(strArr))
+                return self.buildMeasurment(strArr)
         }.catchErrorJustReturn(Thermostats(error: "==== error for url \(url.absoluteString) ===="))
     }
     
@@ -91,27 +125,7 @@ class ThermostatsManager {
         return retTemp
     }
     
-    //MARK: - public methods
-    func loadLastCsv() -> Observable<Thermostats> {
-        guard let localUrl = URL(string: config.lastMeasurementUrl(local: true)) else {
-            fatalError("config.lastMeasurementUrl(local: true): \(config.lastMeasurementUrl(local: true)) is not a correct url for heating system")
-        }
-        guard let remoteUrl = URL(string: config.lastMeasurementUrl(local: false)) else {
-            fatalError("config.lastMeasurementUrl(local: true): \(config.lastMeasurementUrl(local: true)) is not a correct url for heating system")
-        }
-        
-        let obsLocal = buildLastCsvObservable(for: localUrl)
-        let obsRemote = buildLastCsvObservable(for: remoteUrl)
-        
-        return Observable
-            .merge(obsLocal,obsRemote)
-    }
-    
-    func loadAllCsv() -> Observable<MeasurementHistory> {
-        guard let url = URL(string: config.allMeasurementsUrl(local: true)) else {
-            fatalError("\(String(describing: config.lastMeasurementUrl)) is not a correct url for heating system")
-        }
-        
+    private func buildAllCsvObservable(for url: URL) -> Observable<MeasurementHistory> {
         return Observable.just(url)
             .flatMap { url -> Observable<Data> in
                 let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)  //it is important not to cache
@@ -124,21 +138,21 @@ class ThermostatsManager {
                 return strArr
             }
             .map { csvRows -> MeasurementHistory in
-                var retHistory = MeasurementHistory()
+                var measurmentsArr = [Thermostats]()
                 for row in csvRows.dropFirst() {        //drop first because there is a header
                     let rowCells = row.components(separatedBy: ",")
                     if rowCells.count > 8 {
                         let measurment = self.buildMeasurment(rowCells)
-                        
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-                        if let date = dateFormatter.date(from: rowCells[0]) {
-                            retHistory[date] = measurment
-                        }
+                        measurmentsArr.append(measurment)
+//                        let dateFormatter = DateFormatter()
+//                        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+//                        if let date = dateFormatter.date(from: rowCells[0]) {
+//                            retHistory[date] = measurment
+//                        }
                     }
                 }
-                return retHistory
-            }
+                return MeasurementHistory(measurmentsArr)
+            }.catchErrorJustReturn(MeasurementHistory(error: "==== MeasurementHistory error for url \(url.absoluteString) ===="))
 
     }
 }

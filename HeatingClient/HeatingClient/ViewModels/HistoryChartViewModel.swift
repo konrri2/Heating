@@ -9,14 +9,12 @@
 import Foundation
 import Charts
 
-typealias MeasurementHistory = [Date: [Thermostat]]
-
 struct HistoryChartViewModel {
     var history: MeasurementHistory
     
     init(_ history: MeasurementHistory) {
         self.history = history
-        logVerbose("number of Measurement in History = \(history.keys.count)")
+        logVerbose("number of Measurement in History = \(history.measurmentsArr?.count ?? -42)")
     }
     
     func chartData(for roomName: String) -> ([String]?, LineChartData?) {
@@ -24,8 +22,11 @@ struct HistoryChartViewModel {
         var labels = [String]()
         
         var index: Double = 0
-        for k in history.keys.sorted(by: <) {
-            if let arrThemostats = history[k],
+        guard let arr = history.measurmentsArr else {
+            fatalError("history.measurmentsArr is empty")
+        }
+        for m in arr {
+            if let arrThemostats = m.array,
                 let therm = findThermostat(for: roomName, in: arrThemostats) {
                 
                 let dataEntry = ChartDataEntry(x: index, y: therm.temperature ?? 0.0)

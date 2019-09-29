@@ -58,22 +58,20 @@ class DetailViewController: UIViewController {
         man.loadAllCsv()
             .subscribe(
                 onNext: { history in
-                    self.historyChartViewModel = HistoryChartViewModel(history)
-                    
-                    DispatchQueue.main.async {
-                        if let roomName = self.theThermostatVM?.thermostat.roomName {
-                            (self.timeLabels, self.lineChartDate) = self.historyChartViewModel!.chartData(for: roomName)
-                            self.lineChartView.data = self.lineChartDate
-                            self.formatChart()
-                            //reload or somthing TODO: check
-                        }
+                    if let error = history.errorInfo {
+                        logWarn(error)
                     }
-                },
-                onError: {error in
-                    let alert = UIAlertController(title: "Network error", message: error.localizedDescription, preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "OK :-(", style: UIAlertAction.Style.default, handler: nil))
-                    DispatchQueue.main.async {
-                        self.present(alert, animated: true, completion: nil)
+                    else if let _ = history.measurmentsArr {
+                        self.historyChartViewModel = HistoryChartViewModel(history)
+                        
+                        DispatchQueue.main.async {
+                            if let roomName = self.theThermostatVM?.thermostat.roomName {
+                                (self.timeLabels, self.lineChartDate) = self.historyChartViewModel!.chartData(for: roomName)
+                                self.lineChartView.data = self.lineChartDate
+                                self.formatChart()
+                                //reload or somthing TODO: check
+                            }
+                        }
                     }
                 }
         )  //if there is no subscription nathing will happend

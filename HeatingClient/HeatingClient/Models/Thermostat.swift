@@ -36,3 +36,27 @@ struct Thermostats {
         }
     }
 }
+
+struct MeasurementHistory {
+    var errorInfo: String?
+    //var dict = [Date: [Thermostat]]()
+    var measurmentsArr: [Thermostats]?
+    
+//    init(_ dict: [Date: [Thermostat]]) {
+//        self.dict = dict
+//    }
+    
+    init(_ arr: [Thermostats]) {
+        measurmentsArr = arr
+    }
+    
+    init(error: String) {
+        errorInfo = error
+    }
+//    
+//    subscript(date: Date) -> [Thermostat]? {
+//        get {
+//            return dict[date]
+//        }
+//    }
+}
