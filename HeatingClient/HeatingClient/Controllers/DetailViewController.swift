@@ -16,6 +16,7 @@ class DetailViewController: UIViewController {
     static var id = "DetailViewController"
     
     @IBOutlet weak var lineChartView: LineChartView!
+    @IBOutlet weak var placeholderView: UIView!
     
     let disposeBag = DisposeBag()
     var historyChartViewModel: HistoryChartViewModel? = nil
@@ -34,16 +35,15 @@ class DetailViewController: UIViewController {
             populateChart()
         }
         
-        if let testView = Bundle.main.loadNibNamed(ThermostatTableViewCell.nibName, owner: self, options: nil)?.first as? UITableViewCell {
-            testView.translatesAutoresizingMaskIntoConstraints = false
-            self.view.addSubview(testView)
-//            NSLayoutConstraint.activate([
-//                testView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-//                testView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-//                testView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-//                testView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-//                ])
-            //self.testView = testView
+        if let cellView = Bundle.main.loadNibNamed(ThermostatTableViewCell.nibName, owner: self, options: nil)?.first as? ThermostatTableViewCell {
+            cellView.viewModel = theThermostatVM
+            self.placeholderView.addSubview(cellView)
+            NSLayoutConstraint.activate([
+                cellView.topAnchor.constraint(equalTo: self.placeholderView.topAnchor),
+                cellView.leadingAnchor.constraint(equalTo: self.placeholderView.leadingAnchor),
+                cellView.trailingAnchor.constraint(equalTo: self.placeholderView.trailingAnchor),
+                cellView.bottomAnchor.constraint(equalTo: self.placeholderView.bottomAnchor),
+                ])
         } else {
             logError("cannot load nib")
         }

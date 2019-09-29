@@ -1,6 +1,4 @@
-"guest" literówka
-
-merge (for all) locally to rasp pi and show that it is connectect locally
+geatchin rooms names from settings
 
 Tests:
 unit test:
