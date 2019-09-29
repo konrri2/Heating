@@ -126,7 +126,7 @@ class ThermostatsManager {
                 return strArr
             }.map { strArr -> Thermostats in
                 return Thermostats(self.buildMeasurment(strArr))
-        }.catchErrorJustReturn(Thermostats(error: "err"))
+        }.catchErrorJustReturn(Thermostats(error: "==== error for url \(url.absoluteString) ===="))
     }
     
     private func parseTemperature(_ str: String) -> Double? {

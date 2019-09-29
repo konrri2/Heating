@@ -24,6 +24,10 @@ def get_file():
     # app.send_file('/measurements_format.csv', attachment_filename='measurements_format.csv')
     # return send_from_directory(directory=uploads, filename='measurements_format.csv')
 
+@app.route('/api/getSettings', methods=['GET'])
+def get_settings():
+    print("/api/all")
+    return send_from_directory('./', 'settings.csv')
 
 @app.route('/api/last', methods=['GET'])
 def get_last() -> str:
