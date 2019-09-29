@@ -51,6 +51,11 @@ class ThermostatTableViewCell: UITableViewCell {
                     .subscribe(onNext: { [weak self]  color in
                         self?.setTemperatureLabel.textColor = color
                     }).disposed(by: disposeBag)
+                
+                vm.setBackgroundColor
+                    .subscribe(onNext: { [weak self]  color in
+                        self?.backgroundColor = color
+                    }).disposed(by: disposeBag)
             }
         }
     }

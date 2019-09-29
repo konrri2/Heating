@@ -61,7 +61,7 @@ class HeatingClientTests: XCTestCase {
         let successResultArray = t0.array != nil ? t0.array : t1.array
         XCTAssertNotNil(successResultArray, "one must return corretct array")
         XCTAssertNotEqual(successResultArray?.count, 3, "number of thermostats cennot be 3")
-        XCTAssertEqual(successResultArray?.count, 8, "number of thermostats must by 8")
+        XCTAssertEqual(successResultArray?.count, 9, "number of thermostats must by 8 +1 virtual")
     }
 
     func testAllHistoryJsonData() throws {

@@ -23,7 +23,11 @@ class ListViewController: UITableViewController {
         
         let nib = UINib.init(nibName: "ThermostatTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: ThermostatTableViewCell.id)
-
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 120
+        self.tableView.tableFooterView = UIView()
+        
         populateThermostats()
         
         self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)

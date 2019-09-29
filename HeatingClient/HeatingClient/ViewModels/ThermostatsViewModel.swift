@@ -50,28 +50,80 @@ struct ThermostatViewModel {
     }
     
     var isOn: Observable<String> {
-        return Observable<String>.just(
-            {
-                var str = "off"
-                if thermostat.isOn == true {
-                    str = "on"
-                    if let setTemp = thermostat.setTemperature,
-                        let temp = thermostat.temperature {
-                        if setTemp >= temp {
-                            str = "🔥  on"
+        if thermostat is RoomThermostat {
+            return Observable<String>.just(
+                {
+                    var str = "off"
+                    if thermostat.isOn == true {
+                        str = "on"
+                        if let setTemp = thermostat.setTemperature,
+                            let temp = thermostat.temperature {
+                            if setTemp >= temp {
+                                str = "🔥  on"
+                            }
+                        }
+                    }
+                    return str
+                }())
+        } else {  //oudside
+            return Observable<String>.just({
+                var str = ""
+                if let outTherm = thermostat as? OutsideVirtualThermostat {
+                    if let desc = outTherm.weatherDescription {
+                        if desc.contains("bezchmu") {
+                            str = "☀️"
+                        } else if desc.contains("niewidoczne") || desc.contains("pochmu") {
+                            str = "☁️"
+                        } else if desc.contains("descz") {
+                            str = "🌧"
+                        } else {
+                            str = "🌤"
                         }
                     }
                 }
                 return str
-            }())
+                }())
+        }
     }
     
     var setTemperature: Observable<String> {
-        return Observable<String>.just("Set to \(thermostat.setTemperature ?? 0.0)")
+        if thermostat is RoomThermostat {
+            return Observable<String>.just("Set to \(thermostat.setTemperature ?? 0.0)")
+        }
+        else {
+            return Observable<String>.just(
+                {
+                    var str = ""
+                    if let outTherm = thermostat as? OutsideVirtualThermostat {
+                        str = outTherm.weatherDescription ?? ""
+                    }
+                    return str
+                }())
+        }
     }
     
     var setTemperatureColor: Observable<UIColor> {
-        return Observable<UIColor>.just(textColor(for: thermostat.setTemperature))
+        if thermostat is RoomThermostat {
+            return Observable<UIColor>.just(textColor(for: thermostat.setTemperature))
+        }
+        else {
+            return Observable<UIColor>.just(UIColor.black)
+        }
+    }
+    
+    var setBackgroundColor: Observable<UIColor> {
+        if thermostat is RoomThermostat {
+            var color = UIColor.white
+            if #available(iOS 13.0, *) {
+                //TODO install new xcode
+                //color = UIColor.systemBackground
+            }
+            
+            return Observable<UIColor>.just(color)
+        }
+        else {
+            return Observable<UIColor>.just(UIColor.lightGray)
+        }
     }
     
     ///arbitrarry choosen colors
