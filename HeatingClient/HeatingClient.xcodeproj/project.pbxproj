@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7602B93D233E0F3E004B354E /* HistoryChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7602B93C233E0F3E004B354E /* HistoryChartViewModel.swift */; };
+		7606B59C2340E7D70023D9C2 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606B59B2340E7D60023D9C2 /* SettingsManager.swift */; };
+		7606B59E2340E7E10023D9C2 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606B59D2340E7E10023D9C2 /* Settings.swift */; };
 		7610AF6223101EE600E91F84 /* TODO.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7610AF6123101EE600E91F84 /* TODO.txt */; };
 		7612CB3D230E9E1D002CF6C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7612CB3B230E9E1D002CF6C4 /* Config.plist */; };
 		7612CB3E230E9E1D002CF6C4 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7612CB3C230E9E1D002CF6C4 /* ConfigManager.swift */; };
@@ -44,6 +46,8 @@
 		2388AB1CE9104EF0E1E724B3 /* Pods-HeatingClient-HeatingClientTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeatingClient-HeatingClientTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HeatingClient-HeatingClientTests/Pods-HeatingClient-HeatingClientTests.release.xcconfig"; sourceTree = "<group>"; };
 		4A98C292716A6DBED8A3F769 /* Pods-HeatingClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeatingClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HeatingClient/Pods-HeatingClient.debug.xcconfig"; sourceTree = "<group>"; };
 		7602B93C233E0F3E004B354E /* HistoryChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryChartViewModel.swift; sourceTree = "<group>"; };
+		7606B59B2340E7D60023D9C2 /* SettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		7606B59D2340E7E10023D9C2 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		7610AF6123101EE600E91F84 /* TODO.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
 		7612CB3B230E9E1D002CF6C4 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		7612CB3C230E9E1D002CF6C4 /* ConfigManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 		7612CB3F230E9F19002CF6C4 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				7606B59B2340E7D60023D9C2 /* SettingsManager.swift */,
 				7612CB40230E9F3E002CF6C4 /* ThermostatsManager.swift */,
 			);
 			path = Networking;
@@ -169,6 +174,7 @@
 		76164936230D542300BFE176 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7606B59D2340E7E10023D9C2 /* Settings.swift */,
 				7616493B230D54FA00BFE176 /* Thermostat.swift */,
 			);
 			path = Models;
@@ -416,9 +422,11 @@
 				7602B93D233E0F3E004B354E /* HistoryChartViewModel.swift in Sources */,
 				76164925230D485E00BFE176 /* AppDelegate.swift in Sources */,
 				7616493C230D54FA00BFE176 /* Thermostat.swift in Sources */,
+				7606B59E2340E7E10023D9C2 /* Settings.swift in Sources */,
 				7612CB3E230E9E1D002CF6C4 /* ConfigManager.swift in Sources */,
 				7616493A230D54EE00BFE176 /* ThermostatsViewModel.swift in Sources */,
 				76EE9B5A233F9C400062409E /* ThermostatTableViewCell.swift in Sources */,
+				7606B59C2340E7D70023D9C2 /* SettingsManager.swift in Sources */,
 				762EBF472314062000B2FB30 /* Logger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
