@@ -18,17 +18,13 @@ import Foundation
  "5", "Living room", "room6", "aada", 19.0, 18.0, 19.0, 21.0,
  "6", "Kitchen", "room7", "9a3b", 19.0, 18.0, 19.0, 21.0,
  "7", "Office", "room8", "9c8a", 16.0, 14.0, 18.0, 16.0,  # chcemy, zeby w gabinecie grzalo na przemian pd 22 do 2:00
-
- 
  */
 struct RoomSetting {
     var name: String?
-    var maxTemp: Double?
-    var minTemp: Double?
-    
-    init(csvRow: String) {
-        
-    }
+    var tempDay6: Double?
+    var tempDay22: Double?
+    var tempNight22: Double?
+    var tempNight6: Double?
 }
 
 struct RoomsSettings {

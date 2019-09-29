@@ -41,7 +41,7 @@ class HeatingClientTests: XCTestCase {
         let t1 = apiReturns[1]
         
         XCTAssertTrue(((t0.errorInfo == nil) != (t1.errorInfo == nil)), "only one (local xor remote) may terurn error")
-        let successResultDict = t0.dict.isEmpty ? t0.dict : t1.dict
+        let successResultDict = t0.dict.isEmpty ? t1.dict : t0.dict
         XCTAssertNotEqual(successResultDict.keys.count, 3, "number of settings cennot be 3")
         XCTAssertEqual(successResultDict.keys.count, 8, "number of thermostats must by 8")
     }

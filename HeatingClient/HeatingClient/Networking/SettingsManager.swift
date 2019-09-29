@@ -40,13 +40,18 @@ class SettingsManager {
             }.map { data -> [String] in
                 let dataStr = String(data: data, encoding: String.Encoding.utf8)
                 guard let dataRow = dataStr else { return [] }
-                let strArr = dataRow.components(separatedBy: ",")
+                let strArr = dataRow.components(separatedBy: "\n")
                 return strArr
             }.map { strArr -> RoomsSettings in
                 var roomSettArr = [RoomSetting]()
-                for row in strArr {
-                    logVerbose(row)
-                    roomSettArr.append(RoomSetting(csvRow: row))
+                for dataRow in strArr {
+                    let cells = dataRow.components(separatedBy: ",")
+                    if cells.count >= 8 {
+                        let sett = RoomSetting(name: cells[1],
+                                               tempDay6: Double(cells[4]), tempDay22: Double(cells[5]),
+                                               tempNight22: Double(cells[6]), tempNight6: Double(cells[7]))
+                        roomSettArr.append(sett)
+                    }
                 }
                 return RoomsSettings(roomSettArr)
             }.catchErrorJustReturn(RoomsSettings(error: "==== error for url \(url.absoluteString) ===="))
