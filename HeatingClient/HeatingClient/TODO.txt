@@ -1,6 +1,6 @@
+oudside temperature view
 
-
-seting
+setting view
 
 chart view - make pretty
 
