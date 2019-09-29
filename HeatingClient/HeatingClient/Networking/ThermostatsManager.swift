@@ -61,22 +61,22 @@ class ThermostatsManager {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
         let date = dateFormatter.date(from: strArr[0])
-        
         let oudsideTemp = Double(strArr[1].trimmingCharacters(in: .whitespaces))
+        let outsideThermostat = OutsideVirtualThermostat(timestamp: date, oudsideTemp: oudsideTemp, weatherDescription: strArr[2])
+        retList.append(outsideThermostat)
+        
         for (index, element) in self.roomsNames.enumerated() {
             let temp = Double(strArr[index+4].trimmingCharacters(in: .whitespaces))
             let setTemp = self.parseTemperature(strArr[index+13])
             
             let on = Bool(strArr[index+22].trimmingCharacters(in: .whitespaces).lowercased())
             
-            let thermostat = Thermostat(
+            let thermostat = RoomThermostat(
                 roomName: element,
                 timestamp: date,
-                oudsideTemp: oudsideTemp,
                 temperature: temp,
                 setTemperature: setTemp,
-                isOn: on,
-                mode: strArr[index+31]
+                isOn: on
             )
             retList.append(thermostat)
         }
