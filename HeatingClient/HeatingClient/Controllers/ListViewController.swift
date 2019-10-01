@@ -13,6 +13,7 @@ class ListViewController: UITableViewController {
 
     let disposeBag = DisposeBag()
     private var thermostatListVM: ThermostatListViewModel!
+    private var thermostatsManager: ThermostatsManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +29,16 @@ class ListViewController: UITableViewController {
         tableView.estimatedRowHeight = 120
         self.tableView.tableFooterView = UIView()
         
-        populateThermostats()
+        thermostatsManager = ThermostatsManager()
         
         self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if thermostatsManager?.isUpToDate() == false {
+            populateThermostats()
+        }
     }
     
     @objc func refresh(sender:AnyObject) {
@@ -39,36 +47,28 @@ class ListViewController: UITableViewController {
     }
     
     internal func populateThermostats() {
+        logVerbose("populateThermostats")
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        let man = ThermostatsManager()
-        man.loadLastCsv()
-            .subscribe(
-                onNext: { thermostats in
-                    if let error = thermostats.errorInfo {
-                        logWarn(error)
-                    }
-                    else if let therArr = thermostats.array {
-                        self.thermostatListVM = ThermostatListViewModel(therArr)
-                        
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                            self.refreshControl?.endRefreshing()
-                            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        if let man = thermostatsManager {
+            man.loadLastCsv()
+                .subscribe(
+                    onNext: { thermostats in
+                        if let error = thermostats.errorInfo {
+                            logWarn(error)
+                        }
+                        else if let therArr = thermostats.array {
+                            self.thermostatListVM = ThermostatListViewModel(therArr)
+                            
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                                self.refreshControl?.endRefreshing()
+                                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                            }
                         }
                     }
-                }
-
-//                ,
-//                onError: {error in
-//TODO one always fail
-//                    let alert = UIAlertController(title: "Network error", message: error.localizedDescription, preferredStyle: UIAlertController.Style.alert)
-//                    alert.addAction(UIAlertAction(title: "OK :-(", style: UIAlertAction.Style.default, handler: nil))
-//                    DispatchQueue.main.async {
-//                        self.present(alert, animated: true, completion: nil)
-//                    }
-//                }
-            )
-            .disposed(by: disposeBag)
+                )
+                .disposed(by: disposeBag)
+        }
     }
     
     //MARK: - TableView overrides

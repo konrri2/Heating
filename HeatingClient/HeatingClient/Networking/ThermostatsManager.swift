@@ -13,8 +13,7 @@ import RxCocoa
 class ThermostatsManager {
     ///rooms names are copy-pasted from python server  //TODO should add API call to get names dynamically
     var roomsNames: [String] = ["Main bedroom", "Bathroom", "Guest", "Agata's", "Leo's", "Living room", "Kitchen", "Office"]
-    var lastResul: [Thermostat]?
-    
+    var lastDownloadTime: Date?    
     let config: Config
     
     init() {
@@ -23,7 +22,8 @@ class ThermostatsManager {
     
     
     //MARK: - public methods
-    func loadLastCsv() -> Observable<HauseThermostats> {
+    public func loadLastCsv() -> Observable<HauseThermostats> {
+        logVerbose("loadLastCsv")
         guard let localUrl = URL(string: config.lastMeasurementUrl(local: true)) else {
             fatalError("config.lastMeasurementUrl(local: true): \(config.lastMeasurementUrl(local: true)) is not a correct url for heating system")
         }
@@ -33,12 +33,12 @@ class ThermostatsManager {
         
         let obsLocal = buildLastCsvObservable(for: localUrl)
         let obsRemote = buildLastCsvObservable(for: remoteUrl)
-        
+        lastDownloadTime = Date()
         return Observable
             .merge(obsLocal,obsRemote)
     }
     
-    func loadAllCsv() -> Observable<MeasurementHistory> {
+    public func loadAllCsv() -> Observable<MeasurementHistory> {
         guard let localUrl = URL(string: config.allMeasurementsUrl(local: true)) else {
             fatalError("config.allMeasurementsUrl(local: is not a correct url for heating system")
         }
@@ -53,6 +53,16 @@ class ThermostatsManager {
             .merge(obsLocal,obsRemote)
     }
     
+    public func isUpToDate() -> Bool {
+        guard let lastDownload = lastDownloadTime else {
+            logVerbose("isUpToDate: firstDownload")
+            return false
+        }
+
+        let minutesAgo = Date().addingTimeInterval(-60)
+        logVerbose("isUpToDate: lastDownload=\(lastDownload)   minutesAgo=\(minutesAgo)")
+        return lastDownload > minutesAgo
+    }
     
     //MARK: private methods
     fileprivate func buildMeasurment(_ strArr: [String]) -> HauseThermostats {
@@ -80,7 +90,6 @@ class ThermostatsManager {
             )
             retList.append(thermostat)
         }
-        self.lastResul = retList
         return HauseThermostats(retList)
     }
     

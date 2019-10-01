@@ -56,8 +56,9 @@ class ConfigManager {
     static func parseConfig(filename: String) -> Config? {
         guard let url = Bundle.main.url(forResource: filename, withExtension: "plist"),
                 let data = try? Data(contentsOf: url),
-                let config = try? PropertyListDecoder().decode(Config.self, from: data) else {
-                return nil
+                let config = try? PropertyListDecoder().decode(Config.self, from: data)
+        else {
+            return nil
         }
         return config
     }

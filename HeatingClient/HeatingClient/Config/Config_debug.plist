@@ -2,9 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>HeatingSystemUrl</key>
+	<key>localAddress</key>
+	<string>192.168.1.3</string>
+	<key>remoteAddress</key>
 	<string>http://leszczynski.edu.pl</string>
 	<key>info</key>
-	<string>Main</string>
+	<string>App trys to connect to server in local-home network and DDNS server (simultanously)</string>
 </dict>
 </plist>
