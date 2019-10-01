@@ -37,13 +37,8 @@ class DetailViewController: UIViewController {
         
         if let cellView = Bundle.main.loadNibNamed(ThermostatTableViewCell.nibName, owner: self, options: nil)?.first as? ThermostatTableViewCell {
             cellView.viewModel = theThermostatVM
+            cellView.frame = self.placeholderView.bounds //Works until screen rotation //TODO
             self.placeholderView.addSubview(cellView)
-            NSLayoutConstraint.activate([
-                cellView.topAnchor.constraint(equalTo: self.placeholderView.topAnchor),
-                cellView.leadingAnchor.constraint(equalTo: self.placeholderView.leadingAnchor),
-                cellView.trailingAnchor.constraint(equalTo: self.placeholderView.trailingAnchor),
-                cellView.bottomAnchor.constraint(equalTo: self.placeholderView.bottomAnchor),
-                ])
         } else {
             logError("cannot load nib")
         }
