@@ -36,7 +36,7 @@ def get_settings():
 def get_today_csv():
     print("/api/today")
     file_name_date = datetime.datetime.now().strftime("%Y_%m_%d")
-    return send_from_directory('./res', file_name_date+'.csv')
+    return send_from_directory('./res', file_name_date + '.csv')
 
 
 @app.route('/api/24h', methods=['GET'])
@@ -46,7 +46,23 @@ def get_2days_csv():
     print(yesterday)
     file_name_date = datetime.datetime.now().strftime("%Y_%m_%d") + '.csv'
     file_yesterday = yesterday.strftime("%Y_%m_%d") + '.csv'
-    filenames = ['./res/'+file_yesterday, './res/'+file_name_date]
+    filenames = ['./res/' + file_yesterday, './res/' + file_name_date]
+    with open('./res/concatefile.csv', 'w') as outfile:
+        for fname in filenames:
+            with open(fname) as infile:
+                for line in infile:
+                    outfile.write(line)
+    return send_from_directory('./res', 'concatefile.csv')
+
+
+# this methods concatenates all.csv for full historry and today.csv for detailed measurments 
+@app.route('/api/allAndToday', methods=['GET'])
+def get_allAndToday_csv():
+    print("/api/allAndToday")
+    yesterday = datetime.datetime.now() - timedelta(days=1)
+    print(yesterday)
+    file_name_date = datetime.datetime.now().strftime("%Y_%m_%d") + '.csv'
+    filenames = ['./res/all.csv', './res/' + file_name_date]
     with open('./res/concatefile.csv', 'w') as outfile:
         for fname in filenames:
             with open(fname) as infile:
