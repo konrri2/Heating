@@ -103,7 +103,7 @@ class ListViewController: UITableViewController {
                  let object = thermostatListVM[indexPath.row]
                  let controller = (segue.destination as! DetailViewController)
                  controller.theThermostatVM = object
-                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+                 // why? controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                  controller.navigationItem.leftItemsSupplementBackButton = true
              }
          }

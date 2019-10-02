@@ -32,10 +32,15 @@ class SettingsManager {
             .merge(obsLocal,obsRemote)
     }
     
+    //TODO test it
+    func clearCache() {
+        URLSessionConfiguration.default.urlCache = nil
+    }
+    
     private func buildCsvObservable(for url: URL) -> Observable<RoomsSettings> {
         return Observable.just(url)
             .flatMap { url -> Observable<Data> in
-                let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)  //it is important not to cache
+                let request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 900)
                 return URLSession.shared.rx.data(request: request)
             }.map { data -> [String] in
                 let dataStr = String(data: data, encoding: String.Encoding.utf8)
@@ -47,14 +52,13 @@ class SettingsManager {
                 for dataRow in strArr {
                     let cells = dataRow.components(separatedBy: ",")
                     if cells.count >= 8 {
-                        let sett = RoomSetting(name: cells[1],
-                                               tempDay6: Double(cells[4]), tempDay22: Double(cells[5]),
-                                               tempNight22: Double(cells[6]), tempNight6: Double(cells[7]))
+                        let sett = RoomSetting(cells)
                         roomSettArr.append(sett)
                     }
                 }
                 return RoomsSettings(roomSettArr)
             }.catchErrorJustReturn(RoomsSettings(error: "==== error for url \(url.absoluteString) ===="))
     }
+    
     
 }

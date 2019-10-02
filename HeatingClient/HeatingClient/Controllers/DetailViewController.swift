@@ -75,7 +75,7 @@ class DetailViewController: UIViewController {
         .disposed(by: disposeBag)
     }
     
-    func formatChartXAxis() {
+    private func formatChartXAxis() {
         let xAxis = lineChartView.xAxis
         xAxis.labelPosition = .bottom
         xAxis.drawGridLinesEnabled = false
@@ -87,5 +87,14 @@ class DetailViewController: UIViewController {
         xAxis.granularity = 1.0
       
         lineChartView.animate(yAxisDuration: 2)
+    }
+    
+    // MARK: - Segues
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showSettings" {
+            let controller = (segue.destination as! TempSettingVC)
+            controller.theThermostatVM = self.theThermostatVM
+            //do I need?   controller.navigationItem.leftItemsSupplementBackButton = true
+        }
     }
 }

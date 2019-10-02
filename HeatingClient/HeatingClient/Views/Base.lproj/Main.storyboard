@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UJc-Ww-Gs4">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UJc-Ww-Gs4">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JSu-r6-c4h" id="TQw-nf-lZG">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20.5" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRU-vp-R0B">
@@ -81,6 +79,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Thermostats List" id="6sT-d1-ARg"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="grG-gN-hI9">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <attributedString key="attributedTitle">
                             <fragment content="Reloading...">
@@ -99,17 +98,17 @@
         <!--Detail-->
         <scene sceneID="TfY-35-YmJ">
             <objects>
-                <viewController title="Detail" id="avO-e8-BB7" customClass="DetailViewController" customModule="HeatingClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" title="Detail" id="avO-e8-BB7" customClass="DetailViewController" customModule="HeatingClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kng-2c-5cC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b4U-CJ-YG7" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="0.0" y="144" width="375" height="523"/>
+                                <rect key="frame" x="0.0" y="124" width="375" height="543"/>
                                 <color key="backgroundColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hCN-7a-sgy">
-                                <rect key="frame" x="0.0" y="64" width="375" height="80"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="kLl-em-K5A"/>
                                 </constraints>
@@ -127,7 +126,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YCP-N6-cYi"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Kwx-64-spd"/>
+                    <navigationItem key="navigationItem" id="Kwx-64-spd">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="vT4-il-zya">
+                            <connections>
+                                <segue destination="f7L-9f-lzp" kind="show" identifier="showSettings" id="cfO-e4-GD6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="lineChartView" destination="b4U-CJ-YG7" id="1KR-Lv-onr"/>
                         <outlet property="placeholderView" destination="hCN-7a-sgy" id="cEG-9A-s6T"/>
@@ -137,13 +142,44 @@
             </objects>
             <point key="canvasLocation" x="2277.5999999999999" y="72.413793103448285"/>
         </scene>
+        <!--Set temperature-->
+        <scene sceneID="qH9-Ue-Z65">
+            <objects>
+                <viewController storyboardIdentifier="TempSettingVC" title="Set temperature" id="f7L-9f-lzp" customClass="TempSettingVC" customModule="HeatingClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0dx-yc-9ci">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n3E-FU-EMT" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="144" width="375" height="523"/>
+                                <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="HNt-f2-UBO" firstAttribute="trailing" secondItem="n3E-FU-EMT" secondAttribute="trailing" id="BeP-r5-9Fp"/>
+                            <constraint firstItem="HNt-f2-UBO" firstAttribute="bottom" secondItem="n3E-FU-EMT" secondAttribute="bottom" id="Dhw-Z5-a3F"/>
+                            <constraint firstItem="n3E-FU-EMT" firstAttribute="top" secondItem="HNt-f2-UBO" secondAttribute="top" constant="100" id="hHo-iA-aOk"/>
+                            <constraint firstItem="n3E-FU-EMT" firstAttribute="leading" secondItem="HNt-f2-UBO" secondAttribute="leading" id="xhz-mr-KF2"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="HNt-f2-UBO"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="dIN-IO-b48"/>
+                    <connections>
+                        <outlet property="chartView" destination="n3E-FU-EMT" id="PeM-1H-LE5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bz4-eU-4O9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3558" y="74"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="v92-mZ-hoj">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UJc-Ww-Gs4" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NUz-JQ-qOL">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
