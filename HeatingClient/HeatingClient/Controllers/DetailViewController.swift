@@ -62,11 +62,13 @@ class DetailViewController: UIViewController {
                         
                         DispatchQueue.main.async {
                             if let roomName = self.theThermostatVM?.thermostat.roomName {
-                                (self.timeLabels, self.lineChartDate) = self.historyChartViewModel!.chartData(for: roomName, chartView: self.lineChartView)
-                                self.lineChartView.data = self.lineChartDate
-                                self.formatChartXAxis()
+//                                (self.timeLabels, self.lineChartDate) = self.historyChartViewModel!.chartData(for: roomName, chartView: self.lineChartView)
+//                                self.lineChartView.data = self.lineChartDate
+//                                self.formatChartXAxis()
+                                
+                                
+                                self.historyChartViewModel?.buildChart(for: roomName, chartView: self.lineChartView)
                                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                                //reload or somthing TODO: check
                             }
                         }
                     }
@@ -75,6 +77,7 @@ class DetailViewController: UIViewController {
         .disposed(by: disposeBag)
     }
     
+    @available(*, deprecated, message: "use historyChartViewModel?.buildChart()")
     private func formatChartXAxis() {
         let xAxis = lineChartView.xAxis
         xAxis.labelPosition = .bottom

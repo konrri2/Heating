@@ -9,14 +9,121 @@
 import Foundation
 import Charts
 
-struct HistoryChartViewModel {
+public class DateValueFormatter: NSObject, IAxisValueFormatter {
+    private let dateFormatter = DateFormatter()
+    
+    override init() {
+        super.init()
+        dateFormatter.dateFormat = "dd MMM HH:mm"
+    }
+    
+    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        return dateFormatter.string(from: Date(timeIntervalSince1970: value))
+    }
+}
+
+class HistoryChartViewModel {
     var history: MeasurementHistory
+    var chartView: LineChartView?
+    var roomName: String?
     
     init(_ history: MeasurementHistory) {
         self.history = history
         logVerbose("number of Measurement in History = \(history.measurmentsArr?.count ?? -42)")
     }
     
+    public func buildChart(for roomName: String, chartView: LineChartView) {
+        self.chartView = chartView
+        self.roomName = roomName
+        
+        chartView.chartDescription?.enabled = false
+
+        chartView.dragEnabled = true
+        chartView.setScaleEnabled(true)
+        chartView.pinchZoomEnabled = false
+        chartView.highlightPerDragEnabled = true
+
+        chartView.backgroundColor = .white
+
+        chartView.legend.enabled = false
+
+        let xAxis = chartView.xAxis
+        xAxis.labelPosition = .topInside
+        xAxis.labelFont = .systemFont(ofSize: 10, weight: .light)
+        //xAxis.labelTextColor = UIColor(red: 255/255, green: 192/255, blue: 56/255, alpha: 1)
+        xAxis.drawAxisLineEnabled = false
+        xAxis.drawGridLinesEnabled = true
+        xAxis.centerAxisLabelsEnabled = true
+        xAxis.granularity = 3600
+        xAxis.valueFormatter = DateValueFormatter()
+
+        let leftAxis = chartView.leftAxis
+        leftAxis.labelPosition = .insideChart
+        leftAxis.labelFont = .systemFont(ofSize: 12, weight: .light)
+        leftAxis.drawGridLinesEnabled = true
+        leftAxis.granularityEnabled = true
+        leftAxis.axisMinimum = 15
+        leftAxis.axisMaximum = 26
+        leftAxis.yOffset = -9  //so the tempertature labels will show slightly above lines
+        //leftAxis.labelTextColor = UIColor(red: 255/255, green: 192/255, blue: 56/255, alpha: 1)
+
+
+        chartView.rightAxis.enabled = false
+
+        chartView.legend.form = .line
+
+        chartView.animate(xAxisDuration: 2.5)
+        
+        
+        self.setDataCount()
+    }
+    
+    func setDataCount() {
+        let now = Date().timeIntervalSince1970
+        let oneDayTimeInterval = TimeInterval(24*3600)
+        let yesterday = Date().addingTimeInterval(-oneDayTimeInterval)
+        let hourSeconds: TimeInterval = 3600
+        
+        let from = yesterday
+        let to = now
+        
+        var values = [ChartDataEntry]()
+        guard let arr = history.measurmentsArr,
+                    roomName?.isEmpty == false
+            else {
+                fatalError("history.measurmentsArr is empty")
+        }
+        for m in arr {
+            if let arrThemostats = m.array,
+                let therm = findThermostat(for: roomName!, in: arrThemostats) {
+                if let time = therm.timestamp?.timeIntervalSince1970,
+                    let temp = therm.temperature {                      //if nill don't add data entry
+                    let dataEntry = ChartDataEntry(x: time, y: temp)
+                    values.append(dataEntry)
+                }
+            }
+        }
+        
+        let set1 = LineChartDataSet(entries: values, label: "DataSet 1")
+        set1.axisDependency = .left
+        set1.setColor(UIColor(red: 51/255, green: 181/255, blue: 229/255, alpha: 1))
+        set1.lineWidth = 1.5
+        set1.drawCirclesEnabled = false
+        set1.drawValuesEnabled = false
+        set1.fillAlpha = 0.26
+        set1.fillColor = UIColor(red: 51/255, green: 181/255, blue: 229/255, alpha: 1)
+        set1.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
+        set1.drawCircleHoleEnabled = false
+        
+        let data = LineChartData(dataSet: set1)
+        data.setValueTextColor(.white)
+        data.setValueFont(.systemFont(ofSize: 9, weight: .light))
+        
+        chartView?.data = data
+    }
+    
+    
+    @available(*, deprecated, message: "use buildChart()")
     func chartData(for roomName: String, chartView: LineChartView) -> ([String]?, LineChartData?) {
         var temperatureDataEntries: [ChartDataEntry] = []
         var settingTempDataEntries: [ChartDataEntry] = []
