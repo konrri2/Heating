@@ -1,17 +1,4 @@
-dowlnoad 24h isntaed of all
-
-setting min max for oudside temp
-
-setting view
-
-cell view as a DatailViewHeader -> autolayout
-
-chart download indicator
-
-
-chart view - make pretty
-
-rooms names from settings
+add cell with average temperature -> that leads to multichart
 
 Tests:
 unit test:

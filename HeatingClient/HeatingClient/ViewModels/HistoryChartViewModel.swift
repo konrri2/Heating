@@ -54,6 +54,7 @@ class HistoryChartViewModel {
     
     func setData() {
         var values = [ChartDataEntry]()
+        var setValues = [ChartDataEntry]()
         guard let arr = history.measurmentsArr,
                     roomName?.isEmpty == false
             else {
@@ -66,17 +67,21 @@ class HistoryChartViewModel {
                     let temp = therm.temperature {                      //if nill don't add data entry
                     let dataEntry = ChartDataEntry(x: time, y: temp)
                     values.append(dataEntry)
+                    if let setTemp = therm.setTemperature {
+                        let sdEntry = ChartDataEntry(x: time, y: setTemp)
+                        setValues.append(sdEntry)
+                    }
                 }
             }
         }
         
         let set1 = LineChartDataSet(entries: values, label: "measurments")
         setTemperatureColors(set1)
+        let set2 = LineChartDataSet(entries: setValues, label: "settings")
+        setTemperatureSettingColors(set2)
         
-        let data = LineChartData(dataSet: set1)
-        data.setValueTextColor(.white)
-        data.setValueFont(.systemFont(ofSize: 9, weight: .light))
-        
+        let data = LineChartData(dataSets: [set2,set1])
+
         chartView?.data = data
     }
     
@@ -116,7 +121,7 @@ class HistoryChartViewModel {
             chartView.pinchZoomEnabled = false
             chartView.highlightPerDragEnabled = true
             chartView.backgroundColor = .white
-            chartView.legend.enabled = false
+            //chartView.legend.enabled = false
             chartView.rightAxis.enabled = false
             chartView.legend.form = .line
             chartView.animate(xAxisDuration: 1.5)
@@ -128,8 +133,27 @@ class HistoryChartViewModel {
     
     fileprivate func setTemperatureColors(_ set1: LineChartDataSet) {
         set1.axisDependency = .left
-        set1.setColor(UIColor(red: 51/255, green: 181/255, blue: 229/255, alpha: 1))
-        set1.lineWidth = 1.5
+        set1.setColor(.red)
+        set1.lineWidth = 3.5
+        set1.drawCirclesEnabled = false
+        set1.drawValuesEnabled = false
+        set1.fillAlpha = 0.26
+        set1.fillColor = UIColor(red: 51/255, green: 181/255, blue: 229/255, alpha: 1)
+        set1.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
+        set1.drawCircleHoleEnabled = false
+        let gradientColors = [ChartColorTemplates.colorFromString("#330000ff").cgColor,
+                              ChartColorTemplates.colorFromString("#33ff0000").cgColor]
+        let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
+        
+        set1.fillAlpha = 1
+        set1.fill = Fill(linearGradient: gradient, angle: 90)
+        set1.drawFilledEnabled = true
+    }
+
+    fileprivate func setTemperatureSettingColors(_ set1: LineChartDataSet) {
+        set1.axisDependency = .left
+        set1.setColor(.green)
+        set1.lineWidth = 2.0
         set1.drawCirclesEnabled = false
         set1.drawValuesEnabled = false
         set1.fillAlpha = 0.26
@@ -137,7 +161,8 @@ class HistoryChartViewModel {
         set1.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
         set1.drawCircleHoleEnabled = false
     }
-
+    
+    
     //MARK: - Axies appearance
     
     ///X axis in seconds since 1970 [timeinterval - double]
