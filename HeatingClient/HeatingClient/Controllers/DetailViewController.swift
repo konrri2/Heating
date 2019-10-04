@@ -43,11 +43,8 @@ class DetailViewController: UIViewController {
             logError("cannot load nib")
         }
     }
-    
 
-
-
-    //TODO: calling loadAll each time is not optimal
+    //calling loadAll each time is not optimal, but I set cachePolicy 5minutes
     internal func populateChart() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         let man = ThermostatsManager()

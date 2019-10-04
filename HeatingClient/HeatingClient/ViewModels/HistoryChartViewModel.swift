@@ -91,7 +91,10 @@ class HistoryChartViewModel {
         let referenceTimeInterval = yesterday.timeIntervalSince1970
         
         chartView?.setVisibleXRangeMaximum(day)
-        chartView?.moveViewToX(referenceTimeInterval)
+        if let axisDependency = chartView?.leftAxis.axisDependency {
+            chartView?.setVisibleYRangeMaximum(12.0, axis: axisDependency)
+            chartView?.moveViewTo(xValue: referenceTimeInterval, yValue: 20.0, axis: axisDependency)
+        }
     }
     
     private func findThermostat(for roomName: String, in thermostats: [Thermostat]) -> Thermostat? {
@@ -136,6 +139,8 @@ class HistoryChartViewModel {
     }
 
     //MARK: - Axies appearance
+    
+    ///X axis in seconds since 1970 [timeinterval - double]
     fileprivate func setXAxisAppearance() {
         if let xAxis = chartView?.xAxis {
             xAxis.labelPosition = .topInside
@@ -144,22 +149,22 @@ class HistoryChartViewModel {
             xAxis.drawAxisLineEnabled = true
             xAxis.drawGridLinesEnabled = true
             xAxis.granularityEnabled = true
-
             xAxis.labelCount = 7
-            xAxis.granularity = h * 6.0
-        
+            xAxis.granularity = h * 4.0
+            
             xAxis.valueFormatter = DateValueFormatter()
         }
     }
     
+    ///Y axis in degrees centigrades
     fileprivate func setYAxisAppearance() {
         if let leftAxis = self.chartView?.leftAxis {
             leftAxis.labelPosition = .insideChart
             leftAxis.labelFont = .systemFont(ofSize: 12, weight: .light)
             leftAxis.drawGridLinesEnabled = true
             leftAxis.granularityEnabled = true
-            leftAxis.axisMinimum = 15
-            leftAxis.axisMaximum = 26
+            leftAxis.axisMinimum = -20
+            leftAxis.axisMaximum = 40
             leftAxis.yOffset = -9  //so the tempertature labels will show slightly above lines
             //leftAxis.labelTextColor = UIColor(red: 255/255, green: 192/255, blue: 56/255, alpha: 1)
         }
