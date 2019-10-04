@@ -22,7 +22,7 @@ class ThermostatsManager {
     
     
     //MARK: - public methods
-    public func loadLastCsv() -> Observable<HauseThermostats> {
+    public func loadLastCsv() -> Observable<HouseThermoState> {
         logVerbose("loadLastCsv")
         guard let localUrl = URL(string: config.lastMeasurementUrl(local: true)) else {
             fatalError("config.lastMeasurementUrl(local: true): \(config.lastMeasurementUrl(local: true)) is not a correct url for heating system")
@@ -65,32 +65,36 @@ class ThermostatsManager {
     }
     
     //MARK: private methods
-    fileprivate func buildMeasurment(_ strArr: [String]) -> HauseThermostats {
+    fileprivate func buildMeasurment(_ strArr: [String]) -> HouseThermoState? {
         var retList = [Thermostat]()
         //date format 2019-08-12 10:45
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-        let date = dateFormatter.date(from: strArr[0])
-        let oudsideTemp = Double(strArr[1].trimmingCharacters(in: .whitespaces))
-        let outsideThermostat = OutsideVirtualThermostat(timestamp: date, oudsideTemp: oudsideTemp, weatherDescription: strArr[2])
-        retList.append(outsideThermostat)
-        
-        for (index, element) in self.roomsNames.enumerated() {
-            let temp = Double(strArr[index+4].trimmingCharacters(in: .whitespaces))
-            let setTemp = self.parseTemperature(strArr[index+13])
+        if let date = dateFormatter.date(from: strArr[0]) {
+            let oudsideTemp = Double(strArr[1].trimmingCharacters(in: .whitespaces))
+            let outsideThermostat = OutsideVirtualThermostat(timestamp: date, oudsideTemp: oudsideTemp, weatherDescription: strArr[2])
+            retList.append(outsideThermostat)
             
-            let on = Bool(strArr[index+22].trimmingCharacters(in: .whitespaces).lowercased())
-            
-            let thermostat = RoomThermostat(
-                roomName: element,
-                timestamp: date,
-                temperature: temp,
-                setTemperature: setTemp,
-                isOn: on
-            )
-            retList.append(thermostat)
+            for (index, element) in self.roomsNames.enumerated() {
+                let temp = Double(strArr[index+4].trimmingCharacters(in: .whitespaces))
+                let setTemp = self.parseTemperature(strArr[index+13])
+                
+                let on = Bool(strArr[index+22].trimmingCharacters(in: .whitespaces).lowercased())
+                
+                let thermostat = RoomThermostat(
+                    roomName: element,
+                    timestamp: date,
+                    temperature: temp,
+                    setTemperature: setTemp,
+                    isOn: on
+                )
+                retList.append(thermostat)
+            }
+            return HouseThermoState(retList, date)
         }
-        return HauseThermostats(retList)
+        else {
+            return nil
+        }
     }
     
     /**
@@ -107,7 +111,7 @@ class ThermostatsManager {
      main bedroom,bathroom,gust,agata's,leo's',living room,kitchen,office
 
         */
-    private func buildLastCsvObservable(for url: URL) -> Observable<HauseThermostats> {
+    private func buildLastCsvObservable(for url: URL) -> Observable<HouseThermoState> {
         return Observable.just(url)
             .flatMap { url -> Observable<Data> in
                 let request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 300)  //cache for 5 minutes
@@ -117,9 +121,13 @@ class ThermostatsManager {
                 guard let dataRow = dataStr else { return [] }
                 let strArr = dataRow.components(separatedBy: ",")
                 return strArr
-            }.map { strArr -> HauseThermostats in
-                return self.buildMeasurment(strArr)
-        }.catchErrorJustReturn(HauseThermostats(error: "==== error for url \(url.absoluteString) ===="))
+            }.map { strArr -> HouseThermoState in
+                guard let res = self.buildMeasurment(strArr) else {
+                    let err = HouseThermoState(error: "==== error cannot parse CSV for HouseThermostats")
+                    return err
+                }
+                return res
+        }.catchErrorJustReturn(HouseThermoState(error: "==== error for url \(url.absoluteString) ===="))
     }
     
     private func parseTemperature(_ str: String) -> Double? {
@@ -147,17 +155,14 @@ class ThermostatsManager {
                 return strArr
             }
             .map { csvRows -> MeasurementHistory in
-                var measurmentsArr = [HauseThermostats]()
+                var measurmentsArr = [HouseThermoState]()
                 for row in csvRows.dropFirst() {        //drop first because there is a header
                     let rowCells = row.components(separatedBy: ",")
                     if rowCells.count > 8 {
-                        let measurment = self.buildMeasurment(rowCells)
-                        measurmentsArr.append(measurment)
-//                        let dateFormatter = DateFormatter()
-//                        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-//                        if let date = dateFormatter.date(from: rowCells[0]) {
-//                            retHistory[date] = measurment
-//                        }
+                        if let measurment = self.buildMeasurment(rowCells) {
+                            measurmentsArr.append(measurment)
+                        }
+
                     }
                 }
                 return MeasurementHistory(measurmentsArr)

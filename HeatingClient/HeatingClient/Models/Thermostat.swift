@@ -52,12 +52,14 @@ class OutsideVirtualThermostat: Thermostat {
     }
 }
 
-struct HauseThermostats {
+struct HouseThermoState {
     var errorInfo: String?
     var array: [Thermostat]?
+    var time: Date? //timestamp of the measurment
     
-    init(_ arr: [Thermostat]) {
-        array = arr
+    init(_ arr: [Thermostat], _ timestamp: Date) {
+        self.array = arr
+        self.time = timestamp
     }
     init(error: String) {
         errorInfo = error
@@ -68,19 +70,29 @@ struct HauseThermostats {
             return array?[index]
         }
     }
+    
+    func isNewer(_ other: HouseThermoState) -> Bool {
+        if let time = self.time?.timeIntervalSince1970,
+            let oTime = other.time?.timeIntervalSince1970 {
+            return time > oTime
+        }
+        return false
+    }
 }
 
 struct MeasurementHistory {
     var errorInfo: String?
     //var dict = [Date: [Thermostat]]()
-    var measurmentsArr: [HauseThermostats]?
+    var measurmentsArr: [HouseThermoState]?
     
 //    init(_ dict: [Date: [Thermostat]]) {
 //        self.dict = dict
 //    }
     
-    init(_ arr: [HauseThermostats]) {
-        measurmentsArr = arr
+    init(_ arr: [HouseThermoState]) {
+        measurmentsArr = arr.sorted(by: {
+            $1.isNewer($0)
+        })  //checkin if the next one $1 is newer than the previous one $0
     }
     
     init(error: String) {
