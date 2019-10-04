@@ -32,10 +32,27 @@ class ListViewController: UITableViewController {
         thermostatsManager = ThermostatsManager()
         
         self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appWillEnterForegroundNotified(_:)),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func appWillEnterForegroundNotified(_ notification: Notification!) {
+        logVerbose("appWillEnterForegroundNotified")
+        if thermostatsManager?.isUpToDate() == false {
+            populateThermostats()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        logVerbose("viewDidAppear")
         if thermostatsManager?.isUpToDate() == false {
             populateThermostats()
         }
