@@ -11,10 +11,32 @@ import Charts
 
 public class DateValueFormatter: NSObject, IAxisValueFormatter {
     private let dateFormatter = DateFormatter()
+    private var _values: [TimeInterval] = [TimeInterval]()
+    private var _valueCount: Int = 0
+    
+    @objc public var values: [TimeInterval]
+    {
+        get
+        {
+            return _values
+        }
+        set
+        {
+            _values = newValue
+            _valueCount = _values.count
+        }
+    }
     
     override init() {
         super.init()
-        dateFormatter.dateFormat = "dd MMM HH:mm"
+        dateFormatter.dateFormat = "dd MMM \nHH:mm"
+    }
+    
+    @objc public init(values: [TimeInterval])
+    {
+        super.init()
+        
+        self.values = values
     }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
@@ -31,6 +53,8 @@ class HistoryChartViewModel {
         self.history = history
         logVerbose("number of Measurement in History = \(history.measurmentsArr?.count ?? -42)")
     }
+    
+
     
     public func buildChart(for roomName: String, chartView: LineChartView) {
         self.chartView = chartView
@@ -50,12 +74,8 @@ class HistoryChartViewModel {
         let xAxis = chartView.xAxis
         xAxis.labelPosition = .topInside
         xAxis.labelFont = .systemFont(ofSize: 10, weight: .light)
-        //xAxis.labelTextColor = UIColor(red: 255/255, green: 192/255, blue: 56/255, alpha: 1)
-        xAxis.drawAxisLineEnabled = false
-        xAxis.drawGridLinesEnabled = true
-        xAxis.centerAxisLabelsEnabled = true
-        xAxis.granularity = 3600
-        xAxis.valueFormatter = DateValueFormatter()
+        setXLabels(xAxis)
+
 
         let leftAxis = chartView.leftAxis
         leftAxis.labelPosition = .insideChart
@@ -67,26 +87,14 @@ class HistoryChartViewModel {
         leftAxis.yOffset = -9  //so the tempertature labels will show slightly above lines
         //leftAxis.labelTextColor = UIColor(red: 255/255, green: 192/255, blue: 56/255, alpha: 1)
 
-
         chartView.rightAxis.enabled = false
-
         chartView.legend.form = .line
-
-        chartView.animate(xAxisDuration: 2.5)
-        
+        chartView.animate(xAxisDuration: 1.5)
         
         self.setDataCount()
     }
     
     func setDataCount() {
-        let now = Date().timeIntervalSince1970
-        let oneDayTimeInterval = TimeInterval(24*3600)
-        let yesterday = Date().addingTimeInterval(-oneDayTimeInterval)
-        let hourSeconds: TimeInterval = 3600
-        
-        let from = yesterday
-        let to = now
-        
         var values = [ChartDataEntry]()
         guard let arr = history.measurmentsArr,
                     roomName?.isEmpty == false
@@ -122,6 +130,46 @@ class HistoryChartViewModel {
         chartView?.data = data
     }
     
+    fileprivate func setXLabels_bedExperiment(_ xAxis: XAxis, hoursStep: Double = 6) {
+        let h: TimeInterval = 3600
+        let date = Date()
+        let cal = Calendar(identifier: .gregorian)
+        let midnightDate = cal.startOfDay(for: date)
+        let yesterdayMidnightDate = midnightDate.addingTimeInterval(-24 * h)
+        let from = yesterdayMidnightDate.timeIntervalSince1970
+        let timeStep = hoursStep * h
+        
+        var labels = [TimeInterval]()
+        for i in 0...7 {
+            labels.append(from + (Double(i) * timeStep))
+        }
+        
+
+        xAxis.valueFormatter = DateValueFormatter(values: labels)
+    }
+    
+    fileprivate func setXLabels(_ xAxis: XAxis) {
+        let hourSeconds: TimeInterval = 3600
+        let now = Date().timeIntervalSince1970
+        let oneDayTimeInterval = TimeInterval(24*hourSeconds)
+        let yesterday = Date().addingTimeInterval(-oneDayTimeInterval).timeIntervalSince1970
+
+        let numberOfHoursYesterday = floor(yesterday / hourSeconds)
+        let xFrom = numberOfHoursYesterday * hourSeconds
+        let numberOfHoursToday = floor(now / hourSeconds)
+        let xTo = numberOfHoursToday * hourSeconds
+        
+        //xAxis.labelTextColor = UIColor(red: 255/255, green: 192/255, blue: 56/255, alpha: 1)
+//        xAxis.drawAxisLineEnabled = true
+//        xAxis.drawGridLinesEnabled = true
+//        xAxis.centerAxisLabelsEnabled = true
+
+        xAxis.axisMinimum = xFrom
+        xAxis.axisMaximum = xTo
+        xAxis.setLabelCount(7, force: true)
+        xAxis.granularity = hourSeconds
+        xAxis.valueFormatter = DateValueFormatter()
+    }
     
     @available(*, deprecated, message: "use buildChart()")
     func chartData(for roomName: String, chartView: LineChartView) -> ([String]?, LineChartData?) {

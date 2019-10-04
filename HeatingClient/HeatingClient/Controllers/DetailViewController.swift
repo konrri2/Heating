@@ -61,12 +61,7 @@ class DetailViewController: UIViewController {
                         self.historyChartViewModel = HistoryChartViewModel(history)
                         
                         DispatchQueue.main.async {
-                            if let roomName = self.theThermostatVM?.thermostat.roomName {
-//                                (self.timeLabels, self.lineChartDate) = self.historyChartViewModel!.chartData(for: roomName, chartView: self.lineChartView)
-//                                self.lineChartView.data = self.lineChartDate
-//                                self.formatChartXAxis()
-                                
-                                
+                            if let roomName = self.theThermostatVM?.thermostat.roomName {                               
                                 self.historyChartViewModel?.buildChart(for: roomName, chartView: self.lineChartView)
                                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
                             }
