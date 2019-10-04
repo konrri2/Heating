@@ -26,6 +26,7 @@
 		762EBF472314062000B2FB30 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762EBF462314062000B2FB30 /* Logger.swift */; };
 		7643AD3E23447404008E99DD /* TempSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7643AD3D23447404008E99DD /* TempSettingVC.swift */; };
 		7643AD4023447509008E99DD /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7643AD3F23447509008E99DD /* SettingsViewModel.swift */; };
+		769DE7012347D4560002C3BF /* TimeXAxisRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769DE7002347D4560002C3BF /* TimeXAxisRenderer.swift */; };
 		76C3D60123227BB9005DB931 /* HeatingClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C3D60023227BB9005DB931 /* HeatingClientTests.swift */; };
 		76EE9B5A233F9C400062409E /* ThermostatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EE9B58233F9C400062409E /* ThermostatTableViewCell.swift */; };
 		76EE9B5B233F9C400062409E /* ThermostatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76EE9B59233F9C400062409E /* ThermostatTableViewCell.xib */; };
@@ -68,6 +69,7 @@
 		762EBF462314062000B2FB30 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		7643AD3D23447404008E99DD /* TempSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempSettingVC.swift; sourceTree = "<group>"; };
 		7643AD3F23447509008E99DD /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		769DE7002347D4560002C3BF /* TimeXAxisRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeXAxisRenderer.swift; sourceTree = "<group>"; };
 		76C3D5FE23227BB9005DB931 /* HeatingClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HeatingClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76C3D60023227BB9005DB931 /* HeatingClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatingClientTests.swift; sourceTree = "<group>"; };
 		76C3D60223227BB9005DB931 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 		76164923230D485E00BFE176 /* HeatingClient */ = {
 			isa = PBXGroup;
 			children = (
+				769DE6FF2347D4330002C3BF /* ChartsExtension */,
 				762EBF45231405D300B2FB30 /* Common */,
 				7612CB3A230E9AC7002CF6C4 /* Config */,
 				7616493D230D550000BFE176 /* Controllers */,
@@ -221,6 +224,14 @@
 				762EBF462314062000B2FB30 /* Logger.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		769DE6FF2347D4330002C3BF /* ChartsExtension */ = {
+			isa = PBXGroup;
+			children = (
+				769DE7002347D4560002C3BF /* TimeXAxisRenderer.swift */,
+			);
+			path = ChartsExtension;
 			sourceTree = "<group>";
 		};
 		76C3D5FF23227BB9005DB931 /* HeatingClientTests */ = {
@@ -457,6 +468,7 @@
 				7606B59C2340E7D70023D9C2 /* SettingsManager.swift in Sources */,
 				762EBF472314062000B2FB30 /* Logger.swift in Sources */,
 				7643AD3E23447404008E99DD /* TempSettingVC.swift in Sources */,
+				769DE7012347D4560002C3BF /* TimeXAxisRenderer.swift in Sources */,
 				7643AD4023447509008E99DD /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

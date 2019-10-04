@@ -65,7 +65,7 @@ extension CGSize
 extension Double
 {
     /// Rounds the number to the nearest multiple of it's order of magnitude, rounding away from zero if halfway.
-    func roundedToNextSignficant() -> Double
+    public func roundedToNextSignficant() -> Double
     {
         guard
             !isInfinite,

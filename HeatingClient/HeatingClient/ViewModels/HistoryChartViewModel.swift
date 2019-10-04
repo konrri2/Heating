@@ -10,15 +10,22 @@ import Foundation
 import Charts
 
 public class DateValueFormatter: NSObject, IAxisValueFormatter {
-    private let dateFormatter = DateFormatter()
+    private let fullDateFormatter = DateFormatter()
+    private let shortDateFormater = DateFormatter()
 
     override init() {
         super.init()
-        dateFormatter.dateFormat = "dd MMM \nHH:mm"
+        fullDateFormatter.dateFormat = "HH:mm    dd MMMM"
+        shortDateFormater.dateFormat = "HH:mm"
     }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return dateFormatter.string(from: Date(timeIntervalSince1970: value))
+        if value.truncatingRemainder(dividingBy: (3600*24)) == 0 {
+            return fullDateFormatter.string(from: Date(timeIntervalSince1970: value))
+        }
+        else {
+            return shortDateFormater.string(from: Date(timeIntervalSince1970: value))
+        }
     }
 }
 
@@ -126,10 +133,14 @@ class HistoryChartViewModel {
             chartView.legend.form = .line
             chartView.animate(xAxisDuration: 1.5)
             
+            let customXAxisRenderer = TimeXAxisRenderer(viewPortHandler: chartView.viewPortHandler, xAxis: chartView.xAxis, transformer: chartView.getTransformer(forAxis: YAxis.AxisDependency.left))
+            chartView.xAxisRenderer = customXAxisRenderer
+            
             setXAxisAppearance()
             setYAxisAppearance()
         }
     }
+    
     
     fileprivate func setTemperatureColors(_ set1: LineChartDataSet) {
         set1.axisDependency = .left
@@ -168,6 +179,7 @@ class HistoryChartViewModel {
     ///X axis in seconds since 1970 [timeinterval - double]
     fileprivate func setXAxisAppearance() {
         if let xAxis = chartView?.xAxis {
+            xAxis.labelRotationAngle = -90.0
             xAxis.labelPosition = .topInside
             xAxis.labelFont = .systemFont(ofSize: 10, weight: .light)
             let h: TimeInterval = 3600
@@ -176,8 +188,8 @@ class HistoryChartViewModel {
             xAxis.granularityEnabled = true
             xAxis.labelCount = 7
             xAxis.granularity = h * 4.0
-            
             xAxis.valueFormatter = DateValueFormatter()
+            xAxis.yOffset = 40 //to show below margin
         }
     }
     
