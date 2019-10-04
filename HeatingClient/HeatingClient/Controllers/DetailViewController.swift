@@ -72,21 +72,6 @@ class DetailViewController: UIViewController {
         .disposed(by: disposeBag)
     }
     
-    @available(*, deprecated, message: "use historyChartViewModel?.buildChart()")
-    private func formatChartXAxis() {
-        let xAxis = lineChartView.xAxis
-        xAxis.labelPosition = .bottom
-        xAxis.drawGridLinesEnabled = false
-        if let labels = timeLabels {
-            xAxis.valueFormatter = IndexAxisValueFormatter(values: labels)
-            xAxis.labelCount = labels.count
-        }
-        xAxis.labelRotationAngle = -45.0
-        xAxis.granularity = 1.0
-      
-        lineChartView.animate(yAxisDuration: 2)
-    }
-    
     // MARK: - Segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showSettings" {
