@@ -44,6 +44,39 @@ public class DateValueFormatter: NSObject, IAxisValueFormatter {
     }
 }
 
+
+//formater 2
+class ChartXAxisFormatter: NSObject {
+    private let dateFormatter = DateFormatter()
+    fileprivate var referenceTimeInterval: TimeInterval?
+
+    convenience init(referenceTimeInterval: TimeInterval) {
+        self.init()
+        self.referenceTimeInterval = referenceTimeInterval
+        //dateFormatter.dateFormat = "dd MMM \nHH:mm"
+         dateFormatter.dateStyle = .short
+         dateFormatter.timeStyle = .short
+         dateFormatter.locale = Locale.current
+    }
+}
+
+
+extension ChartXAxisFormatter: IAxisValueFormatter {
+
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        guard let referenceTimeInterval = referenceTimeInterval
+        else {
+            return ""
+        }
+
+        //let date = Date(timeIntervalSince1970: value * 3600 * 24 + referenceTimeInterval)
+        let date = Date(timeIntervalSince1970: value)
+        return dateFormatter.string(from: date)
+    }
+
+}
+
+
 class HistoryChartViewModel {
     var history: MeasurementHistory
     var chartView: LineChartView?
@@ -94,6 +127,8 @@ class HistoryChartViewModel {
         self.setDataCount()
     }
     
+
+    
     func setDataCount() {
         var values = [ChartDataEntry]()
         guard let arr = history.measurmentsArr,
@@ -128,6 +163,47 @@ class HistoryChartViewModel {
         data.setValueFont(.systemFont(ofSize: 9, weight: .light))
         
         chartView?.data = data
+        
+        scrollZoomChart()
+    }
+    
+    fileprivate func scrollZoomChart() {
+        let h: TimeInterval = 3600
+        let day = h * 24.0
+        let now = Date()
+        let cal = Calendar(identifier: .gregorian)
+        let midnightDate = cal.startOfDay(for: now)
+        let yesterdayMidnightDate = midnightDate.addingTimeInterval(-day)
+        let yesterday = now.addingTimeInterval(-day)
+        let referenceTimeInterval = yesterday.timeIntervalSince1970
+        
+        chartView?.setVisibleXRangeMaximum(day)
+        chartView?.moveViewToX(referenceTimeInterval)
+    }
+    
+    fileprivate func setXLabels(_ xAxis: XAxis) {
+        let h: TimeInterval = 3600
+        xAxis.drawAxisLineEnabled = true
+        xAxis.drawGridLinesEnabled = true
+        xAxis.granularityEnabled = true
+
+        xAxis.labelCount = 7
+        xAxis.granularity = h * 6.0
+    
+        xAxis.valueFormatter = DateValueFormatter()
+    }
+    
+    fileprivate func setXLabelsAnotherStrangeExperimenrt(_ xAxis: XAxis) {
+        let h: TimeInterval = 3600
+        let date = Date()
+        let cal = Calendar(identifier: .gregorian)
+        let midnightDate = cal.startOfDay(for: date)
+        let yesterdayMidnightDate = midnightDate.addingTimeInterval(-24 * h)
+        let from = yesterdayMidnightDate.timeIntervalSince1970
+        let referenceTimeInterval: TimeInterval = from
+
+        let xValuesNumberFormatter = ChartXAxisFormatter(referenceTimeInterval: referenceTimeInterval)
+        xAxis.valueFormatter = xValuesNumberFormatter
     }
     
     fileprivate func setXLabels_bedExperiment(_ xAxis: XAxis, hoursStep: Double = 6) {
@@ -148,7 +224,7 @@ class HistoryChartViewModel {
         xAxis.valueFormatter = DateValueFormatter(values: labels)
     }
     
-    fileprivate func setXLabels(_ xAxis: XAxis) {
+    fileprivate func setXLabels_forceLabelsCount(_ xAxis: XAxis) {
         let hourSeconds: TimeInterval = 3600
         let now = Date().timeIntervalSince1970
         let oneDayTimeInterval = TimeInterval(24*hourSeconds)
