@@ -83,7 +83,7 @@ class ThermostatsManager {
     private func buildLastCsvObservable(for url: URL) -> Observable<HouseThermoState> {
         return Observable.just(url)
             .flatMap { url -> Observable<Data> in
-                let request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 300)  //cache for 5 minutes
+                let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)  //it is important not to cache
                 return URLSession.shared.rx.data(request: request)
             }.map { data -> [String] in
                 let dataStr = String(data: data, encoding: String.Encoding.utf8)
@@ -91,8 +91,12 @@ class ThermostatsManager {
                 let strArr = dataRow.components(separatedBy: ",")
                 return strArr
             }.map { strArr -> HouseThermoState in
-                let res = HouseThermoState(strArr)
-                return res
+                if let res = HouseThermoState(strArr) {
+                    return res
+                }
+                else {
+                    return HouseThermoState(error: "HouseThermoState returns nil for LastCsv")
+                }
         }.catchErrorJustReturn(HouseThermoState(error: "==== error for url \(url.absoluteString) ===="))
     }
     
@@ -101,7 +105,7 @@ class ThermostatsManager {
     private func buildAllCsvObservable(for url: URL) -> Observable<MeasurementHistory> {
         return Observable.just(url)
             .flatMap { url -> Observable<Data> in
-                let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)  //it is important not to cache
+                let request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 300)  //cache for 5 minutes
                 return URLSession.shared.rx.data(request: request)
             }
             .map { data -> [String] in
@@ -115,8 +119,9 @@ class ThermostatsManager {
                 for row in csvRows.dropFirst() {        //drop first because there is a header
                     let rowCells = row.components(separatedBy: ",")
                     if rowCells.count > 8 {
-                        let measurment = HouseThermoState(rowCells)
-                        measurmentsArr.append(measurment)
+                        if let measurment = HouseThermoState(rowCells) {
+                            measurmentsArr.append(measurment)
+                        }
                     }
                 }
                 return MeasurementHistory(measurmentsArr)

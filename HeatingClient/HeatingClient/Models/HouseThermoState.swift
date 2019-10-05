@@ -24,8 +24,9 @@ struct HouseThermoState {
         errorInfo = error
     }
     
-    init(_ strArr: [String])  {
+    init?(_ strArr: [String])  {
         var retList = [Thermostat]()
+        var roomsOnly = [RoomThermostat]()
         //date format 2019-08-12 10:45
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
@@ -48,13 +49,17 @@ struct HouseThermoState {
                     isOn: on
                 )
                 retList.append(thermostat)
+                roomsOnly.append(thermostat)
             }
+            let avgVirtualThermostat = CombiningVirtualThermostat(timestamp: date, toCombine: roomsOnly)
+            retList.append(avgVirtualThermostat)
+            
             self.array = retList
             self.time = date
         }
         else {
-            self.errorInfo = "HouseThermoState : Cennot parse date"
-            logError(self.errorInfo)
+            logWarn("HouseThermoState : Cennot parse date -> propably header in .csv")
+            return nil
         }
     }
     

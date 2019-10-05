@@ -90,7 +90,7 @@ struct ThermostatViewModel {
         if thermostat is RoomThermostat {
             return Observable<String>.just("Set to \(thermostat.setTemperature ?? 0.0)")
         }
-        else {
+        else if thermostat is OutsideVirtualThermostat {
             return Observable<String>.just(
                 {
                     var str = ""
@@ -99,6 +99,10 @@ struct ThermostatViewModel {
                     }
                     return str
                 }())
+        } else if thermostat is CombiningVirtualThermostat {
+            return Observable<String>.just( "select to show \n combined chart")
+        } else {
+            fatalError("unkonwn thermostat type")
         }
     }
     

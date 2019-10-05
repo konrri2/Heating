@@ -132,7 +132,7 @@ class HistoryChartViewModel {
             //chartView.legend.enabled = false
             chartView.rightAxis.enabled = false
             chartView.legend.form = .line
-            chartView.animate(xAxisDuration: 1.5)
+            chartView.animate(yAxisDuration: 1.5)
             
             let customXAxisRenderer = TimeXAxisRenderer(viewPortHandler: chartView.viewPortHandler, xAxis: chartView.xAxis, transformer: chartView.getTransformer(forAxis: YAxis.AxisDependency.left))
             chartView.xAxisRenderer = customXAxisRenderer

@@ -52,4 +52,32 @@ class OutsideVirtualThermostat: Thermostat {
     }
 }
 
+class CombiningVirtualThermostat: Thermostat {
+    
+    init(
+        timestamp: Date?,
+        toCombine: [RoomThermostat]
+        ) {
+        super.init()
+        self.roomName = "Average"
+        self.timestamp = timestamp
+        temperature = calcAverage(toCombine)
+    }
+    
+    private func calcAverage(_ toCombine: [RoomThermostat]) -> Double {
+        var sum = 0.0
+        var count = 0.0
+        for r in toCombine {
+            if let temp = r.temperature {
+                sum += temp
+                count += 1.0
+            }
+        }
+        guard count > 0 else {
+            fatalError("empty list of thermostats to average")
+        }
+        return sum/count
+    }
+}
+
 
