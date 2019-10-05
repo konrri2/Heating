@@ -46,7 +46,8 @@ struct HouseThermoState {
                     timestamp: date,
                     temperature: temp,
                     setTemperature: setTemp,
-                    isOn: on
+                    isOn: on,
+                    index: index
                 )
                 retList.append(thermostat)
                 roomsOnly.append(thermostat)

@@ -9,12 +9,25 @@
 import Foundation
 
 
-class Thermostat {
+class Thermostat: Hashable {
+    static func == (lhs: Thermostat, rhs: Thermostat) -> Bool {
+        return lhs.roomName == rhs.roomName
+    }
+    
+    var hashValue: Int {
+        return index
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.roomName)
+    }
+    
     var roomName: String?  // /api/last returns no description
     var timestamp: Date?
     var temperature: Double?  //nil if thermostat is offline
     var setTemperature: Double?
     var isOn: Bool?
+    var index: Int = -42
 }
 
 class RoomThermostat: Thermostat {
@@ -25,7 +38,8 @@ class RoomThermostat: Thermostat {
         timestamp: Date?,
         temperature: Double?,
         setTemperature: Double?,
-        isOn: Bool?
+        isOn: Bool?,
+        index: Int
         ) {
         super.init()
         self.roomName = roomName
@@ -33,6 +47,7 @@ class RoomThermostat: Thermostat {
         self.temperature = temperature
         self.setTemperature = setTemperature
         self.isOn = isOn
+        self.index = index
     }
 }
 
@@ -46,6 +61,7 @@ class OutsideVirtualThermostat: Thermostat {
         ) {
         super.init()
         self.roomName = "Outside"
+        self.index = -1
         self.timestamp = timestamp
         self.temperature = oudsideTemp
         self.weatherDescription = weatherDescription
@@ -60,6 +76,7 @@ class CombiningVirtualThermostat: Thermostat {
         ) {
         super.init()
         self.roomName = "Average"
+        self.index = 10
         self.timestamp = timestamp
         temperature = calcAverage(toCombine)
     }

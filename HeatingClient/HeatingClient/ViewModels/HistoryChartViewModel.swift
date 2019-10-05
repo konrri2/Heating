@@ -48,15 +48,57 @@ class HistoryChartViewModel {
         }
     }
     
-    public func buildChart(for roomName: String, chartView: LineChartView) {
+    public func buildChart(for therm: Thermostat, chartView: LineChartView) {
         self.chartView = chartView
-        self.roomName = roomName
-        
+        self.roomName = therm.roomName
+
         setChartAppearance()
+        if therm is CombiningVirtualThermostat {
+            setDataWithAllRooms()
+        } else {
+            self.setData()
+        }
         
-        self.setData()
-                    
-        scrollAndZoomChart()
+        if therm is OutsideVirtualThermostat {
+            scrollAndZoomChartForOudside()
+        }
+        else {
+            scrollAndZoomChart()
+        }
+    }
+    
+    func setDataWithAllRooms() {
+        var values = [Thermostat:[ChartDataEntry]]()
+        guard let arr = history.measurmentsArr  else {
+                fatalError("history.measurmentsArr is empty")
+        }
+        for m in arr {
+            if let therms = m.array {
+                for therm in therms {
+                    if let time = therm.timestamp?.timeIntervalSince1970,
+                        let temp = therm.temperature {                      //if nill don't add data entry
+                        let dataEntry = ChartDataEntry(x: time, y: temp)
+                        if var val = values[therm] {
+                            val.append(dataEntry)
+                            values[therm] = val
+                        }
+                        else {
+                            let valNew = [dataEntry]
+                            values[therm] = valNew
+                        }
+                    }
+                }
+            }
+        }
+        
+        var sets = [LineChartDataSet]()
+        for k in values.keys {
+            let set = LineChartDataSet(entries: values[k], label: k.roomName)
+            setMultipleLinesColor(set)
+            sets.append(set)
+        }
+        let data = LineChartData(dataSets: sets)
+        chartView?.data = data
     }
     
     func setData() {
@@ -108,6 +150,18 @@ class HistoryChartViewModel {
             chartView?.setVisibleYRangeMaximum(12.0, axis: axisDependency)
             chartView?.moveViewTo(xValue: referenceTimeInterval, yValue: 20.0, axis: axisDependency)
         }
+    }
+    
+    fileprivate func scrollAndZoomChartForOudside() {
+        let h: TimeInterval = 3600
+        let day = h * 24.0
+        let now = Date()
+        let yesterday = now.addingTimeInterval(-day)
+        let referenceTimeInterval = yesterday.timeIntervalSince1970
+        
+        chartView?.setVisibleXRangeMinimum(h * 4.0) //maximal zoom in -> 2h on the screen
+        chartView?.setVisibleXRangeMaximum(day * 3.0)
+        chartView?.moveViewToX(referenceTimeInterval)
     }
     
     private func findThermostat(for roomName: String, in thermostats: [Thermostat]) -> Thermostat? {
@@ -174,6 +228,17 @@ class HistoryChartViewModel {
         set1.drawCircleHoleEnabled = false
     }
     
+    fileprivate func setMultipleLinesColor(_ set1: LineChartDataSet) {
+        set1.axisDependency = .left
+        set1.setColor(.green)
+        set1.lineWidth = 2.0
+        set1.drawCirclesEnabled = false
+        set1.drawValuesEnabled = false
+        set1.fillAlpha = 0.26
+        set1.fillColor = UIColor(red: 51/255, green: 181/255, blue: 229/255, alpha: 1)
+        set1.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
+        set1.drawCircleHoleEnabled = false
+    }
     
     //MARK: - Axies appearance
     
