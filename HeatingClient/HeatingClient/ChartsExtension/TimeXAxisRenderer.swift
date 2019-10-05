@@ -11,6 +11,12 @@ import Charts
 
 
 class TimeXAxisRenderer: XAxisRenderer {
+    
+    ///by defauly it rounded to half hours
+    private func roundToTime(_ x: Double, toSignificant: Double = 1800.0) -> Double {
+        return round(x / toSignificant) * toSignificant
+    }
+    
     override func computeAxisValues(min: Double, max: Double)
     {
         guard let axis = self.axis else { return }
@@ -30,17 +36,8 @@ class TimeXAxisRenderer: XAxisRenderer {
         
         // Find out how much spacing (in y value space) between axis values
         let rawInterval = range / Double(labelCount)
-        var interval = 3600.0
-        
-        // Normalize interval
-        let intervalMagnitude = pow(10.0, Double(Int(log10(interval)))).roundedToNextSignficant()
-        let intervalSigDigit = Int(interval / intervalMagnitude)
-        if intervalSigDigit > 5
-        {
-            // Use one order of magnitude higher, to avoid intervals like 0.9 or 90
-            // if it's 0.0 after floor(), we use the old value
-            interval = floor(10.0 * intervalMagnitude) == 0.0 ? interval : floor(10.0 * intervalMagnitude)
-        }
+        var interval = roundToTime( rawInterval)
+        //logVerbose("chart interval = \(interval)")
         
         var n = axis.centerAxisLabelsEnabled ? 1 : 0
         
@@ -106,29 +103,6 @@ class TimeXAxisRenderer: XAxisRenderer {
                 
                 f += interval
                 i += 1
-            }
-        }
-        
-        // set decimals
-        if interval < 1
-        {
-            axis.decimals = Int(ceil(-log10(interval)))
-        }
-        else
-        {
-            axis.decimals = 0
-        }
-        
-        if axis.centerAxisLabelsEnabled
-        {
-            axis.centeredEntries.reserveCapacity(n)
-            axis.centeredEntries.removeAll()
-            
-            let offset: Double = interval / 2.0
-            
-            for i in 0 ..< n
-            {
-                axis.centeredEntries.append(axis.entries[i] + offset)
             }
         }
     }

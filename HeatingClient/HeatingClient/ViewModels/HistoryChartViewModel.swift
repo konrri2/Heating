@@ -102,6 +102,7 @@ class HistoryChartViewModel {
         let yesterday = now.addingTimeInterval(-day)
         let referenceTimeInterval = yesterday.timeIntervalSince1970
         
+        chartView?.setVisibleXRangeMinimum(h * 2.0) //maximal zoom in -> 2h on the screen
         chartView?.setVisibleXRangeMaximum(day)
         if let axisDependency = chartView?.leftAxis.axisDependency {
             chartView?.setVisibleYRangeMaximum(12.0, axis: axisDependency)
@@ -186,8 +187,8 @@ class HistoryChartViewModel {
             xAxis.drawAxisLineEnabled = true
             xAxis.drawGridLinesEnabled = true
             xAxis.granularityEnabled = true
-            xAxis.labelCount = 7
-            xAxis.granularity = h * 4.0
+            //xAxis.labelCount = 7
+            //xAxis.granularity = h * 4.0
             xAxis.valueFormatter = DateValueFormatter()
             xAxis.yOffset = 40 //to show below margin
         }
