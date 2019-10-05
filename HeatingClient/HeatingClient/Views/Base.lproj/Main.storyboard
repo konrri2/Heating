@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UJc-Ww-Gs4">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UJc-Ww-Gs4">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JSu-r6-c4h" id="TQw-nf-lZG">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20.5" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRU-vp-R0B">
@@ -104,11 +106,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b4U-CJ-YG7" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="0.0" y="124" width="375" height="543"/>
+                                <rect key="frame" x="0.0" y="144" width="375" height="523"/>
                                 <color key="backgroundColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hCN-7a-sgy">
-                                <rect key="frame" x="0.0" y="44" width="375" height="80"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="kLl-em-K5A"/>
                                 </constraints>
@@ -150,16 +152,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wPu-mD-muN">
+                                <rect key="frame" x="0.0" y="64" width="375" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="UB7-UV-wCZ"/>
+                                </constraints>
+                            </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n3E-FU-EMT" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="0.0" y="144" width="375" height="523"/>
-                                <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="164" width="375" height="503"/>
+                                <color key="backgroundColor" red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="wPu-mD-muN" firstAttribute="leading" secondItem="HNt-f2-UBO" secondAttribute="leading" id="7se-DT-43n"/>
                             <constraint firstItem="HNt-f2-UBO" firstAttribute="trailing" secondItem="n3E-FU-EMT" secondAttribute="trailing" id="BeP-r5-9Fp"/>
                             <constraint firstItem="HNt-f2-UBO" firstAttribute="bottom" secondItem="n3E-FU-EMT" secondAttribute="bottom" id="Dhw-Z5-a3F"/>
+                            <constraint firstItem="wPu-mD-muN" firstAttribute="top" secondItem="HNt-f2-UBO" secondAttribute="top" id="Ob8-Qd-7sE"/>
                             <constraint firstItem="n3E-FU-EMT" firstAttribute="top" secondItem="HNt-f2-UBO" secondAttribute="top" constant="100" id="hHo-iA-aOk"/>
+                            <constraint firstItem="HNt-f2-UBO" firstAttribute="trailing" secondItem="wPu-mD-muN" secondAttribute="trailing" id="sRJ-Zs-WtE"/>
+                            <constraint firstItem="n3E-FU-EMT" firstAttribute="top" secondItem="wPu-mD-muN" secondAttribute="bottom" id="wXW-YU-yxa"/>
                             <constraint firstItem="n3E-FU-EMT" firstAttribute="leading" secondItem="HNt-f2-UBO" secondAttribute="leading" id="xhz-mr-KF2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HNt-f2-UBO"/>
@@ -167,11 +179,12 @@
                     <navigationItem key="navigationItem" id="dIN-IO-b48"/>
                     <connections>
                         <outlet property="chartView" destination="n3E-FU-EMT" id="PeM-1H-LE5"/>
+                        <outlet property="steppersStackView" destination="wPu-mD-muN" id="ZxM-QI-IfT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bz4-eU-4O9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3558" y="74"/>
+            <point key="canvasLocation" x="3557.5999999999999" y="73.313343328335833"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="v92-mZ-hoj">
@@ -179,7 +192,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UJc-Ww-Gs4" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NUz-JQ-qOL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

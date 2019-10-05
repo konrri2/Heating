@@ -15,11 +15,11 @@ class TempSettingVC: UIViewController {
     static var id = "TempSettingVC"
     
     @IBOutlet weak var chartView: LineChartView!
-
+    @IBOutlet weak var steppersStackView: UIStackView!
+    
     let disposeBag = DisposeBag()
     var settingVM: SettingsViewModel?
     var theThermostatVM: ThermostatViewModel?
-    var timeLabels: [String]?
     var lineChartDate: LineChartData?
     
     override func viewDidLoad() {
@@ -27,6 +27,51 @@ class TempSettingVC: UIViewController {
         if chartView != nil {
             populateChart()
         }
+        setSeteppers()
+    }
+    
+    func setSeteppers() {
+        if let stackView = steppersStackView {
+            stackView.alignment = UIStackView.Alignment.fill
+            
+            let dayLabel = UILabel()
+            dayLabel.text  = "  day   "
+
+            let nightLabel = UILabel()
+            nightLabel.text = "night  "
+            
+            let marginLabel = UILabel()
+            marginLabel.text = " ℃"
+            
+            //stackView.addArrangedSubview(dayLabel)
+            stackView.addArrangedSubview(buildStepper())
+            stackView.addArrangedSubview(buildStepper())
+            //stackView.addArrangedSubview(nightLabel)
+            stackView.addArrangedSubview(buildStepper())
+            stackView.addArrangedSubview(buildStepper())
+            //stackView.addArrangedSubview(marginLabel)
+        }
+    }
+    
+    func buildStepper() -> UIStepper {
+        let stepper = UIStepper()
+        stepper.transform = CGAffineTransform.init(scaleX: 1.0, y: 0.6)
+                                .translatedBy(x: 0, y: 70)
+                                //.scaledBy(x: 0.6, y: 1.2)
+                                .rotated(by: CGFloat(-Double.pi / 2.0))
+        
+        stepper.minimumValue = 10.0
+        stepper.maximumValue = 28.0
+        stepper.stepValue = 0.5
+        stepper.value = 17.0
+        
+        
+        if let d6 = settingVM?.dayAt6 {
+            stepper.rx.value.asObservable()
+                .bind(to: d6)
+                .disposed(by: disposeBag)
+        }
+        return stepper
     }
     
     internal func populateChart() {
@@ -42,11 +87,8 @@ class TempSettingVC: UIViewController {
                         self.settingVM = SettingsViewModel(roomsSettings)
                         if let roomName = self.theThermostatVM?.thermostat.roomName {
                             if self.settingVM != nil {
-                                (self.timeLabels, self.lineChartDate) = self.settingVM!.chartData(for: roomName, chartView: self.chartView)
-                                //TODO: check if self can be nil if you navigate quickly
                                 DispatchQueue.main.async {
-                                    self.chartView.data = self.lineChartDate
-                                    self.formatChartXAxis()
+                                    self.settingVM?.buildChart(for: roomName, chartView: self.chartView)
                                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
                                 }
                             }
@@ -56,14 +98,5 @@ class TempSettingVC: UIViewController {
                 }
         )
         .disposed(by: disposeBag)
-    }
-    
-    private func formatChartXAxis() {
-        let xAxis = chartView.xAxis
-        xAxis.labelPosition = .bottom
-        if let labels = timeLabels {
-            xAxis.valueFormatter = IndexAxisValueFormatter(values: labels)
-            xAxis.labelCount = labels.count
-        }
     }
 }
