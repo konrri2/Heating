@@ -17,17 +17,10 @@ class SettingsViewModel {
     var chartView: LineChartView?
     var roomName: String?
     
-    var dayAt6 = BehaviorRelay( value: 0.0)
+    var settingDayAt6 = 0.0
     
     init(_ rSetinngs: RoomsSettings) {
         self.roomsSettings = rSetinngs
-        
-        dayAt6.subscribe({val in
-            log("day6.subscribe(onNext == \(val)")
-            
-        })
-         .disposed(by: disposeBag)
-        
     }
     
     public func buildChart(for roomName: String, chartView: LineChartView) {
@@ -91,7 +84,7 @@ class SettingsViewModel {
         let set1 = LineChartDataSet(entries: dayDataEntries, label: "old")
         let set2 = LineChartDataSet(entries: nightTempDataEntries, label: "old")
         
-        let setDay6cde = ChartDataEntry(x: 6.0, y: dayAt6.value)
+        let setDay6cde = ChartDataEntry(x: 6.0, y: settingDayAt6)
         let settDayEntries = [setDay6cde, day22cde]
         
         let set3 = LineChartDataSet(entries: settDayEntries, label: "new")
@@ -138,19 +131,13 @@ class SettingsViewModel {
         let set1 = LineChartDataSet(entries: dayDataEntries, label: "old")
         let set2 = LineChartDataSet(entries: nightTempDataEntries, label: "old")
         
-        let setDay6cde = ChartDataEntry(x: 6.0, y: dayAt6.value)
-        let settDayEntries = [setDay6cde, day22cde]
-        
-        let set3 = LineChartDataSet(entries: settDayEntries, label: "new")
-        let set4 = LineChartDataSet(entries: nightTempDataEntries, label: "new")
-        
-        
+
         set1.lineWidth = 2.0
         set1.setColor(UIColor.green)
         set2.setColor(.red)
         set2.lineWidth = 2.0
         
-        let data = LineChartData(dataSets: [set2,set1, set4, set3])
+        let data = LineChartData(dataSets: [set2,set1])
         
         return (labels, data)
     }

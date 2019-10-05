@@ -66,11 +66,14 @@ class TempSettingVC: UIViewController {
         stepper.value = 17.0
         
         
-        if let d6 = settingVM?.dayAt6 {
-            stepper.rx.value.asObservable()
-                .bind(to: d6)
-                .disposed(by: disposeBag)
-        }
+        stepper.rx.value.asObservable()
+            .subscribe(onNext: {val in
+                log("stepper.rx.value subscribe val=\(val)")
+                self.settingVM?.settingDayAt6 = val
+                self.redrawTheChart()
+            })
+            .disposed(by: disposeBag)
+        
         return stepper
     }
     
@@ -85,18 +88,22 @@ class TempSettingVC: UIViewController {
                     }
                     else if roomsSettings.dict.isEmpty == false {
                         self.settingVM = SettingsViewModel(roomsSettings)
-                        if let roomName = self.theThermostatVM?.thermostat.roomName {
-                            if self.settingVM != nil {
-                                DispatchQueue.main.async {
-                                    self.settingVM?.buildChart(for: roomName, chartView: self.chartView)
-                                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                                }
-                            }
-                        }
+                        self.redrawTheChart()
                     }
                     
                 }
         )
         .disposed(by: disposeBag)
+    }
+    
+    func redrawTheChart() {
+        if let roomName = self.theThermostatVM?.thermostat.roomName {
+            if self.settingVM != nil {
+                DispatchQueue.main.async {
+                    self.settingVM?.buildChart(for: roomName, chartView: self.chartView)
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                }
+            }
+        }
     }
 }
