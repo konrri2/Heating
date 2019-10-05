@@ -12,7 +12,7 @@ import RxCocoa
 
 class ThermostatsManager {
     ///rooms names are copy-pasted from python server  //TODO should add API call to get names dynamically
-    var roomsNames: [String] = ["Main bedroom", "Bathroom", "Guest", "Agata's", "Leo's", "Living room", "Kitchen", "Office"]
+
     var lastDownloadTime: Date?    
     let config: Config
     
@@ -65,37 +65,6 @@ class ThermostatsManager {
     }
     
     //MARK: private methods
-    fileprivate func buildMeasurment(_ strArr: [String]) -> HouseThermoState? {
-        var retList = [Thermostat]()
-        //date format 2019-08-12 10:45
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-        if let date = dateFormatter.date(from: strArr[0]) {
-            let oudsideTemp = Double(strArr[1].trimmingCharacters(in: .whitespaces))
-            let outsideThermostat = OutsideVirtualThermostat(timestamp: date, oudsideTemp: oudsideTemp, weatherDescription: strArr[2])
-            retList.append(outsideThermostat)
-            
-            for (index, element) in self.roomsNames.enumerated() {
-                let temp = Double(strArr[index+4].trimmingCharacters(in: .whitespaces))
-                let setTemp = self.parseTemperature(strArr[index+13])
-                
-                let on = Bool(strArr[index+22].trimmingCharacters(in: .whitespaces).lowercased())
-                
-                let thermostat = RoomThermostat(
-                    roomName: element,
-                    timestamp: date,
-                    temperature: temp,
-                    setTemperature: setTemp,
-                    isOn: on
-                )
-                retList.append(thermostat)
-            }
-            return HouseThermoState(retList, date)
-        }
-        else {
-            return nil
-        }
-    }
     
     /**
             /api/last return a single csv row with last measurments
@@ -122,25 +91,12 @@ class ThermostatsManager {
                 let strArr = dataRow.components(separatedBy: ",")
                 return strArr
             }.map { strArr -> HouseThermoState in
-                guard let res = self.buildMeasurment(strArr) else {
-                    let err = HouseThermoState(error: "==== error cannot parse CSV for HouseThermostats")
-                    return err
-                }
+                let res = HouseThermoState(strArr)
                 return res
         }.catchErrorJustReturn(HouseThermoState(error: "==== error for url \(url.absoluteString) ===="))
     }
     
-    private func parseTemperature(_ str: String) -> Double? {
-        var retTemp = Double(str.trimmingCharacters(in: .whitespaces))
-        if retTemp == nil {
-            let arrStr = str.components(separatedBy: "->")  //-> indicates the temperature is changing. It looks good in .csv but complicate parsing process
-            if arrStr.count > 1 {
-                retTemp = Double(arrStr[1].trimmingCharacters(in: .whitespaces))
-            }
-        }
-        
-        return retTemp
-    }
+
     
     private func buildAllCsvObservable(for url: URL) -> Observable<MeasurementHistory> {
         return Observable.just(url)
@@ -159,10 +115,8 @@ class ThermostatsManager {
                 for row in csvRows.dropFirst() {        //drop first because there is a header
                     let rowCells = row.components(separatedBy: ",")
                     if rowCells.count > 8 {
-                        if let measurment = self.buildMeasurment(rowCells) {
-                            measurmentsArr.append(measurment)
-                        }
-
+                        let measurment = HouseThermoState(rowCells)
+                        measurmentsArr.append(measurment)
                     }
                 }
                 return MeasurementHistory(measurmentsArr)

@@ -55,7 +55,7 @@ def get_2days_csv():
     return send_from_directory('./res', 'concatefile.csv')
 
 
-# this methods concatenates all.csv for full historry and today.csv for detailed measurments 
+# this methods concatenates all.csv for full historry and today.csv for detailed measurments
 @app.route('/api/allAndToday', methods=['GET'])
 def get_allAndToday_csv():
     print("/api/allAndToday")

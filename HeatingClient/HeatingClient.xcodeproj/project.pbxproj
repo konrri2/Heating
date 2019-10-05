@@ -26,6 +26,8 @@
 		762EBF472314062000B2FB30 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762EBF462314062000B2FB30 /* Logger.swift */; };
 		7643AD3E23447404008E99DD /* TempSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7643AD3D23447404008E99DD /* TempSettingVC.swift */; };
 		7643AD4023447509008E99DD /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7643AD3F23447509008E99DD /* SettingsViewModel.swift */; };
+		766CD7C12349232C00DBF899 /* HouseThermoState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766CD7C02349232C00DBF899 /* HouseThermoState.swift */; };
+		766CD7C32349239000DBF899 /* MeasurementHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766CD7C22349239000DBF899 /* MeasurementHistory.swift */; };
 		769DE7012347D4560002C3BF /* TimeXAxisRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769DE7002347D4560002C3BF /* TimeXAxisRenderer.swift */; };
 		76C3D60123227BB9005DB931 /* HeatingClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C3D60023227BB9005DB931 /* HeatingClientTests.swift */; };
 		76EE9B5A233F9C400062409E /* ThermostatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EE9B58233F9C400062409E /* ThermostatTableViewCell.swift */; };
@@ -69,6 +71,8 @@
 		762EBF462314062000B2FB30 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		7643AD3D23447404008E99DD /* TempSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempSettingVC.swift; sourceTree = "<group>"; };
 		7643AD3F23447509008E99DD /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		766CD7C02349232C00DBF899 /* HouseThermoState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseThermoState.swift; sourceTree = "<group>"; };
+		766CD7C22349239000DBF899 /* MeasurementHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementHistory.swift; sourceTree = "<group>"; };
 		769DE7002347D4560002C3BF /* TimeXAxisRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeXAxisRenderer.swift; sourceTree = "<group>"; };
 		76C3D5FE23227BB9005DB931 /* HeatingClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HeatingClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76C3D60023227BB9005DB931 /* HeatingClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatingClientTests.swift; sourceTree = "<group>"; };
@@ -183,6 +187,8 @@
 			children = (
 				7606B59D2340E7E10023D9C2 /* Settings.swift */,
 				7616493B230D54FA00BFE176 /* Thermostat.swift */,
+				766CD7C02349232C00DBF899 /* HouseThermoState.swift */,
+				766CD7C22349239000DBF899 /* MeasurementHistory.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -456,10 +462,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				76227818233CD3AF00B89376 /* DetailViewController.swift in Sources */,
+				766CD7C32349239000DBF899 /* MeasurementHistory.swift in Sources */,
 				7612CB41230E9F3E002CF6C4 /* ThermostatsManager.swift in Sources */,
 				76164927230D485E00BFE176 /* ListViewController.swift in Sources */,
 				7602B93D233E0F3E004B354E /* HistoryChartViewModel.swift in Sources */,
 				76164925230D485E00BFE176 /* AppDelegate.swift in Sources */,
+				766CD7C12349232C00DBF899 /* HouseThermoState.swift in Sources */,
 				7616493C230D54FA00BFE176 /* Thermostat.swift in Sources */,
 				7606B59E2340E7E10023D9C2 /* Settings.swift in Sources */,
 				7612CB3E230E9E1D002CF6C4 /* ConfigManager.swift in Sources */,

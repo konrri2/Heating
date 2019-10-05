@@ -1,5 +1,9 @@
 add cell with average temperature -> that leads to multichart
 
+if oudside - allow smaller range on one screen
+
+api/settings on server
+
 Tests:
 unit test:
     downloading and parsing
