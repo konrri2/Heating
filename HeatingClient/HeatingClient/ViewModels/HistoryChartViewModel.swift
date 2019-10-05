@@ -15,12 +15,12 @@ public class DateValueFormatter: NSObject, IAxisValueFormatter {
 
     override init() {
         super.init()
-        fullDateFormatter.dateFormat = "HH:mm    dd MMMM"
+        fullDateFormatter.dateFormat = "\t\t dd MMMM \nHH:mm"
         shortDateFormater.dateFormat = "HH:mm"
     }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        if value.truncatingRemainder(dividingBy: (3600*24)) == 0 {
+        if value.truncatingRemainder(dividingBy: (3600*12)) == 0 {
             return fullDateFormatter.string(from: Date(timeIntervalSince1970: value))
         }
         else {
@@ -180,17 +180,18 @@ class HistoryChartViewModel {
     ///X axis in seconds since 1970 [timeinterval - double]
     fileprivate func setXAxisAppearance() {
         if let xAxis = chartView?.xAxis {
-            xAxis.labelRotationAngle = -90.0
+           // xAxis.labelRotationAngle = -.0
             xAxis.labelPosition = .topInside
             xAxis.labelFont = .systemFont(ofSize: 10, weight: .light)
-            let h: TimeInterval = 3600
+            //let h: TimeInterval = 3600
             xAxis.drawAxisLineEnabled = true
             xAxis.drawGridLinesEnabled = true
             xAxis.granularityEnabled = true
             //xAxis.labelCount = 7
             //xAxis.granularity = h * 4.0
             xAxis.valueFormatter = DateValueFormatter()
-            xAxis.yOffset = 40 //to show below margin
+            xAxis.yOffset = 30 //to show below margin
+            //xAxis.wordWrapEnabled = true
         }
     }
     
