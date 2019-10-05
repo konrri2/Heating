@@ -25,7 +25,7 @@ struct RoomSetting {
     var tempDay22: Double?
     var tempNight22: Double?
     var tempNight6: Double?
-                        
+       
     //NOTE: names came with spaces and quotes
     init(_ cells: [String]) {
         name = cells[1].replacingOccurrences(of: "\"", with: "")
@@ -35,6 +35,8 @@ struct RoomSetting {
         tempDay22 = Double(cells[5].trimmingCharacters(in: .whitespacesAndNewlines))
         tempNight22 = Double(cells[6].trimmingCharacters(in: .whitespacesAndNewlines))
         tempNight6 = Double(cells[7].trimmingCharacters(in: .whitespacesAndNewlines))
+        
+        //TODO newSettings = [tempDay6, tempDay22, tempNight22, tempNight6]
     }
 }
 

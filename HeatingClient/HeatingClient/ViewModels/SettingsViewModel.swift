@@ -11,27 +11,45 @@ import Charts
 import RxSwift
 import RxCocoa
 
-class SettingsViewModel {
+
+class HouseSettingsViewModel {
     var roomsSettings: RoomsSettings
-    let disposeBag = DisposeBag()
-    var chartView: LineChartView?
-    var roomName: String?
-    
-    var settings = [0.0, 0.0, 0.0, 0.0]
     
     init(_ rSetinngs: RoomsSettings) {
         self.roomsSettings = rSetinngs
     }
+}
+
+class RoomSettingsViewModel {
+    let disposeBag = DisposeBag()
+    var chartView: LineChartView?
+    var theRoomSetting: RoomSetting
     
-    public func buildChart(for roomName: String, chartView: LineChartView) {
-        self.chartView = chartView
-        self.roomName = roomName
+    //when the user starts changing in setting view
+    var newSettings = [20.0, 20.0, 20.0, 20.0]
+    
+    init(_ rs: RoomSetting) {
+        self.theRoomSetting = rs
         
-        //setChartAppearance()
+        if let td6 = rs.tempDay6 {
+            newSettings[0] = td6
+        }
+        if let td22 = rs.tempDay22 {
+            newSettings[1] = td22
+        }
+        if let tn22 = rs.tempNight22 {
+            newSettings[2] = tn22
+        }
+        if let tn6 = rs.tempNight6 {
+            newSettings[3] = tn6
+        }
+    }
+
+    public func buildChart(chartView: LineChartView) {
+        self.chartView = chartView
         
         self.setData()
-        
-        //scrollAndZoomChart()
+
         formatXAxis()
         formatYAxis()
     }
@@ -65,14 +83,8 @@ class SettingsViewModel {
     }
     
     func setData() {
-        guard
-            let rName = self.roomName,
-            let roomS = roomsSettings.dict[rName]
-            else {
-                logError("there is no setting for room \(self.roomName ?? "[!!!! no name]")")
-                return
-        }
-        
+        let roomS = self.theRoomSetting
+
         let day6cde = ChartDataEntry(x: 6.0, y: roomS.tempDay6 ?? 0.0)
         let day22cde = ChartDataEntry(x: 21.90, y: roomS.tempDay22 ?? 0.0)
         let night22cde = ChartDataEntry(x: 22.10, y: roomS.tempNight22 ?? 0.0)
@@ -84,6 +96,7 @@ class SettingsViewModel {
         let set1 = LineChartDataSet(entries: dayDataEntries, label: "old")
         let set2 = LineChartDataSet(entries: nightTempDataEntries, label: "old")
         
+        let settings = self.newSettings
         let settDayEntries = [ChartDataEntry(x: 6.0, y: settings[0]), ChartDataEntry(x: 21.90, y: settings[1])]
         let settNightEntries = [ChartDataEntry(x: 22.10, y: settings[2]), ChartDataEntry(x: 30.0, y: settings[3])]
         
