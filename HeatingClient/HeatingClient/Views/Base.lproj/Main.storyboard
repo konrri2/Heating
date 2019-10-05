@@ -152,26 +152,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wPu-mD-muN">
-                                <rect key="frame" x="0.0" y="64" width="375" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="UB7-UV-wCZ"/>
-                                </constraints>
-                            </stackView>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fN-60-R9V">
+                                <rect key="frame" x="0.0" y="64" width="375" height="160"/>
+                            </pickerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n3E-FU-EMT" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="0.0" y="164" width="375" height="503"/>
+                                <rect key="frame" x="0.0" y="224" width="375" height="443"/>
                                 <color key="backgroundColor" red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="wPu-mD-muN" firstAttribute="leading" secondItem="HNt-f2-UBO" secondAttribute="leading" id="7se-DT-43n"/>
                             <constraint firstItem="HNt-f2-UBO" firstAttribute="trailing" secondItem="n3E-FU-EMT" secondAttribute="trailing" id="BeP-r5-9Fp"/>
+                            <constraint firstItem="n3E-FU-EMT" firstAttribute="top" secondItem="1fN-60-R9V" secondAttribute="bottom" id="Ceu-v2-t8q"/>
                             <constraint firstItem="HNt-f2-UBO" firstAttribute="bottom" secondItem="n3E-FU-EMT" secondAttribute="bottom" id="Dhw-Z5-a3F"/>
-                            <constraint firstItem="wPu-mD-muN" firstAttribute="top" secondItem="HNt-f2-UBO" secondAttribute="top" id="Ob8-Qd-7sE"/>
-                            <constraint firstItem="n3E-FU-EMT" firstAttribute="top" secondItem="HNt-f2-UBO" secondAttribute="top" constant="100" id="hHo-iA-aOk"/>
-                            <constraint firstItem="HNt-f2-UBO" firstAttribute="trailing" secondItem="wPu-mD-muN" secondAttribute="trailing" id="sRJ-Zs-WtE"/>
-                            <constraint firstItem="n3E-FU-EMT" firstAttribute="top" secondItem="wPu-mD-muN" secondAttribute="bottom" id="wXW-YU-yxa"/>
+                            <constraint firstItem="1fN-60-R9V" firstAttribute="trailing" secondItem="HNt-f2-UBO" secondAttribute="trailing" id="N81-6v-iSe"/>
+                            <constraint firstItem="1fN-60-R9V" firstAttribute="top" secondItem="HNt-f2-UBO" secondAttribute="top" id="cgX-kB-KnG"/>
+                            <constraint firstItem="n3E-FU-EMT" firstAttribute="top" secondItem="HNt-f2-UBO" secondAttribute="top" constant="160" id="hHo-iA-aOk"/>
+                            <constraint firstItem="1fN-60-R9V" firstAttribute="leading" secondItem="HNt-f2-UBO" secondAttribute="leading" id="pag-6l-pLV"/>
                             <constraint firstItem="n3E-FU-EMT" firstAttribute="leading" secondItem="HNt-f2-UBO" secondAttribute="leading" id="xhz-mr-KF2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HNt-f2-UBO"/>
@@ -179,7 +176,7 @@
                     <navigationItem key="navigationItem" id="dIN-IO-b48"/>
                     <connections>
                         <outlet property="chartView" destination="n3E-FU-EMT" id="PeM-1H-LE5"/>
-                        <outlet property="steppersStackView" destination="wPu-mD-muN" id="ZxM-QI-IfT"/>
+                        <outlet property="pickerView" destination="1fN-60-R9V" id="aaG-ZB-paT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bz4-eU-4O9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
