@@ -42,7 +42,8 @@ struct ThermostatViewModel {
     }
     
     var temperature: Observable<String> {
-        return Observable<String>.just(String(thermostat.temperature ?? 0.0))
+        let str = String(format: "%04.1f", thermostat.temperature ?? 0.0) //format  %04.1f   /4 digits togehther with dot and 1 digit after dot
+        return Observable<String>.just(str)
     }
     
     var temperatureColor: Observable<UIColor> {

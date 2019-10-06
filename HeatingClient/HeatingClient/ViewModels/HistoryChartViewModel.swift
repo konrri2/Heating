@@ -34,6 +34,7 @@ class HistoryChartViewModel {
     var history: MeasurementHistory
     var chartView: LineChartView?
     var roomName: String?
+    var theThermostat: Thermostat?
     
     init(_ history: MeasurementHistory) {
         self.history = history
@@ -51,7 +52,8 @@ class HistoryChartViewModel {
     public func buildChart(for therm: Thermostat, chartView: LineChartView) {
         self.chartView = chartView
         self.roomName = therm.roomName
-
+        self.theThermostat = therm
+        
         setChartAppearance()
         if therm is CombiningVirtualThermostat {
             setDataWithAllRooms()
@@ -76,7 +78,7 @@ class HistoryChartViewModel {
             if let therms = m.array {
                 for therm in therms {
                     if let time = therm.timestamp?.timeIntervalSince1970,
-                        let temp = therm.temperature {                      //if nill don't add data entry
+                        let temp = therm.temperature {                      //if nil don't add data entry
                         let dataEntry = ChartDataEntry(x: time, y: temp)
                         if var val = values[therm] {
                             val.append(dataEntry)
@@ -186,7 +188,10 @@ class HistoryChartViewModel {
             //chartView.legend.enabled = false
             chartView.rightAxis.enabled = false
             chartView.legend.form = .line
-            chartView.animate(yAxisDuration: 1.5)
+            
+            if theThermostat is RoomThermostat {
+                chartView.animate(yAxisDuration: 1.5)
+            }
             
             let customXAxisRenderer = TimeXAxisRenderer(viewPortHandler: chartView.viewPortHandler, xAxis: chartView.xAxis, transformer: chartView.getTransformer(forAxis: YAxis.AxisDependency.left))
             chartView.xAxisRenderer = customXAxisRenderer
@@ -230,7 +235,7 @@ class HistoryChartViewModel {
     
     fileprivate func setMultipleLinesColor(_ set1: LineChartDataSet) {
         set1.axisDependency = .left
-        set1.setColor(.green)
+        set1.setColor(randomColor())
         set1.lineWidth = 2.0
         set1.drawCirclesEnabled = false
         set1.drawValuesEnabled = false
@@ -238,6 +243,13 @@ class HistoryChartViewModel {
         set1.fillColor = UIColor(red: 51/255, green: 181/255, blue: 229/255, alpha: 1)
         set1.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
         set1.drawCircleHoleEnabled = false
+    }
+    
+    private func randomColor() -> UIColor {
+        return UIColor(red: .random(in: 0.2 ... 0.8),   //color not in full range because we dont wont black or white
+                       green: .random(in: 0.2 ... 0.8),
+                       blue: .random(in: 0.2 ... 0.8),
+                       alpha: 1.0)
     }
     
     //MARK: - Axies appearance
