@@ -129,6 +129,7 @@ class ThermostatsManager {
                     let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
                     return URLSession.shared.rx.data(request: request)
                 }
+                //this URLSessionConfiguration.default.urlCache = nil is not enough 
             }
             .map { data -> [String] in
                 let dataStr = String(data: data, encoding: String.Encoding.utf8)

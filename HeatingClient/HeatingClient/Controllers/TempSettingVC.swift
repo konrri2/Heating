@@ -22,12 +22,14 @@ class TempSettingVC: UIViewController {
     var theThermostatVM: ThermostatViewModel?
     var lineChartDate: LineChartData?
     var oneRoomSettingVM: RoomSettingsViewModel?
+    var settMananger = SettingsManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if chartView != nil {
             populateChart()
         }
+        
     }
     
     //set only whan setting data is ready
@@ -69,8 +71,7 @@ class TempSettingVC: UIViewController {
     
     internal func populateChart() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        let man = SettingsManager()
-        man.loadSettings()
+        settMananger.loadSettings()
             .subscribe(
                 onNext: { roomsSettings in
                     if let error = roomsSettings.errorInfo {
@@ -101,6 +102,11 @@ class TempSettingVC: UIViewController {
             }
         }
     }
+    
+    @IBAction func applySettingsTaped(_ sender: Any) {
+        //settMananger
+    }
+    
 }
 
 

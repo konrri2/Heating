@@ -20,9 +20,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="20.5" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpw-z2-vmc">
-                        <rect key="frame" x="16" y="0.0" width="76" height="80"/>
+                        <rect key="frame" x="16" y="0.0" width="80" height="80"/>
                         <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="76" id="pdN-bZ-GrF"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="pdN-bZ-GrF"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="x3W-Mt-RJ6"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="37"/>
@@ -30,13 +30,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="living room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8y-T1-Ukc">
-                        <rect key="frame" x="108" y="10" width="105" height="23"/>
+                        <rect key="frame" x="112" y="10" width="105" height="23"/>
                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="19"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="set to: 20.0 albo dlugi opis pogody na dwie linie" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LcZ-QA-quB">
-                        <rect key="frame" x="108" y="41" width="188" height="41"/>
+                        <rect key="frame" x="112" y="41" width="184" height="41"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>

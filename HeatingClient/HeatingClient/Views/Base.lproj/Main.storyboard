@@ -173,7 +173,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HNt-f2-UBO"/>
                     </view>
-                    <navigationItem key="navigationItem" id="dIN-IO-b48"/>
+                    <navigationItem key="navigationItem" id="dIN-IO-b48">
+                        <barButtonItem key="rightBarButtonItem" title="Apply" id="0Ud-5f-cCo">
+                            <connections>
+                                <action selector="applySettingsTaped:" destination="f7L-9f-lzp" id="JZI-fd-odb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="chartView" destination="n3E-FU-EMT" id="PeM-1H-LE5"/>
                         <outlet property="pickerView" destination="1fN-60-R9V" id="aaG-ZB-paT"/>
