@@ -13,10 +13,13 @@ import RxCocoa
 class ThermostatsManager {
     ///rooms names are copy-pasted from python server  //TODO should add API call to get names dynamically
 
-    var lastDownloadTime: Date?    
+    var lastDownloadTime: Date?
+    var historyDownloadTime: Date?
     let config: Config
     
-    init() {
+    static let shared = ThermostatsManager()
+    
+    private init() {
         config = ConfigManager.parseConfig()
     }
     
@@ -59,6 +62,15 @@ class ThermostatsManager {
             return false
         }
 
+        return ThermostatsManager.isDateRecent(lastDownload)
+    }
+    
+    public func isHistoryUpTpDate() -> Bool {
+        guard let lastDownload = historyDownloadTime else {
+            logVerbose("isUpToDate: firstDownload")
+            return false
+        }
+        
         return ThermostatsManager.isDateRecent(lastDownload)
     }
     
@@ -109,8 +121,14 @@ class ThermostatsManager {
     private func buildAllCsvObservable(for url: URL) -> Observable<MeasurementHistory> {
         return Observable.just(url)
             .flatMap { url -> Observable<Data> in
-                let request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 300)  //cache for 5 minutes
-                return URLSession.shared.rx.data(request: request)
+                if self.isHistoryUpTpDate() {  //caching mechanism things it is a static csv file, so I need to do manual checking
+                    let request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 300)
+                    return URLSession.shared.rx.data(request: request)
+                }
+                else {  //if history download is old -> downlod without any caches
+                    let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
+                    return URLSession.shared.rx.data(request: request)
+                }
             }
             .map { data -> [String] in
                 let dataStr = String(data: data, encoding: String.Encoding.utf8)

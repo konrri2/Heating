@@ -47,7 +47,7 @@ class HeatingClientTests: XCTestCase {
     }
     
     func testJsonData_loadLastCsv() throws {
-        let man = ThermostatsManager()
+        let man = ThermostatsManager.shared
         log("testing loadLastCsv...")
         let apiReturns = try man.loadLastCsv()
             .toBlocking()
@@ -75,7 +75,7 @@ class HeatingClientTests: XCTestCase {
     }
 
     func testAllHistoryJsonData() throws {
-        let man = ThermostatsManager()
+        let man = ThermostatsManager.shared
         log("testing loadAllCsv...")
         let apiReturns = try man.loadAllCsv()
             .toBlocking()
@@ -86,7 +86,7 @@ class HeatingClientTests: XCTestCase {
         let t1 = apiReturns[1]
         
         //testing count
-        XCTAssertTrue(((t0.errorInfo == nil) != (t1.errorInfo == nil)), "only one (local xor remote) may terurn error")
+        XCTAssertTrue(((t0.errorInfo == nil) != (t1.errorInfo == nil)), "only one (local xor remote) may return error")
         let successResultArray = t0.measurmentsArr != nil ? t0.measurmentsArr : t1.measurmentsArr
         if let thermoState = successResultArray?.last {
             if let time = thermoState.time {

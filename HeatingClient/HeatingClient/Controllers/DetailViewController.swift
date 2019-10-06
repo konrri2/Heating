@@ -47,7 +47,7 @@ class DetailViewController: UIViewController {
     //calling loadAll each time is not optimal, but I set cachePolicy 5minutes
     internal func populateChart() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        let man = ThermostatsManager()
+        let man = ThermostatsManager.shared
         man.loadAllCsv()
             .subscribe(
                 onNext: { history in

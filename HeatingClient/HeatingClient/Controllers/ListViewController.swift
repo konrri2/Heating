@@ -29,7 +29,7 @@ class ListViewController: UITableViewController {
         tableView.estimatedRowHeight = 120
         self.tableView.tableFooterView = UIView()
         
-        thermostatsManager = ThermostatsManager()
+        thermostatsManager = ThermostatsManager.shared
         
         self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         NotificationCenter.default.addObserver(
