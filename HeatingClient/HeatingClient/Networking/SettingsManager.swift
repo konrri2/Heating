@@ -32,9 +32,47 @@ class SettingsManager {
             .merge(obsLocal,obsRemote)
     }
     
-    //TODO test it
+    //TODO -check, because this does not work as expected
     func clearCache() {
         URLSessionConfiguration.default.urlCache = nil
+    }
+    
+    func applySettings() {
+        let json: [String: Any] = ["room": "Guest",
+                                   "new": "7,7,7,7",
+                                   "old": "8,8,8,8"]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://localhost:8090/api/changeSetting")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            if let httpResponse = response as? HTTPURLResponse {
+                log("===========response =")
+                print(httpResponse.statusCode)
+                if let responseString = String(bytes: data, encoding: .utf8) {
+                    // The response body seems to be a valid UTF-8 string, so print that.
+                    print(responseString)
+                }
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any] {
+                print(responseJSON)
+            }
+        }
+        
+        task.resume()
     }
     
     private func buildCsvObservable(for url: URL) -> Observable<RoomsSettings> {

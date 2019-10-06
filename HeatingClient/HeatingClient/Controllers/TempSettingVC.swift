@@ -104,7 +104,7 @@ class TempSettingVC: UIViewController {
     }
     
     @IBAction func applySettingsTaped(_ sender: Any) {
-        //settMananger
+        settMananger.applySettings()
     }
     
 }

@@ -85,28 +85,26 @@ def get_time():
 
 
 @app.route('/api/changeSetting', methods=['POST'])
-def foo():
+def changeSetting():
     data = request.json
     print("room in request = ")
     room_name = data["room"]
     old = data["old"]
     new = data["new"]
-    replace_in_settings_file(room_name, old, new)
-    return get_settings()
-
-
-def replace_in_settings_file(room_name, old, new):
     with open('./settings.csv', 'r') as file:
         filedata = file.read()
-
     old_line = setting_line_for_room(room_name)
+    if old_line is None:
+        return "No room " + room_name + "  in settings"
     new_line = old_line.replace(old, new)
     print("---replacing setting line ---" + old_line + "    with    " + new_line)
+    if old_line == new_line:
+        return "cennot change settings"
     filedata = filedata.replace(old_line, new_line)
-
     # Write the file out again
     with open('./settings.csv', 'w') as file:
         file.write(filedata)
+    return "OK"
 
 
 def setting_line_for_room(room_name):
