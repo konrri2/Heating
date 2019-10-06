@@ -1,0 +1,122 @@
+#!flask/bin/python
+from flask import Flask, jsonify, request, send_from_directory
+import os.path
+from datetime import datetime, timedelta
+#import monitoring_bvf
+import datetime
+
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def index():
+    return "Hello, World!"
+
+
+app = Flask(__name__)
+
+
+@app.route('/api/all', methods=['GET'])
+def get_file():
+    print("/api/all")
+    return send_from_directory('./res', 'all.csv')
+    # app.send_file('/measurements_format.csv', attachment_filename='measurements_format.csv')
+    # return send_from_directory(directory=uploads, filename='measurements_format.csv')
+
+
+@app.route('/api/getSettings', methods=['GET'])
+def get_settings():
+    print("/api/getSettings")
+    return send_from_directory('./', 'settings.csv')
+
+
+@app.route('/api/today', methods=['GET'])
+def get_today_csv():
+    print("/api/today")
+    file_name_date = datetime.datetime.now().strftime("%Y_%m_%d")
+    return send_from_directory('./res', file_name_date + '.csv')
+
+
+@app.route('/api/24h', methods=['GET'])
+def get_2days_csv():
+    print("/api/24h")
+    yesterday = datetime.datetime.now() - timedelta(days=1)
+    print(yesterday)
+    file_name_date = datetime.datetime.now().strftime("%Y_%m_%d") + '.csv'
+    file_yesterday = yesterday.strftime("%Y_%m_%d") + '.csv'
+    filenames = ['./res/' + file_yesterday, './res/' + file_name_date]
+    with open('./res/concatefile.csv', 'w') as outfile:
+        for fname in filenames:
+            with open(fname) as infile:
+                for line in infile:
+                    outfile.write(line)
+    return send_from_directory('./res', 'concatefile.csv')
+
+
+# this methods concatenates all.csv for full historry and today.csv for detailed measurments
+@app.route('/api/allAndToday', methods=['GET'])
+def get_allAndToday_csv():
+    print("/api/allAndToday")
+    yesterday = datetime.datetime.now() - timedelta(days=1)
+    print(yesterday)
+    file_name_date = datetime.datetime.now().strftime("%Y_%m_%d") + '.csv'
+    filenames = ['./res/all.csv', './res/' + file_name_date]
+    with open('./res/concatefile.csv', 'w') as outfile:
+        for fname in filenames:
+            with open(fname) as infile:
+                for line in infile:
+                    outfile.write(line)
+    return send_from_directory('./res', 'concatefile.csv')
+
+
+@app.route('/api/last', methods=['GET'])
+def get_last() -> str:
+    print("/api/last")
+    res = monitoring_bvf.last_observation
+    print("returning " + res)
+    return res
+
+
+@app.route('/api/time')
+def get_time():
+    time = datetime.now()
+    return "RPI3 date and time: " + str(time)
+
+
+@app.route('/api/changeSetting', methods=['POST'])
+def foo():
+    data = request.json
+    print("room in request = ")
+    room_name = data["room"]
+    old = data["old"]
+    new = data["new"]
+    replace_in_settings_file(room_name, old, new)
+    return get_settings()
+
+
+def replace_in_settings_file(room_name, old, new):
+    with open('./settings.csv', 'r') as file:
+        filedata = file.read()
+
+    old_line = setting_line_for_room(room_name)
+    new_line = old_line.replace(old, new)
+    print("---replacing setting line ---" + old_line + "    with    " + new_line)
+    filedata = filedata.replace(old_line, new_line)
+
+    # Write the file out again
+    with open('./settings.csv', 'w') as file:
+        file.write(filedata)
+
+
+def setting_line_for_room(room_name):
+    with open('./settings.csv', 'r') as file:
+        filedata = file.read()
+        for line in filedata.split("\n"):
+            if room_name in line:
+                return line
+
+
+# test replace_in_settings_file("Guest room", "19.0, 17.5, 18.0, 21.5,", "9.0, 1.5, 8.0, 1.5,")
+
+app.run(host='0.0.0.0', port=8090)
