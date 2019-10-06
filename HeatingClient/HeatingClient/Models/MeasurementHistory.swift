@@ -17,6 +17,9 @@ struct MeasurementHistory {
         measurmentsArr = arr.sorted(by: {
             $1.isNewer($0)
         })  //checkin if the next one $1 is newer than the previous one $0
+        if let lastMeasurmentTime = measurmentsArr?.last?.time {
+            log("lastMeasurmentTime = \(lastMeasurmentTime)")
+        }
     }
     
     init(error: String) {

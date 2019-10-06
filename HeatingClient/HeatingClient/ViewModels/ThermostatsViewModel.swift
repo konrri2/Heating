@@ -100,7 +100,16 @@ struct ThermostatViewModel {
                     return str
                 }())
         } else if thermostat is CombiningVirtualThermostat {
-            return Observable<String>.just( "select to show \n combined chart")
+            return Observable<String>.just({
+                if let date = thermostat.timestamp {
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "dd MMMM \nHH:mm"
+                    return dateFormatter.string(from: date)
+                }
+                else {
+                    return "!!! ERROR !!! no parsing date"
+                }
+                }())
         } else {
             fatalError("unkonwn thermostat type")
         }

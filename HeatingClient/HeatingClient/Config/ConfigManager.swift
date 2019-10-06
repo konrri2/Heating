@@ -21,7 +21,6 @@ struct Config: Decodable {
     }
     
     func allMeasurementsUrl(local: Bool, datailsForLastDay: Bool = true) -> String {
-        //http://192.168.1.3:8090/api/allAndToday
         if datailsForLastDay {
             if local {
                 return localAddress + "/api/allAndToday"

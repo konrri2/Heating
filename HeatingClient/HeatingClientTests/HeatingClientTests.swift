@@ -57,11 +57,21 @@ class HeatingClientTests: XCTestCase {
         let t0 = apiReturns[0]
         let t1 = apiReturns[1]
         
+        //testing count
         XCTAssertTrue(((t0.errorInfo == nil) != (t1.errorInfo == nil)), "only one (local xor remote) may terurn error")
         let successResultArray = t0.array != nil ? t0.array : t1.array
         XCTAssertNotNil(successResultArray, "one must return corretct array")
         XCTAssertNotEqual(successResultArray?.count, 3, "number of thermostats cennot be 3")
-        XCTAssertEqual(successResultArray?.count, 9, "number of thermostats must by 8 +1 virtual")
+        XCTAssertEqual(successResultArray?.count, 10, "number of thermostats must by 8 +1 virtual oudside +1 virtual average")
+        
+        //testing time of cache
+        if let time = successResultArray?.first?.timestamp {
+            log("lastCsv download time = \(time)")
+            XCTAssertTrue(ThermostatsManager.isDateRecent(time, timeMarginSec: 600), "downloaded date is old \(time)")
+        }
+        else {
+            XCTFail("no time in thermostat")
+        }
     }
 
     func testAllHistoryJsonData() throws {
@@ -75,7 +85,21 @@ class HeatingClientTests: XCTestCase {
         let t0 = apiReturns[0]
         let t1 = apiReturns[1]
         
+        //testing count
         XCTAssertTrue(((t0.errorInfo == nil) != (t1.errorInfo == nil)), "only one (local xor remote) may terurn error")
+        let successResultArray = t0.measurmentsArr != nil ? t0.measurmentsArr : t1.measurmentsArr
+        if let thermoState = successResultArray?.last {
+            if let time = thermoState.time {
+                log("allCsv download time = \(time)")
+                XCTAssertTrue(ThermostatsManager.isDateRecent(time, timeMarginSec: 600), "downloaded date is old \(time)")
+            }
+            else {
+                XCTFail("no time in thermostat")
+            }
+        }
+        else {
+            XCTFail("cennot get thermostate from mesurments array")
+        }
     }
     
 //    func testPerformanceExample() {

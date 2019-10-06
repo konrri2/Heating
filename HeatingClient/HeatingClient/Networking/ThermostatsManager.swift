@@ -59,9 +59,13 @@ class ThermostatsManager {
             return false
         }
 
-        let minutesAgo = Date().addingTimeInterval(-60)
-        logVerbose("isUpToDate: lastDownload=\(lastDownload)   minutesAgo=\(minutesAgo)")
-        return lastDownload > minutesAgo
+        return ThermostatsManager.isDateRecent(lastDownload)
+    }
+    
+    static func isDateRecent(_ date: Date, timeMarginSec: Double = 60) -> Bool {
+        let minutesAgo = Date().addingTimeInterval(-timeMarginSec)
+        logVerbose("isUpToDate: lastDownload=\(date)   minutesAgo=\(minutesAgo)")
+        return date > minutesAgo
     }
     
     //MARK: private methods
@@ -83,7 +87,7 @@ class ThermostatsManager {
     private func buildLastCsvObservable(for url: URL) -> Observable<HouseThermoState> {
         return Observable.just(url)
             .flatMap { url -> Observable<Data> in
-                let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)  //it is important not to cache
+                let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)  //it is important not to cache - because it thiks API is a static file. I check isUpToDate() when navigating and changing every second
                 return URLSession.shared.rx.data(request: request)
             }.map { data -> [String] in
                 let dataStr = String(data: data, encoding: String.Encoding.utf8)
