@@ -8,12 +8,14 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 class ListViewController: UITableViewController {
 
     let disposeBag = DisposeBag()
     private var thermostatListVM: ThermostatListViewModel!
     private var thermostatsManager: ThermostatsManager?
+    private var errorHouseStates: BehaviorRelay<[HouseThermoState]> = BehaviorRelay(value: [])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +32,7 @@ class ListViewController: UITableViewController {
         self.tableView.tableFooterView = UIView()
         
         thermostatsManager = ThermostatsManager.shared
+        observeErrors()
         
         self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         NotificationCenter.default.addObserver(
@@ -41,6 +44,21 @@ class ListViewController: UITableViewController {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func observeErrors() {
+        errorHouseStates.subscribe(onNext: { errorArr in
+            let count = errorArr.count
+            logWarn("======   num of wrong houseThermoStates = \(count)")
+            if (count >= 2) {
+                let alert = UIAlertController(title: "Connection error", message: "Both HouseThermoStates are wrong", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                DispatchQueue.main.async {
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+        })
+        .disposed(by: disposeBag)
     }
     
     @objc func appWillEnterForegroundNotified(_ notification: Notification!) {
@@ -65,13 +83,17 @@ class ListViewController: UITableViewController {
     
     internal func populateThermostats() {
         logVerbose("populateThermostats")
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        DispatchQueue.main.async {  //TODO make it work
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        }
         if let man = thermostatsManager {
             man.loadLastCsv()
                 .subscribe(
                     onNext: { thermostats in
                         if let error = thermostats.errorInfo {
                             logWarn(error)
+                            let newArr = self.errorHouseStates.value + [thermostats]
+                            self.errorHouseStates.accept(newArr)
                         }
                         else if let therArr = thermostats.array {
                             self.thermostatListVM = ThermostatListViewModel(therArr)
