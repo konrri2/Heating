@@ -15,7 +15,9 @@ class ListViewController: UITableViewController {
     let disposeBag = DisposeBag()
     private var thermostatListVM: ThermostatListViewModel!
     private var thermostatsManager: ThermostatsManager?
-    private var errorHouseStates: BehaviorRelay<[HouseThermoState]> = BehaviorRelay(value: [])
+    
+    ///Error infos. If both urls have error message -> show error alert. but check if it is not the same error for the same url
+    private var errorHouseStates: BehaviorRelay<[String]> = BehaviorRelay(value: [])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,8 +96,12 @@ class ListViewController: UITableViewController {
                         [unowned self] thermostats in
                         if let error = thermostats.errorInfo {
                             logWarn(error)
-                            let newArr = self.errorHouseStates.value + [thermostats]
-                            self.errorHouseStates.accept(newArr)
+                            if self.errorHouseStates.value.contains(error) {
+                                log("we already know that from this url there is an error")
+                            } else {
+                                let newArr = self.errorHouseStates.value + [error]
+                                self.errorHouseStates.accept(newArr)
+                            }
                         }
                         else if let therArr = thermostats.array {
                             self.thermostatListVM = ThermostatListViewModel(therArr)

@@ -13,6 +13,7 @@ struct HouseThermoState {
     var array: [Thermostat]?
     var time: Date? //timestamp of the measurment
     
+    //TOOD this shouldn't be harcoded
     let roomsNames: [String] = ["Main bedroom", "Bathroom", "Guest", "Agata's", "Leo's", "Living room", "Kitchen", "Office"]
     
     init(_ arr: [Thermostat], _ timestamp: Date) {

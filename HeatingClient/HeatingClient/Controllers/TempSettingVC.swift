@@ -82,6 +82,7 @@ class TempSettingVC: UIViewController {
                     else if roomsSettings.dict.isEmpty == false {
                         if let roomName = self.theThermostatVM?.thermostat.roomName,
                             let oneRoomSett = roomsSettings[roomName] {
+                            log("-------------  getting setting for \(roomName)  -------------")
                             self.oneRoomSettingVM = RoomSettingsViewModel(oneRoomSett)
                             self.redrawTheChart()
                             DispatchQueue.main.async {
