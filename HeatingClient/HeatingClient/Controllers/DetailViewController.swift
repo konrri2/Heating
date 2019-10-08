@@ -50,7 +50,8 @@ class DetailViewController: UIViewController {
         let man = ThermostatsManager.shared
         man.loadAllCsv()
             .subscribe(
-                onNext: { history in
+                onNext: {
+                    [unowned self] history in
                     if let error = history.errorInfo {
                         logWarn(error)
                     }

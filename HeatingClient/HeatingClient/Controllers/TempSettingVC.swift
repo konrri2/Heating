@@ -51,7 +51,8 @@ class TempSettingVC: UIViewController {
         }
         
         pickerView.rx.modelSelected(Double.self)
-            .subscribe(onNext: { models in
+            .subscribe(onNext: {
+                [unowned self] models in
                 logVerbose("picker choose: ")
                 print(models)
                 self.oneRoomSettingVM?.newSettings = models
@@ -73,7 +74,8 @@ class TempSettingVC: UIViewController {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         settMananger.loadSettings()
             .subscribe(
-                onNext: { roomsSettings in
+                onNext: {
+                    [unowned self] roomsSettings in
                     if let error = roomsSettings.errorInfo {
                         logWarn(error)
                     }

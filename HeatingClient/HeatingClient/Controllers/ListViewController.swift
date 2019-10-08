@@ -47,7 +47,8 @@ class ListViewController: UITableViewController {
     }
     
     private func observeErrors() {
-        errorHouseStates.subscribe(onNext: { errorArr in
+        errorHouseStates.subscribe(onNext: {
+            [unowned self] errorArr in
             let count = errorArr.count
             logWarn("======   num of wrong houseThermoStates = \(count)")
             if (count >= 2) {
@@ -89,7 +90,8 @@ class ListViewController: UITableViewController {
         if let man = thermostatsManager {
             man.loadLastCsv()
                 .subscribe(
-                    onNext: { thermostats in
+                    onNext: {
+                        [unowned self] thermostats in
                         if let error = thermostats.errorInfo {
                             logWarn(error)
                             let newArr = self.errorHouseStates.value + [thermostats]
