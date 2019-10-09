@@ -51,12 +51,12 @@ class ThermostatsManager {
         
         let obsLocal = buildAllCsvObservable(for: localUrl)
         let obsRemote = buildAllCsvObservable(for: remoteUrl)
-        
+        historyDownloadTime = Date()
         return Observable
             .merge(obsLocal,obsRemote)
     }
     
-    public func isUpToDate() -> Bool {
+    public func isLastCsvUpToDate() -> Bool {
         guard let lastDownload = lastDownloadTime else {
             logVerbose("isUpToDate: firstDownload")
             return false
@@ -65,19 +65,30 @@ class ThermostatsManager {
         return ThermostatsManager.isDateRecent(lastDownload)
     }
     
-    public func isHistoryUpTpDate() -> Bool {
+    public func isHistoryUpToDate() -> Bool {
         guard let lastDownload = historyDownloadTime else {
-            logVerbose("isUpToDate: firstDownload")
+            logVerbose("isUpToDate (historyDownloadTime): firstDownload")
             return false
         }
         
         return ThermostatsManager.isDateRecent(lastDownload)
     }
     
-    static func isDateRecent(_ date: Date, timeMarginSec: Double = 60) -> Bool {
+    static func isDateRecent_wrong(_ date: Date, timeMarginSec: Double = 60) -> Bool {
         let minutesAgo = Date().addingTimeInterval(-timeMarginSec)
-        logVerbose("isUpToDate: lastDownload=\(date)   minutesAgo=\(minutesAgo)")
-        return date > minutesAgo
+        let minutesInFuture = Date().addingTimeInterval(timeMarginSec)
+        let isRecent = date < minutesInFuture
+        logVerbose("isUpToDate: lastDownload=\(date)   minutesAgo=\(minutesAgo)  minutesInFuture=\(minutesInFuture) return= \(isRecent)")
+        return isRecent
+    }
+    
+    static func isDateRecent(_ dateToCheck: Date, timeMarginSec: Double = 180) -> Bool {
+        let now = Date()
+        let dateWithMargin = dateToCheck.addingTimeInterval(timeMarginSec)
+        let isRecent = dateWithMargin > now
+        log("dateToCheck=\(dateToCheck)  now=\(now) dateWithMArgin=\(dateWithMargin) isRecent=\(isRecent)")
+        
+        return isRecent
     }
     
     //MARK: private methods
@@ -121,7 +132,7 @@ class ThermostatsManager {
     private func buildAllCsvObservable(for url: URL) -> Observable<MeasurementHistory> {
         return Observable.just(url)
             .flatMap { url -> Observable<Data> in
-                if self.isHistoryUpTpDate() {  //caching mechanism things it is a static csv file, so I need to do manual checking
+                if self.isHistoryUpToDate() {  //caching mechanism things it is a static csv file, so I need to do manual checking
                     let request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 300)
                     return URLSession.shared.rx.data(request: request)
                 }

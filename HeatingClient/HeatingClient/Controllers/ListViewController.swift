@@ -66,7 +66,7 @@ class ListViewController: UITableViewController {
     
     @objc func appWillEnterForegroundNotified(_ notification: Notification!) {
         logVerbose("appWillEnterForegroundNotified")
-        if thermostatsManager?.isUpToDate() == false {
+        if thermostatsManager?.isLastCsvUpToDate() == false {
             populateThermostats()
         }
     }
@@ -74,7 +74,7 @@ class ListViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         logVerbose("viewDidAppear")
-        if thermostatsManager?.isUpToDate() == false {
+        if thermostatsManager?.isLastCsvUpToDate() == false {
             populateThermostats()
         }
     }

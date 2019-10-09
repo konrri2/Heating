@@ -49,6 +49,8 @@ class HeatingClientTests: XCTestCase {
     func testJsonData_loadLastCsv() throws {
         let man = ThermostatsManager.shared
         log("testing loadLastCsv...")
+        //TODO - when testing the app starts and stars another download manually
+        //XCTAssertFalse(man.isLastCsvUpToDate(), "before download it cannot be up to date")
         let apiReturns = try man.loadLastCsv()
             .toBlocking()
             .toArray()
@@ -65,6 +67,7 @@ class HeatingClientTests: XCTestCase {
         XCTAssertEqual(successResultArray?.count, 10, "number of thermostats must by 8 +1 virtual oudside +1 virtual average")
         
         //testing time of cache
+        XCTAssertTrue(man.isLastCsvUpToDate(), "just after download should be up to date")
         if let time = successResultArray?.first?.timestamp {
             log("lastCsv download time = \(time)")
             XCTAssertTrue(ThermostatsManager.isDateRecent(time, timeMarginSec: 600), "downloaded date is old \(time)")
@@ -77,6 +80,7 @@ class HeatingClientTests: XCTestCase {
     func testAllHistoryJsonData() throws {
         let man = ThermostatsManager.shared
         log("testing loadAllCsv...")
+        XCTAssertFalse(man.isHistoryUpToDate(), "before download it cannot be up to date")
         let apiReturns = try man.loadAllCsv()
             .toBlocking()
             .toArray()
@@ -88,9 +92,11 @@ class HeatingClientTests: XCTestCase {
         //testing count
         XCTAssertTrue(((t0.errorInfo == nil) != (t1.errorInfo == nil)), "only one (local xor remote) may return error")
         let successResultArray = t0.measurmentsArr != nil ? t0.measurmentsArr : t1.measurmentsArr
+        XCTAssertTrue(man.isHistoryUpToDate(), "just after download should be up to date")
         if let thermoState = successResultArray?.last {
             if let time = thermoState.time {
                 log("allCsv download time = \(time)")
+                //TODO why it is buforing
                 XCTAssertTrue(ThermostatsManager.isDateRecent(time, timeMarginSec: 600), "downloaded date is old \(time)")
             }
             else {
@@ -100,6 +106,14 @@ class HeatingClientTests: XCTestCase {
         else {
             XCTFail("cennot get thermostate from mesurments array")
         }
+    }
+    
+    func testDates() {
+        let now = Date()
+        XCTAssertTrue(ThermostatsManager.isDateRecent(now))
+        XCTAssertTrue(ThermostatsManager.isDateRecent(now.addingTimeInterval(-60)))
+        XCTAssertFalse(ThermostatsManager.isDateRecent(now.addingTimeInterval(-600)))
+        
     }
     
 //    func testPerformanceExample() {
