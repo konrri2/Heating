@@ -92,7 +92,7 @@ class HeatingClientTests: XCTestCase {
         //testing count
         XCTAssertTrue(((t0.errorInfo == nil) != (t1.errorInfo == nil)), "only one (local xor remote) may return error")
         let successResultArray = t0.measurmentsArr != nil ? t0.measurmentsArr : t1.measurmentsArr
-        XCTAssertTrue(man.isHistoryUpToDate(), "just after download should be up to date")
+        XCTAssertTrue(man.isHistoryUpToDate(), "just after download should be up to date")  //isHistoryUpToDate compares to last data enty in csv, so it is always a few minutes old
         if let thermoState = successResultArray?.last {
             if let time = thermoState.time {
                 log("allCsv download time = \(time)")

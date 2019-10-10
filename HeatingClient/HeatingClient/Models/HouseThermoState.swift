@@ -16,10 +16,10 @@ struct HouseThermoState {
     //TOOD this shouldn't be harcoded
     let roomsNames: [String] = ["Main bedroom", "Bathroom", "Guest", "Agata's", "Leo's", "Living room", "Kitchen", "Office"]
     
-    init(_ arr: [Thermostat], _ timestamp: Date) {
-        self.array = arr
-        self.time = timestamp
-    }
+//    init(_ arr: [Thermostat], _ timestamp: Date) {
+//        self.array = arr
+//        self.time = timestamp
+//    }
     
     init(error: String) {
         errorInfo = error
@@ -32,6 +32,8 @@ struct HouseThermoState {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
         if let date = dateFormatter.date(from: strArr[0]) {
+            self.time = date
+            
             let oudsideTemp = Double(strArr[1].trimmingCharacters(in: .whitespaces))
             let outsideThermostat = OutsideVirtualThermostat(timestamp: date, oudsideTemp: oudsideTemp, weatherDescription: strArr[2])
             retList.append(outsideThermostat)
@@ -57,7 +59,6 @@ struct HouseThermoState {
             retList.append(avgVirtualThermostat)
             
             self.array = retList
-            self.time = date
         }
         else {
             logWarn("HouseThermoState : Cennot parse date -> propably header in .csv")

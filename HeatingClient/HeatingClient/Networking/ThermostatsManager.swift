@@ -36,7 +36,7 @@ class ThermostatsManager {
         
         let obsLocal = buildLastCsvObservable(for: localUrl)
         let obsRemote = buildLastCsvObservable(for: remoteUrl)
-        lastDownloadTime = Date()
+
         return Observable
             .merge(obsLocal,obsRemote)
     }
@@ -51,7 +51,7 @@ class ThermostatsManager {
         
         let obsLocal = buildAllCsvObservable(for: localUrl)
         let obsRemote = buildAllCsvObservable(for: remoteUrl)
-        historyDownloadTime = Date()
+
         return Observable
             .merge(obsLocal,obsRemote)
     }
@@ -70,8 +70,9 @@ class ThermostatsManager {
             logVerbose("isUpToDate (historyDownloadTime): firstDownload")
             return false
         }
-        
-        return ThermostatsManager.isDateRecent(lastDownload)
+        let isRecent = ThermostatsManager.isDateRecent(lastDownload, timeMarginSec: 480)  //it compares to last data enty in csv, so it is always a few minutes old
+        log("--++++++++---++++++++--  isHistoryUpToDate ---------------  ++++++++   last Download = \(lastDownload)    isRecent=\(isRecent)")
+        return isRecent
     }
     
     static func isDateRecent_wrong(_ date: Date, timeMarginSec: Double = 60) -> Bool {
@@ -119,6 +120,8 @@ class ThermostatsManager {
                 return strArr
             }.map { strArr -> HouseThermoState in
                 if let res = HouseThermoState(strArr) {
+                    self.lastDownloadTime = res.time
+                    log("--------------  lastDownlodedTime = \(self.lastDownloadTime)")
                     return res
                 }
                 else {
@@ -133,7 +136,7 @@ class ThermostatsManager {
         return Observable.just(url)
             .flatMap { url -> Observable<Data> in
                 if self.isHistoryUpToDate() {  //caching mechanism things it is a static csv file, so I need to do manual checking
-                    let request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 300)
+                    let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)// cachePolicy: .useProtocolCachePolicy, timeoutInterval: 300)
                     return URLSession.shared.rx.data(request: request)
                 }
                 else {  //if history download is old -> downlod without any caches
@@ -158,6 +161,11 @@ class ThermostatsManager {
                         }
                     }
                 }
+                if let lastTempMeasurment = measurmentsArr.last {
+                    self.historyDownloadTime = lastTempMeasurment.time
+                    log("--------------  buildAllCsvObservable:historyDownloadTime = \(self.historyDownloadTime)")
+                }
+                
                 return MeasurementHistory(measurmentsArr)
             }.catchErrorJustReturn(MeasurementHistory(error: "==== MeasurementHistory error for url \(url.absoluteString) ===="))
 
