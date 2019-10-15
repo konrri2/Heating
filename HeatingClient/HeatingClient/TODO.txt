@@ -1,3 +1,8 @@
+screen with settings (icon from main screen) set password
+
+password used to encrypt setting values
+
+if off - zero on chart setting value
 
 api/settings on server
 
