@@ -130,8 +130,7 @@ struct ThermostatViewModel {
         if thermostat is RoomThermostat {
             var color = UIColor.white
             if #available(iOS 13.0, *) {
-                //TODO install new xcode
-                //color = UIColor.systemBackground
+                color = UIColor.systemBackground
             }
             
             return Observable<UIColor>.just(color)

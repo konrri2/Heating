@@ -22,9 +22,9 @@ class ListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = true
-        }
+//        if #available(iOS 11.0, *) {
+//            self.navigationController?.navigationBar.prefersLargeTitles = true
+//        }
         
         let nib = UINib.init(nibName: "ThermostatTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: ThermostatTableViewCell.id)

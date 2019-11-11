@@ -19,9 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        //Override colors globally
 //        //rgb(41, 128, 185)
-//        UINavigationBar.appearance().barTintColor = UIColor(displayP3Red: 41/255, green: 128/255, blue: 185/255, alpha: 1.0)
-//        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]  //separetly change for large title
-//        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+ //       rgba(243, 156, 18,1.0)
+        UINavigationBar.appearance().barTintColor = UIColor(displayP3Red: 243/255, green: 156/255, blue: 18/255, alpha: 1.0)
+        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]  //separetly change for large title
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 
         
         return true
