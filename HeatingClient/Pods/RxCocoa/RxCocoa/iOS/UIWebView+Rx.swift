@@ -6,7 +6,8 @@
 //  Copyright © 2016 Krunoslav Zaher. All rights reserved.
 //
 
-#if os(iOS)
+#if !targetEnvironment(macCatalyst)
+
 
     import UIKit
     import RxSwift

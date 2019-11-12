@@ -66,6 +66,7 @@
 		76164930230D486000BFE176 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76164939230D54EE00BFE176 /* ThermostatsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThermostatsViewModel.swift; sourceTree = "<group>"; };
 		7616493B230D54FA00BFE176 /* Thermostat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thermostat.swift; sourceTree = "<group>"; };
+		76191FD22379E58600EA926C /* HeatingClient.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HeatingClient.entitlements; sourceTree = "<group>"; };
 		76227817233CD3AF00B89376 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		762EBF432313FFD700B2FB30 /* Config_debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config_debug.plist; sourceTree = "<group>"; };
 		762EBF462314062000B2FB30 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -166,6 +167,7 @@
 		76164923230D485E00BFE176 /* HeatingClient */ = {
 			isa = PBXGroup;
 			children = (
+				76191FD22379E58600EA926C /* HeatingClient.entitlements */,
 				769DE6FF2347D4330002C3BF /* ChartsExtension */,
 				762EBF45231405D300B2FB30 /* Common */,
 				7612CB3A230E9AC7002CF6C4 /* Config */,
@@ -382,28 +384,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-HeatingClient-HeatingClientTests/Pods-HeatingClient-HeatingClientTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/RxBlocking/RxBlocking.framework",
-				"${BUILT_PRODUCTS_DIR}/RxTest/RxTest.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-HeatingClient-HeatingClientTests/Pods-HeatingClient-HeatingClientTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBlocking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxTest.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-HeatingClient-HeatingClientTests/Pods-HeatingClient-HeatingClientTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HeatingClient-HeatingClientTests/Pods-HeatingClient-HeatingClientTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HeatingClient-HeatingClientTests/Pods-HeatingClient-HeatingClientTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B04FFD6DCCCB79031EA61FE8 /* [CP] Check Pods Manifest.lock */ = {
@@ -434,24 +423,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-HeatingClient/Pods-HeatingClient-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-HeatingClient/Pods-HeatingClient-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-HeatingClient/Pods-HeatingClient-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HeatingClient/Pods-HeatingClient-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HeatingClient/Pods-HeatingClient-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -640,7 +620,9 @@
 			baseConfigurationReference = 4A98C292716A6DBED8A3F769 /* Pods-HeatingClient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HeatingClient/HeatingClient.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = UVJCW2277W;
 				INFOPLIST_FILE = HeatingClient/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -650,6 +632,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pl.edu.leszczynski.HeatingClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -660,7 +643,9 @@
 			baseConfigurationReference = FCA6CAB906B1E505011ACCC4 /* Pods-HeatingClient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HeatingClient/HeatingClient.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = UVJCW2277W;
 				INFOPLIST_FILE = HeatingClient/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -670,6 +655,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pl.edu.leszczynski.HeatingClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

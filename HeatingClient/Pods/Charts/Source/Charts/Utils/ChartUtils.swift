@@ -12,6 +12,14 @@
 import Foundation
 import CoreGraphics
 
+#if canImport(UIKit)
+    import UIKit
+#endif
+
+#if canImport(Cocoa)
+import Cocoa
+#endif
+
 extension Comparable {
     func clamped(to range: ClosedRange<Self>) -> Self {
         if self > range.upperBound {
@@ -65,7 +73,7 @@ extension CGSize
 extension Double
 {
     /// Rounds the number to the nearest multiple of it's order of magnitude, rounding away from zero if halfway.
-    public func roundedToNextSignficant() -> Double
+    func roundedToNextSignficant() -> Double
     {
         guard
             !isInfinite,

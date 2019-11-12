@@ -7,8 +7,8 @@ target 'HeatingClient' do
 
   # Pods for HeatingClient
 
-  pod 'RxSwift','~> 4.0' 
-  pod 'RxCocoa','~> 4.0'
+  pod 'RxSwift'
+  pod 'RxCocoa'
   pod 'Charts'
   #pod 'Reachability'
   
