@@ -9,6 +9,8 @@ In `settings.csv` I specify minimal and maximal temperatures for each thermostat
 
 The python program is monitoring temperatures every 5minute and change thermostats settings. 
 
+###### Note:
+My Python skills are not great, therefore I don't want to share source code for the server publicly
 
 
 ## Client: RxSwift
