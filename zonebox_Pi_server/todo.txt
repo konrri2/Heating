@@ -1,2 +1,0 @@
-add config file to set min max setting
-make api call o change min max from phone app
