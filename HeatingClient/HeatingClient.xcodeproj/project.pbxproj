@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -172,7 +172,6 @@
 				762EBF45231405D300B2FB30 /* Common */,
 				7612CB3A230E9AC7002CF6C4 /* Config */,
 				7616493D230D550000BFE176 /* Controllers */,
-				7612CB3F230E9F19002CF6C4 /* Networking */,
 				76164936230D542300BFE176 /* Models */,
 				76164937230D543200BFE176 /* Views */,
 				76164938230D543B00BFE176 /* ViewModels */,
@@ -187,6 +186,7 @@
 		76164936230D542300BFE176 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7612CB3F230E9F19002CF6C4 /* Networking */,
 				7606B59D2340E7E10023D9C2 /* Settings.swift */,
 				7616493B230D54FA00BFE176 /* Thermostat.swift */,
 				766CD7C02349232C00DBF899 /* HouseThermoState.swift */,
@@ -622,6 +622,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HeatingClient/HeatingClient.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 42;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = UVJCW2277W;
 				INFOPLIST_FILE = HeatingClient/Info.plist;
@@ -645,6 +646,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HeatingClient/HeatingClient.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 42;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = UVJCW2277W;
 				INFOPLIST_FILE = HeatingClient/Info.plist;

@@ -60,7 +60,7 @@ struct ThermostatViewModel {
                         str = "on"
                         if let setTemp = thermostat.setTemperature,
                             let temp = thermostat.temperature {
-                            if setTemp >= temp {
+                            if setTemp > temp {
                                 str = "🔥  on"
                             }
                         }

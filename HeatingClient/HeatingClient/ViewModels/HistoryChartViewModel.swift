@@ -55,12 +55,13 @@ class HistoryChartViewModel {
         self.theThermostat = therm
         
         setChartAppearance()
-        if therm is CombiningVirtualThermostat {
-            setDataWithAllRooms()
-        } else {
-            self.setData()
-        }
+//        if therm is CombiningVirtualThermostat {
+//            setDataWithAllRooms()
+//        } else {
+//            self.setData()
+//        }
         
+        self.setData()
         if therm is OutsideVirtualThermostat {
             scrollAndZoomChartForOudside()
         }
@@ -69,6 +70,7 @@ class HistoryChartViewModel {
         }
     }
     
+    @available(*, deprecated, message: "Shows average + all rooms on one chart - so many charts makes it imposible to read")
     func setDataWithAllRooms() {
         var values = [Thermostat:[ChartDataEntry]]()
         guard let arr = history.measurmentsArr  else {
