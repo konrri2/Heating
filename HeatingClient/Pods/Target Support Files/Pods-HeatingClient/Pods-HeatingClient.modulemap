@@ -1,4 +1,4 @@
-framework module Pods_HeatingClient {
+module Pods_HeatingClient {
   umbrella header "Pods-HeatingClient-umbrella.h"
 
   export *

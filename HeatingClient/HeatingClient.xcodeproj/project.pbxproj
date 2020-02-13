@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F5901FD1E1A5653211C9B69 /* libPods-HeatingClient-HeatingClientTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BA57CE11C5B399119A3104 /* libPods-HeatingClient-HeatingClientTests.a */; };
 		7602B93D233E0F3E004B354E /* HistoryChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7602B93C233E0F3E004B354E /* HistoryChartViewModel.swift */; };
 		7606B59C2340E7D70023D9C2 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606B59B2340E7D60023D9C2 /* SettingsManager.swift */; };
 		7606B59E2340E7E10023D9C2 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606B59D2340E7E10023D9C2 /* Settings.swift */; };
@@ -32,8 +33,7 @@
 		76C3D60123227BB9005DB931 /* HeatingClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C3D60023227BB9005DB931 /* HeatingClientTests.swift */; };
 		76EE9B5A233F9C400062409E /* ThermostatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EE9B58233F9C400062409E /* ThermostatTableViewCell.swift */; };
 		76EE9B5B233F9C400062409E /* ThermostatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76EE9B59233F9C400062409E /* ThermostatTableViewCell.xib */; };
-		9DB53D70338729D0640D4E64 /* Pods_HeatingClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F41C7183F47905B2795D9A3 /* Pods_HeatingClient.framework */; };
-		F07F3C8DEBA8B9E87ADC1E93 /* Pods_HeatingClient_HeatingClientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE21A825AD4ECD93E37B4B6 /* Pods_HeatingClient_HeatingClientTests.framework */; };
+		85ABC5B21C8DD5176F3E938B /* libPods-HeatingClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76AEC81F23F48F9C005C1800 /* libPods-HeatingClient.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +50,7 @@
 		0F41C7183F47905B2795D9A3 /* Pods_HeatingClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HeatingClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2388AB1CE9104EF0E1E724B3 /* Pods-HeatingClient-HeatingClientTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeatingClient-HeatingClientTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HeatingClient-HeatingClientTests/Pods-HeatingClient-HeatingClientTests.release.xcconfig"; sourceTree = "<group>"; };
 		4A98C292716A6DBED8A3F769 /* Pods-HeatingClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeatingClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HeatingClient/Pods-HeatingClient.debug.xcconfig"; sourceTree = "<group>"; };
+		57BA57CE11C5B399119A3104 /* libPods-HeatingClient-HeatingClientTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HeatingClient-HeatingClientTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7602B93C233E0F3E004B354E /* HistoryChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryChartViewModel.swift; sourceTree = "<group>"; };
 		7606B59B2340E7D60023D9C2 /* SettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		7606B59D2340E7E10023D9C2 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -75,12 +76,12 @@
 		766CD7C02349232C00DBF899 /* HouseThermoState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseThermoState.swift; sourceTree = "<group>"; };
 		766CD7C22349239000DBF899 /* MeasurementHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementHistory.swift; sourceTree = "<group>"; };
 		769DE7002347D4560002C3BF /* TimeXAxisRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeXAxisRenderer.swift; sourceTree = "<group>"; };
+		76AEC81F23F48F9C005C1800 /* libPods-HeatingClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-HeatingClient.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76C3D5FE23227BB9005DB931 /* HeatingClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HeatingClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76C3D60023227BB9005DB931 /* HeatingClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatingClientTests.swift; sourceTree = "<group>"; };
 		76C3D60223227BB9005DB931 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76EE9B58233F9C400062409E /* ThermostatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThermostatTableViewCell.swift; sourceTree = "<group>"; };
 		76EE9B59233F9C400062409E /* ThermostatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThermostatTableViewCell.xib; sourceTree = "<group>"; };
-		8BE21A825AD4ECD93E37B4B6 /* Pods_HeatingClient_HeatingClientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HeatingClient_HeatingClientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6D1C949977ADC6A3B645AD8 /* Pods-HeatingClient-HeatingClientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeatingClient-HeatingClientTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HeatingClient-HeatingClientTests/Pods-HeatingClient-HeatingClientTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FCA6CAB906B1E505011ACCC4 /* Pods-HeatingClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeatingClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-HeatingClient/Pods-HeatingClient.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,7 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DB53D70338729D0640D4E64 /* Pods_HeatingClient.framework in Frameworks */,
+				85ABC5B21C8DD5176F3E938B /* libPods-HeatingClient.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F07F3C8DEBA8B9E87ADC1E93 /* Pods_HeatingClient_HeatingClientTests.framework in Frameworks */,
+				5F5901FD1E1A5653211C9B69 /* libPods-HeatingClient-HeatingClientTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,8 +109,9 @@
 		0E38355399887CCFA758BF3A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				76AEC81F23F48F9C005C1800 /* libPods-HeatingClient.a */,
 				0F41C7183F47905B2795D9A3 /* Pods_HeatingClient.framework */,
-				8BE21A825AD4ECD93E37B4B6 /* Pods_HeatingClient_HeatingClientTests.framework */,
+				57BA57CE11C5B399119A3104 /* libPods-HeatingClient-HeatingClientTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -262,7 +264,6 @@
 				7616491D230D485E00BFE176 /* Sources */,
 				7616491E230D485E00BFE176 /* Frameworks */,
 				7616491F230D485E00BFE176 /* Resources */,
-				D8BA5AC8DBC865A22E63B70D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -281,7 +282,6 @@
 				76C3D5FA23227BB9005DB931 /* Sources */,
 				76C3D5FB23227BB9005DB931 /* Frameworks */,
 				76C3D5FC23227BB9005DB931 /* Resources */,
-				83305047E0E9C1547BC7BF39 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -378,23 +378,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		83305047E0E9C1547BC7BF39 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HeatingClient-HeatingClientTests/Pods-HeatingClient-HeatingClientTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HeatingClient-HeatingClientTests/Pods-HeatingClient-HeatingClientTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HeatingClient-HeatingClientTests/Pods-HeatingClient-HeatingClientTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		B04FFD6DCCCB79031EA61FE8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -415,23 +398,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D8BA5AC8DBC865A22E63B70D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HeatingClient/Pods-HeatingClient-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HeatingClient/Pods-HeatingClient-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HeatingClient/Pods-HeatingClient-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -623,7 +589,6 @@
 				CODE_SIGN_ENTITLEMENTS = HeatingClient/HeatingClient.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 42;
-				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = UVJCW2277W;
 				INFOPLIST_FILE = HeatingClient/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -633,7 +598,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pl.edu.leszczynski.HeatingClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -647,7 +612,6 @@
 				CODE_SIGN_ENTITLEMENTS = HeatingClient/HeatingClient.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 42;
-				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = UVJCW2277W;
 				INFOPLIST_FILE = HeatingClient/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -657,7 +621,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pl.edu.leszczynski.HeatingClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

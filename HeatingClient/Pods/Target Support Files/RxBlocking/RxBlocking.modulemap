@@ -1,4 +1,4 @@
-framework module RxBlocking {
+module RxBlocking {
   umbrella header "RxBlocking-umbrella.h"
 
   export *

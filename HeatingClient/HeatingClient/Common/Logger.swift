@@ -1,16 +1,8 @@
-//
-//  Logger.swift
-//  SymbioteSpike
-//
-//  Created by Konrad Leszczyński on 14/07/2017.
-//  Copyright © 2017 PSNC. All rights reserved.
-//
-
 import Foundation
 
 public struct GlobalSettings {
     public static let isDebug: Bool                                        = _isDebugAssertConfiguration()
-    public static let isVerboseLogging: Bool                               = true
+    public static let isVerboseLogging: Bool                               = false
 }
 
 public func logVerbose(_ text: String?) {
