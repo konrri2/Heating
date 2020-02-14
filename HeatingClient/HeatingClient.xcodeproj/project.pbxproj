@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -589,6 +589,7 @@
 				CODE_SIGN_ENTITLEMENTS = HeatingClient/HeatingClient.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 42;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = UVJCW2277W;
 				INFOPLIST_FILE = HeatingClient/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -598,7 +599,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pl.edu.leszczynski.HeatingClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -612,6 +613,7 @@
 				CODE_SIGN_ENTITLEMENTS = HeatingClient/HeatingClient.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 42;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = UVJCW2277W;
 				INFOPLIST_FILE = HeatingClient/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -621,7 +623,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pl.edu.leszczynski.HeatingClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
