@@ -21,7 +21,7 @@ public func logTime(_ text: String?) {
     if let t = text {
         let d = Date()
         let df = DateFormatter()
-        df.dateFormat = "Y-MM-dd H:m:ss.SSSS"
+        df.dateFormat = "Y-MM-dd H:m:ss.SSSS" 
         df.string(from: d)
         
         log("[\(df.string(from: d))]   \(t)")
