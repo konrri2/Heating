@@ -1,11 +1,3 @@
-//
-//  Thermostat.swift
-//  NewsAppMVVM
-//
-//  Created by Konrad Leszczyński on 16/08/2019.
-//  Copyright © 2019 Mohammad Azam. All rights reserved.
-//
-
 import Foundation
 
 

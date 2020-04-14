@@ -1,11 +1,3 @@
-//
-//  HauseThermostatsViewModel.swift
-//  NewsAppMVVM
-//
-//  Created by Konrad Leszczyński on 20/08/2019.
-//  Copyright © 2019 Mohammad Azam. All rights reserved.
-//
-
 import Foundation
 import RxSwift
 import RxCocoa

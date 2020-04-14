@@ -121,7 +121,7 @@ class HistoryChartViewModel {
                     let dataEntry = ChartDataEntry(x: time, y: temp)
                     values.append(dataEntry)
                     if let setTemp = therm.setTemperature {
-                        let sdEntry = ChartDataEntry(x: time, y: setTemp)
+                      let sdEntry = ChartDataEntry(x: time, y: therm.isOn == true ? setTemp : 0.0)
                         setValues.append(sdEntry)
                     }
                 }
