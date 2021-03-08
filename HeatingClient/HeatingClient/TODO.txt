@@ -1,3 +1,10 @@
+Linux
+raspbarry pi
+crontab
+cron
+@reboot cd /home/pi/python/zonebox_linearFunctions && /usr/bin/nohup /usr/bin/python3 -u ./flusk_api_app.py > ./heating2021.log &
+
+
 screen with settings (icon from main screen) set password
 
 password used to encrypt setting values
