@@ -25,7 +25,9 @@ struct HouseThermoState {
         errorInfo = error
     }
     
-    init?(_ strArr: [String])  {
+    init?(_ csvArr: [String])  {
+        var strArr = csvArr
+
         var retList = [Thermostat]()
         var roomsOnly = [RoomThermostat]()
         //date format 2019-08-12 10:45
@@ -33,7 +35,10 @@ struct HouseThermoState {
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
         if let date = dateFormatter.date(from: strArr[0]) {
             self.time = date
-            
+
+            if Double(strArr[1].trimmingCharacters(in: .whitespaces)) == nil { // this happened when reading meteo had an error - must move/shift the whole array
+                strArr.insert("-42", at: 1)
+            }
             let oudsideTemp = Double(strArr[1].trimmingCharacters(in: .whitespaces))
             let outsideThermostat = OutsideVirtualThermostat(timestamp: date, oudsideTemp: oudsideTemp, weatherDescription: strArr[2])
             retList.append(outsideThermostat)
